@@ -26,6 +26,46 @@ const CaseStudiesSection = () => {
       story: 'A growing SaaS company struggled with code quality and team coordination. We provided technical leadership and established proper development processes. Successfully scaled team from 5 to 15 developers while maintaining velocity and reducing deployment time by 80%.',
       testimonial: '"Their mentorship transformed our engineering culture. The processes they established helped us scale efficiently while maintaining high code quality standards."',
       logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'Mobile App Development',
+      company: 'HealthTech Solutions',
+      industry: 'Healthcare',
+      story: 'A healthcare startup needed a secure mobile app for patient data management and telemedicine consultations. We developed a React Native app with end-to-end encryption and HIPAA compliance. The app now serves 50,000+ patients and has a 4.8-star rating.',
+      testimonial: '"The security features and user experience exceeded our expectations. The app has transformed how we deliver healthcare services to our patients."',
+      logo: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'AI Integration Platform',
+      company: 'DataFlow AI',
+      industry: 'Artificial Intelligence',
+      story: 'An enterprise client needed to integrate AI capabilities across their existing systems without major infrastructure changes. We built a unified API gateway with machine learning pipelines. The solution reduced AI processing costs by 60% while improving accuracy by 35%.',
+      testimonial: '"They made AI accessible to our entire organization. The seamless integration and performance improvements have been remarkable."',
+      logo: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'Financial Dashboard',
+      company: 'WealthWise',
+      industry: 'Fintech',
+      story: 'A financial services company required a real-time portfolio management dashboard with advanced analytics and risk assessment tools. We created a comprehensive platform with live market data integration. Client assets under management increased by 200% within 8 months.',
+      testimonial: '"The dashboard gives us insights we never had before. Our clients love the transparency and real-time updates on their investments."',
+      logo: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'Supply Chain Optimization',
+      company: 'LogiCore Systems',
+      industry: 'Logistics',
+      story: 'A logistics company needed to optimize their supply chain management with predictive analytics and automated routing. We developed an intelligent system that reduced delivery times by 40% and operational costs by 25%. The platform now handles over 10,000 shipments daily.',
+      testimonial: '"The optimization algorithms have revolutionized our operations. We can now predict and prevent bottlenecks before they happen."',
+      logo: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'Educational Platform',
+      company: 'EduTech Pro',
+      industry: 'Education Technology',
+      story: 'An educational institution wanted to create an interactive learning platform with virtual classrooms and AI-powered personalized learning paths. We built a comprehensive LMS that increased student engagement by 85% and completion rates by 60%.',
+      testimonial: '"Student outcomes have improved dramatically. The personalized learning approach has made education more effective and engaging."',
+      logo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop&crop=center'
     }
   ];
 
@@ -42,11 +82,11 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <Carousel className="w-full max-w-7xl mx-auto" opts={{ align: "center", loop: true }}>
-          <CarouselContent className="-ml-2">
+        <Carousel className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+          <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
-              <CarouselItem key={index} className="pl-2 basis-full md:basis-1/2 lg:basis-1/3">
-                <div className="relative pb-12 transition-all duration-300 [&:not(.embla__slide--snapped)]:scale-90 [&:not(.embla__slide--snapped)]:opacity-70">
+              <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
+                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
