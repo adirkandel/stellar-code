@@ -41,7 +41,7 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
@@ -69,7 +69,7 @@ const ServicesSection = () => {
                     </h3>
                   </div>
 
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-4">
+                  <div className="transition-opacity duration-300 space-y-4">
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {service.description}
                     </p>
