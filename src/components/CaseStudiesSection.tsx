@@ -92,7 +92,7 @@ const CaseStudiesSection = () => {
 
   return (
     <section id="case-studies" className="py-24 bg-gradient-galaxy">
-      <div>
+      <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">Success</span>
@@ -103,11 +103,11 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <Carousel setApi={setCarouselApi} className="w-full overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
           <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
-                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
+                <div className="relative pb-6 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
@@ -119,7 +119,7 @@ const CaseStudiesSection = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
                     
-                    <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                    <div className="relative z-10 p-8 h-full flex flex-col">
                       {/* Company Info */}
                       <div>
                         <h3 className="text-3xl font-bold font-space text-stellar-white mb-2">
