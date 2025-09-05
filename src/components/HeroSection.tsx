@@ -37,7 +37,7 @@ const HeroSection = () => {
             
 
             {/* Headline */}
-            <h1 className="text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-space mb-6 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-space mb-6 leading-tight">
               <span className="text-stellar-white">Building</span>
               <br />
               <span className="text-primary glow-stellar">Stellar</span>
