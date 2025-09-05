@@ -75,13 +75,13 @@ const CaseStudiesSection = () => {
 
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-  const logSlidesInView = useCallback((emblaApi) => {
-    console.log(emblaApi.slidesInView())
+  const logSlidesInView = useCallback((carouselApi) => {
+    console.log(carouselApi.slidesInView())
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logSlidesInView)
-  }, [emblaApi, logSlidesInView])
+    if (carouselApi) carouselApi.on('slidesInView', logSlidesInView)
+  }, [carouselApi, logSlidesInView])
 
   return (
     <section id="case-studies" className="py-24 bg-gradient-galaxy">
