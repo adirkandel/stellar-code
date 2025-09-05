@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Stellar Code Design System - Space-themed consulting agency */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Space-themed color palette */
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Cosmic purple primary */
+    --primary: 253 75% 65%;
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Deep space secondary */
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 213 31% 91%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Nebula muted tones */
+    --muted: 215 25% 27%;
+    --muted-foreground: 217 10% 64%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Stellar accent */
+    --accent: 180 54% 47%;
+    --accent-foreground: 224 71% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 213 31% 91%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 25% 27%;
+    --input: 215 25% 27%;
+    --ring: 253 75% 65%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom space-themed tokens */
+    --cosmic-purple: 253 75% 65%;
+    --deep-space: 224 71% 4%;
+    --stellar-white: 213 31% 91%;
+    --nebula-blue: 215 25% 27%;
+    --neon-teal: 180 54% 47%;
+    --void-black: 224 100% 2%;
+    
+    /* Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(253 75% 65% / 0.1), hsl(180 54% 47% / 0.1));
+    --gradient-galaxy: linear-gradient(180deg, hsl(224 71% 4%), hsl(215 25% 27% / 0.3));
+    --gradient-nebula: radial-gradient(ellipse at center, hsl(253 75% 65% / 0.15), transparent 70%);
+    
+    /* Shadows and glows */
+    --shadow-cosmic: 0 10px 30px -10px hsl(253 75% 65% / 0.3);
+    --glow-stellar: 0 0 20px hsl(253 75% 65% / 0.4);
+    --glow-accent: 0 0 20px hsl(180 54% 47% / 0.4);
+    
+    /* Animations */
+    --transition-stellar: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-orbit: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +126,77 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   }
+}
+
+@layer utilities {
+  /* Gradient utilities */
+  .bg-gradient-cosmic {
+    background: var(--gradient-cosmic);
+  }
+  
+  .bg-gradient-galaxy {
+    background: var(--gradient-galaxy);
+  }
+  
+  .bg-gradient-nebula {
+    background: var(--gradient-nebula);
+  }
+  
+  /* Glow effects */
+  .glow-stellar {
+    box-shadow: var(--glow-stellar);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .shadow-cosmic {
+    box-shadow: var(--shadow-cosmic);
+  }
+  
+  /* Animations */
+  .transition-stellar {
+    transition: var(--transition-stellar);
+  }
+  
+  .transition-orbit {
+    transition: var(--transition-orbit);
+  }
+  
+  /* Starfield animation */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Space-themed hover effects */
+  .hover-glow:hover {
+    box-shadow: var(--glow-stellar);
+    transform: translateY(-2px);
+  }
+  
+  .hover-orbit:hover {
+    transform: scale(1.05) rotateY(5deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
