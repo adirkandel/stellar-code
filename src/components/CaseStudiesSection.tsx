@@ -1,4 +1,5 @@
-import { ArrowRight, CheckCircle, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const CaseStudiesSection = () => {
   const caseStudies = [
@@ -6,27 +7,25 @@ const CaseStudiesSection = () => {
       title: 'SaaS MVP Launch',
       company: 'TechFlow Analytics',
       industry: 'Data Analytics',
-      challenge: 'A startup needed to launch their analytics platform MVP within 3 months to secure Series A funding. They had a brilliant idea but lacked the technical expertise to build a scalable solution.',
-      solution: 'We assembled a full-stack team and delivered a React/Node.js platform with real-time data processing, interactive dashboards, and enterprise-grade security. Implemented CI/CD pipelines and AWS infrastructure.',
-      outcome: 'Launched on time, secured $5M Series A funding within 6 weeks of launch. Platform now serves 10,000+ users with 99.9% uptime.',
-      metrics: [
-        { icon: TrendingUp, label: 'Revenue Growth', value: '400%' },
-        { icon: Users, label: 'Active Users', value: '10K+' },
-        { icon: CheckCircle, label: 'Uptime', value: '99.9%' }
-      ]
+      story: 'A startup needed to launch their analytics platform MVP within 3 months to secure Series A funding. We assembled a full-stack team and delivered a React/Node.js platform with real-time data processing. The platform launched on time and secured $5M Series A funding within 6 weeks.',
+      testimonial: '"It was a game-changer for us. They took our vague ideas and transformed them into a sleek, user-friendly interface that our customers love. Their attention to detail truly sets them apart."',
+      logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&crop=center'
+    },
+    {
+      title: 'E-commerce Platform',
+      company: 'RetailNext',
+      industry: 'E-commerce',
+      story: 'A growing retail company needed to modernize their legacy e-commerce platform to handle increasing traffic and improve user experience. We rebuilt their entire frontend with React and optimized their backend infrastructure. The new platform reduced page load times by 70% and increased conversion rates by 45%.',
+      testimonial: '"The team delivered beyond our expectations. The new platform not only looks amazing but performs incredibly well. Our customers love the improved shopping experience."',
+      logo: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'Team Training & Scale',
       company: 'InnovateCRM',
       industry: 'CRM Software',
-      challenge: 'A growing SaaS company struggled with code quality, deployment issues, and team coordination. Their engineering team was talented but lacked senior leadership and established processes.',
-      solution: 'We provided technical leadership, established code review processes, implemented automated testing, and mentored their development team. Set up proper git workflows and deployment strategies.',
-      outcome: 'Reduced deployment time by 80%, improved code quality scores, and successfully scaled team from 5 to 15 developers while maintaining velocity.',
-      metrics: [
-        { icon: TrendingUp, label: 'Deploy Speed', value: '80% faster' },
-        { icon: Users, label: 'Team Growth', value: '3x' },
-        { icon: CheckCircle, label: 'Bug Reduction', value: '60%' }
-      ]
+      story: 'A growing SaaS company struggled with code quality and team coordination. We provided technical leadership and established proper development processes. Successfully scaled team from 5 to 15 developers while maintaining velocity and reducing deployment time by 80%.',
+      testimonial: '"Their mentorship transformed our engineering culture. The processes they established helped us scale efficiently while maintaining high code quality standards."',
+      logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&crop=center'
     }
   ];
 
@@ -43,69 +42,59 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <div className="space-y-12">
-          {caseStudies.map((study, index) => (
-            <div
-              key={index}
-              className="bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 md:p-12 hover-glow transition-stellar relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-              <div className="relative z-10">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold font-space text-stellar-white mb-2">
-                      {study.title}
-                    </h3>
-                    <div className="flex items-center gap-4 text-muted-foreground">
-                      <span className="font-medium text-primary">{study.company}</span>
-                      <span className="w-1 h-1 bg-muted-foreground rounded-full" />
-                      <span>{study.industry}</span>
+        <Carousel className="w-full max-w-7xl mx-auto">
+          <CarouselContent className="-ml-4">
+            {caseStudies.map((study, index) => (
+              <CarouselItem key={index} className="pl-4 basis-full md:basis-4/5 lg:basis-3/5">
+                <div className="relative">
+                  {/* Main Case Study Card */}
+                  <div 
+                    className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
+                    style={{
+                      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(${study.logo})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+                    
+                    <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                      {/* Company Info */}
+                      <div>
+                        <h3 className="text-3xl font-bold font-space text-stellar-white mb-2">
+                          {study.company}
+                        </h3>
+                        <div className="text-primary font-medium mb-6">{study.industry}</div>
+                        <p className="text-muted-foreground text-lg leading-relaxed">
+                          {study.story}
+                        </p>
+                      </div>
+                      
+                      {/* View Button */}
+                      <div className="mt-6">
+                        <button className="inline-flex items-center gap-3 bg-primary/20 border border-primary/30 text-primary px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 hover-glow">
+                          VIEW
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-4 md:mt-0 flex gap-4">
-                    {study.metrics.map((metric, metricIndex) => {
-                      const IconComponent = metric.icon;
-                      return (
-                        <div key={metricIndex} className="text-center">
-                          <div className="flex items-center justify-center mb-1">
-                            <IconComponent className="w-4 h-4 text-neon-teal" />
-                          </div>
-                          <div className="text-lg font-bold text-stellar-white">{metric.value}</div>
-                          <div className="text-xs text-muted-foreground">{metric.label}</div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div>
-                    <h4 className="text-lg font-semibold text-primary mb-3">Challenge</h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {study.challenge}
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-neon-teal mb-3">Solution</h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {study.solution}
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-stellar-white mb-3">Outcome</h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {study.outcome}
+                  
+                  {/* Testimonial Card - Overlapping */}
+                  <div className="absolute -bottom-8 left-8 right-8 bg-stellar-white/95 backdrop-blur-sm rounded-lg p-6 border border-primary/10 shadow-lg">
+                    <p className="text-deep-space text-base italic leading-relaxed">
+                      {study.testimonial}
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          <CarouselPrevious className="left-4" />
+          <CarouselNext className="right-4" />
+        </Carousel>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <button className="inline-flex items-center gap-3 bg-primary/20 border border-primary/30 text-primary px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 hover-glow">
             View More Case Studies
             <ArrowRight className="w-4 h-4" />
