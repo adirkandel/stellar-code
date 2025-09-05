@@ -76,6 +76,13 @@ const CaseStudiesSection = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const logSlidesInView = useCallback((carouselApi) => {
+    const currentSlideIndex = carouselApi.selectedScrollSnap();
+    if (currentSlideIndex >= 0) {
+      const currentSlideNode = carouselApi.slideNodes()[currentSlideIndex];
+      if (currentSlideNode) {
+        currentSlideNode.classList.add('embla__slide--snapped');
+      }
+    }
     console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
   }, [])
 
