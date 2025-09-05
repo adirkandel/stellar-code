@@ -78,13 +78,10 @@ const CaseStudiesSection = () => {
   const logSlidesInView = useCallback((carouselApi) => {
     const currentSlideIndex = carouselApi.selectedScrollSnap();
     if (currentSlideIndex >= 0) {
-      carouselApi.slideNodes().forEach((node, nodeIdx) => {
-        if (nodeIdx === currentSlideIndex) {
-          node.firstElementChild.classList.add('embla-slide-snapped');
-        } else {
-          node.firstElementChild.classList.remove('embla-slide-snapped');
-        }
-      });
+      const currentSlideNode = carouselApi.slideNodes()[currentSlideIndex];
+      if (currentSlideNode) {
+        currentSlideNode.firstElementChild.classList.add('embla__slide--snapped');
+      }
     }
     console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
   }, [])
@@ -110,7 +107,7 @@ const CaseStudiesSection = () => {
           <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
-                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-75 [&:not(.embla-slide-snapped)]:opacity-50">
+                <div className="relative pb-6 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
@@ -122,7 +119,7 @@ const CaseStudiesSection = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
                     
-                    <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                    <div className="relative z-10 p-8 h-full flex flex-col">
                       {/* Company Info */}
                       <div>
                         <h3 className="text-3xl font-bold font-space text-stellar-white mb-2">
