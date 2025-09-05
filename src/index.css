@@ -18,7 +18,7 @@
 
     /* Cosmic purple primary */
     --primary: 253 75% 65%;
-    --primary-foreground: 224 71% 4%;
+    --primary-foreground: 0 0% 100%;
 
     /* Deep space secondary */
     --secondary: 215 25% 27%;
@@ -91,7 +91,7 @@
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
