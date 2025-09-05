@@ -1,24 +1,19 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import heroStarfield from '@/assets/hero-starfield.jpg';
-
 const HeroSection = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section 
-      id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${heroStarfield})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
+  return <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{
+    backgroundImage: `url(${heroStarfield})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}>
       {/* Overlay gradient for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-deep-space/80 via-deep-space/60 to-deep-space/80" />
       
@@ -27,17 +22,11 @@ const HeroSection = () => {
 
       {/* Floating particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full animate-twinkle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => <div key={i} className="absolute w-1 h-1 bg-primary rounded-full animate-twinkle" style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 3}s`
+      }} />)}
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -45,12 +34,7 @@ const HeroSection = () => {
           {/* Left side - Text content (60% on mobile, 70% on large) */}
           <div className="md:col-span-6 lg:col-span-7 text-center md:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-stellar-white">
-                Trusted by 50+ SaaS startups
-              </span>
-            </div>
+            
 
             {/* Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-space mb-6 leading-tight">
@@ -70,10 +54,7 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Button */}
-            <button
-              onClick={scrollToContact}
-              className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold transition-stellar hover-glow hover:-translate-y-1 shadow-cosmic mb-12 md:mb-16"
-            >
+            <button onClick={scrollToContact} className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold transition-stellar hover-glow hover:-translate-y-1 shadow-cosmic mb-12 md:mb-16">
               Let's Talk
               <ArrowRight className="w-5 h-5 transition-stellar group-hover:translate-x-1" />
             </button>
@@ -111,8 +92,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
