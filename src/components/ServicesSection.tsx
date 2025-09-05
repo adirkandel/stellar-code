@@ -41,50 +41,37 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
               <div
                 key={index}
-                className="flip-card h-80"
+                className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
               >
-                <div className="flip-card-inner holographic">
-                  {/* Front of card */}
-                  <div className="flip-card-front bg-gradient-card backdrop-blur-sm border border-primary/20 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-                    <div className="relative z-10">
-                      <div className="p-4 bg-primary/20 border border-primary/30 rounded-lg mb-4 holographic-rainbow">
-                        <IconComponent className="w-12 h-12 text-stellar-white" />
-                      </div>
-                      <h3 className="text-lg font-bold font-space text-stellar-white leading-tight">
-                        {service.title}
-                      </h3>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar">
+                      <IconComponent className="w-8 h-8 text-primary" />
                     </div>
+                    <h3 className="text-2xl font-bold font-space text-stellar-white">
+                      {service.title}
+                    </h3>
                   </div>
 
-                  {/* Back of card */}
-                  <div className="flip-card-back bg-gradient-card backdrop-blur-sm border border-primary/20 p-6 flex flex-col justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-                    <div className="relative z-10">
-                      <h3 className="text-lg font-bold font-space text-stellar-white mb-4">
-                        {service.title}
-                      </h3>
-                      
-                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                        {service.description}
-                      </p>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
 
-                      <ul className="space-y-2">
-                        {service.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-2 text-sm">
-                            <div className="w-1.5 h-1.5 bg-neon-teal rounded-full flex-shrink-0" />
-                            <span className="text-stellar-white">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-neon-teal rounded-full" />
+                        <span className="text-stellar-white">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             );
