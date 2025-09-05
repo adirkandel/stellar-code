@@ -80,7 +80,7 @@ const CaseStudiesSection = () => {
     if (currentSlideIndex >= 0) {
       const currentSlideNode = carouselApi.slideNodes()[currentSlideIndex];
       if (currentSlideNode) {
-        currentSlideNode.classList.add('embla__slide--snapped');
+        currentSlideNode.firstElementChild.classList.add('embla__slide--snapped');
       }
     }
     console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
