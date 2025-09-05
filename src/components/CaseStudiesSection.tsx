@@ -76,7 +76,7 @@ const CaseStudiesSection = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const logSlidesInView = useCallback((carouselApi) => {
-    console.log(carouselApi.slidesInView())
+    console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
   }, [])
 
   useEffect(() => {
