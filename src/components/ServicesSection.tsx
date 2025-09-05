@@ -41,37 +41,48 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
               <div
                 key={index}
-                className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
+                className="group holographic-card bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                {/* Holographic background layers */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-tl from-neon-teal/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-80 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-stellar-white/5 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[300%] transition-transform duration-1000" />
+                
+                {/* Holographic border glow */}
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-primary/30 via-neon-teal/30 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-[1px]">
+                  <div className="w-full h-full bg-gradient-card rounded-xl" />
+                </div>
+                
                 <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar">
-                      <IconComponent className="w-8 h-8 text-primary" />
+                  <div className="text-center mb-4">
+                    <div className="inline-flex p-4 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar mb-4 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/40">
+                      <IconComponent className="w-8 h-8 text-primary group-hover:text-stellar-white transition-colors" />
                     </div>
-                    <h3 className="text-2xl font-bold font-space text-stellar-white">
+                    <h3 className="text-lg font-bold font-space text-stellar-white group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
                   </div>
 
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-4">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {service.description}
+                    </p>
 
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-neon-teal rounded-full" />
-                        <span className="text-stellar-white">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="space-y-1">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse" />
+                          <span className="text-stellar-white text-xs">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             );
