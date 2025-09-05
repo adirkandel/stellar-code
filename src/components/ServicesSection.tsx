@@ -59,29 +59,29 @@ const ServicesSection = () => {
                   <div className="w-full h-full bg-gradient-card rounded-xl" />
                 </div>
                 
-                <div className="relative z-10">
-                  <div className="text-center mb-4">
-                    <div className="inline-flex p-4 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar mb-4 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/40">
-                      <IconComponent className="w-8 h-8 text-primary group-hover:text-stellar-white transition-colors" />
-                    </div>
-                    <h3 className="text-lg font-bold font-space text-stellar-white group-hover:text-primary transition-colors">
+                <div className="relative z-10 flex gap-6 h-full">
+                  {/* Left side - 30% */}
+                  <div className="w-[30%] flex flex-col items-center justify-center text-center">
+                    <IconComponent className="w-12 h-12 text-primary group-hover:text-neon-teal transition-colors mb-4" />
+                    <h3 className="text-xl font-bold font-space text-stellar-white group-hover:text-primary transition-colors leading-tight">
                       {service.title}
                     </h3>
                   </div>
 
-                  <div className="transition-opacity duration-300 space-y-4">
+                  {/* Right side - 70% */}
+                  <div className="w-[70%] space-y-4">
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {service.description}
                     </p>
 
-                    <ul className="space-y-1">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                       {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse" />
+                        <div key={featureIndex} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse flex-shrink-0" />
                           <span className="text-stellar-white text-xs">{feature}</span>
-                        </li>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </div>
               </div>
