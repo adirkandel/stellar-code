@@ -47,29 +47,32 @@ const ServicesSection = () => {
             return (
               <div
                 key={index}
-                className="group bg-card/50 backdrop-blur-sm border border-nebula-blue/30 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2"
+                className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar">
-                    <IconComponent className="w-8 h-8 text-primary" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg group-hover:bg-primary/30 transition-stellar">
+                      <IconComponent className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold font-space text-stellar-white">
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-bold font-space text-stellar-white">
-                    {service.title}
-                  </h3>
+
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  <ul className="space-y-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-neon-teal rounded-full" />
+                        <span className="text-stellar-white">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-neon-teal rounded-full" />
-                      <span className="text-stellar-white">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             );
           })}

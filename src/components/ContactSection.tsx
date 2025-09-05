@@ -61,10 +61,12 @@ const ContactSection = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
             {/* Contact Form */}
-            <div className="bg-card/50 backdrop-blur-sm border border-nebula-blue/30 rounded-xl p-8">
-              <h3 className="text-2xl font-bold font-space text-stellar-white mb-6">
-                Let's Talk
-              </h3>
+            <div className="bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold font-space text-stellar-white mb-6">
+                  Let's Talk
+                </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -136,23 +138,27 @@ const ContactSection = () => {
                   )}
                 </button>
               </form>
+              </div>
             </div>
 
             {/* Contact Info */}
             <div className="space-y-8">
-              <div className="bg-card/30 backdrop-blur-sm border border-nebula-blue/20 rounded-xl p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg">
-                    <Calendar className="w-6 h-6 text-primary" />
+              <div className="bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-primary/20 border border-primary/30 rounded-lg">
+                      <Calendar className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-stellar-white">Schedule a Call</h4>
+                      <p className="text-muted-foreground">Free 30-minute consultation</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-stellar-white">Schedule a Call</h4>
-                    <p className="text-muted-foreground">Free 30-minute consultation</p>
-                  </div>
+                  <button className="w-full bg-primary/20 border border-primary/30 text-primary px-4 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30">
+                    Book a Free Consultation
+                  </button>
                 </div>
-                <button className="w-full bg-primary/20 border border-primary/30 text-primary px-4 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30">
-                  Book a Free Consultation
-                </button>
               </div>
 
               <div className="space-y-6">

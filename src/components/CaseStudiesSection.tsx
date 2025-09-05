@@ -47,55 +47,58 @@ const CaseStudiesSection = () => {
           {caseStudies.map((study, index) => (
             <div
               key={index}
-              className="bg-card/50 backdrop-blur-sm border border-nebula-blue/30 rounded-xl p-8 md:p-12 hover-glow transition-stellar"
+              className="bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 md:p-12 hover-glow transition-stellar relative overflow-hidden"
             >
-              {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold font-space text-stellar-white mb-2">
-                    {study.title}
-                  </h3>
-                  <div className="flex items-center gap-4 text-muted-foreground">
-                    <span className="font-medium text-primary">{study.company}</span>
-                    <span className="w-1 h-1 bg-muted-foreground rounded-full" />
-                    <span>{study.industry}</span>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold font-space text-stellar-white mb-2">
+                      {study.title}
+                    </h3>
+                    <div className="flex items-center gap-4 text-muted-foreground">
+                      <span className="font-medium text-primary">{study.company}</span>
+                      <span className="w-1 h-1 bg-muted-foreground rounded-full" />
+                      <span>{study.industry}</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 md:mt-0 flex gap-4">
+                    {study.metrics.map((metric, metricIndex) => {
+                      const IconComponent = metric.icon;
+                      return (
+                        <div key={metricIndex} className="text-center">
+                          <div className="flex items-center justify-center mb-1">
+                            <IconComponent className="w-4 h-4 text-neon-teal" />
+                          </div>
+                          <div className="text-lg font-bold text-stellar-white">{metric.value}</div>
+                          <div className="text-xs text-muted-foreground">{metric.label}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-                <div className="mt-4 md:mt-0 flex gap-4">
-                  {study.metrics.map((metric, metricIndex) => {
-                    const IconComponent = metric.icon;
-                    return (
-                      <div key={metricIndex} className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <IconComponent className="w-4 h-4 text-neon-teal" />
-                        </div>
-                        <div className="text-lg font-bold text-stellar-white">{metric.value}</div>
-                        <div className="text-xs text-muted-foreground">{metric.label}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div>
-                  <h4 className="text-lg font-semibold text-primary mb-3">Challenge</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {study.challenge}
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-neon-teal mb-3">Solution</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {study.solution}
-                  </p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-stellar-white mb-3">Outcome</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {study.outcome}
-                  </p>
+                {/* Content */}
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <h4 className="text-lg font-semibold text-primary mb-3">Challenge</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {study.challenge}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-neon-teal mb-3">Solution</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {study.solution}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-stellar-white mb-3">Outcome</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {study.outcome}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

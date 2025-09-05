@@ -48,38 +48,41 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group bg-card/50 backdrop-blur-sm border border-nebula-blue/30 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2"
+              className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
             >
-              {/* Quote Icon */}
-              <div className="mb-6">
-                <Quote className="w-8 h-8 text-primary/60" />
-              </div>
-
-              {/* Stars */}
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, starIndex) => (
-                  <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
-                ))}
-              </div>
-
-              {/* Quote */}
-              <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
-                "{testimonial.quote}"
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/20 border-2 border-primary/40 rounded-full flex items-center justify-center">
-                  <span className="text-primary font-bold font-space">
-                    {testimonial.avatar}
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10">
+                {/* Quote Icon */}
+                <div className="mb-6">
+                  <Quote className="w-8 h-8 text-primary/60" />
                 </div>
-                <div>
-                  <div className="font-semibold text-stellar-white">
-                    {testimonial.name}
+
+                {/* Stars */}
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, starIndex) => (
+                    <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
+                  "{testimonial.quote}"
+                </blockquote>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/20 border-2 border-primary/40 rounded-full flex items-center justify-center">
+                    <span className="text-primary font-bold font-space">
+                      {testimonial.avatar}
+                    </span>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonial.title} at <span className="text-primary">{testimonial.company}</span>
+                  <div>
+                    <div className="font-semibold text-stellar-white">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {testimonial.title} at <span className="text-primary">{testimonial.company}</span>
+                    </div>
                   </div>
                 </div>
               </div>
