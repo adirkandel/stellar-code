@@ -68,17 +68,20 @@ const ServicesSection = () => {
                     </h3>
                   </div>
 
+                  {/* Divider */}
+                  <div className="w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
+
                   {/* Right side - 70% */}
                   <div className="w-[70%] space-y-4">
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-base leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-2">
                           <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse flex-shrink-0" />
-                          <span className="text-stellar-white text-xs">{feature}</span>
+                          <span className="text-stellar-white text-sm">{feature}</span>
                         </div>
                       ))}
                     </div>
