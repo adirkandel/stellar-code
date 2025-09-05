@@ -40,57 +40,73 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-stellar-white">
-              Trusted by 50+ SaaS startups
-            </span>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-center min-h-screen py-20">
+          {/* Left side - Text content (70%) */}
+          <div className="lg:col-span-7 text-center lg:text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-stellar-white">
+                Trusted by 50+ SaaS startups
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-space mb-6 leading-tight">
+              <span className="text-stellar-white">Building</span>
+              <br />
+              <span className="text-primary glow-stellar">Stellar</span>
+              <span className="text-stellar-white"> Web Products,</span>
+              <br />
+              <span className="text-neon-teal">Together</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed">
+              We partner with SaaS startups, entrepreneurs, and tech leaders to create 
+              <span className="text-stellar-white font-medium"> top-tier web applications</span>, 
+              scalable cloud infrastructure, and high-performing development teams.
+            </p>
+
+            {/* CTA Button */}
+            <button
+              onClick={scrollToContact}
+              className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold transition-stellar hover-glow hover:-translate-y-1 shadow-cosmic mb-16"
+            >
+              Let's Talk
+              <ArrowRight className="w-5 h-5 transition-stellar group-hover:translate-x-1" />
+            </button>
+
+            {/* Stats */}
+            <div className="flex justify-center lg:justify-start items-center gap-8 pt-8 border-t border-nebula-blue/30">
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold font-space text-primary">50+</div>
+                <div className="text-sm text-muted-foreground">Projects Delivered</div>
+              </div>
+              <div className="w-px h-12 bg-nebula-blue/30" />
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold font-space text-neon-teal">98%</div>
+                <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+              </div>
+              <div className="w-px h-12 bg-nebula-blue/30" />
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold font-space text-primary">24/7</div>
+                <div className="text-sm text-muted-foreground">Support Available</div>
+              </div>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold font-space mb-6 leading-tight">
-            <span className="text-stellar-white">Building</span>
-            <br />
-            <span className="text-primary glow-stellar">Stellar</span>
-            <span className="text-stellar-white"> Web Products,</span>
-            <br />
-            <span className="text-neon-teal">Together</span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            We partner with SaaS startups, entrepreneurs, and tech leaders to create 
-            <span className="text-stellar-white font-medium"> top-tier web applications</span>, 
-            scalable cloud infrastructure, and high-performing development teams.
-          </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={scrollToContact}
-            className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold transition-stellar hover-glow hover:-translate-y-1 shadow-cosmic"
-          >
-            Let's Talk
-            <ArrowRight className="w-5 h-5 transition-stellar group-hover:translate-x-1" />
-          </button>
-
-          {/* Stats */}
-          <div className="flex justify-center items-center gap-8 mt-16 pt-8 border-t border-nebula-blue/30">
-            <div className="text-center">
-              <div className="text-3xl font-bold font-space text-primary">50+</div>
-              <div className="text-sm text-muted-foreground">Projects Delivered</div>
-            </div>
-            <div className="w-px h-12 bg-nebula-blue/30" />
-            <div className="text-center">
-              <div className="text-3xl font-bold font-space text-neon-teal">98%</div>
-              <div className="text-sm text-muted-foreground">Client Satisfaction</div>
-            </div>
-            <div className="w-px h-12 bg-nebula-blue/30" />
-            <div className="text-center">
-              <div className="text-3xl font-bold font-space text-primary">24/7</div>
-              <div className="text-sm text-muted-foreground">Support Available</div>
+          {/* Right side - Image space (30%) */}
+          <div className="lg:col-span-3 flex justify-center lg:justify-end">
+            <div className="w-full max-w-md h-96 bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="relative z-10 text-center">
+                <div className="w-16 h-16 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Sparkles className="w-8 h-8 text-primary" />
+                </div>
+                <p className="text-muted-foreground">Image placeholder</p>
+              </div>
             </div>
           </div>
         </div>
