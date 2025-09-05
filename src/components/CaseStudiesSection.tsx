@@ -78,13 +78,10 @@ const CaseStudiesSection = () => {
   const logSlidesInView = useCallback((carouselApi) => {
     const currentSlideIndex = carouselApi.selectedScrollSnap();
     if (currentSlideIndex >= 0) {
-      carouselApi.slideNodes().forEach((node, nodeIdx) => {
-        if (nodeIdx === currentSlideIndex) {
-          node.firstElementChild.classList.add('embla-slide-snapped');
-        } else {
-          node.firstElementChild.classList.remove('embla-slide-snapped');
-        }
-      });
+      const currentSlideNode = carouselApi.slideNodes()[currentSlideIndex];
+      if (currentSlideNode) {
+        currentSlideNode.firstElementChild.classList.add('embla__slide--snapped');
+      }
     }
     console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
   }, [])
@@ -95,7 +92,7 @@ const CaseStudiesSection = () => {
 
   return (
     <section id="case-studies" className="py-24 bg-gradient-galaxy">
-      <div className="container mx-auto px-6">
+      <div>
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">Success</span>
@@ -106,11 +103,11 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+        <Carousel setApi={setCarouselApi} className="w-full overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
           <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
-                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-75 [&:not(.embla-slide-snapped)]:opacity-50">
+                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
