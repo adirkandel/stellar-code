@@ -202,22 +202,6 @@
     background: linear-gradient(145deg, hsl(var(--card) / 0.8), hsl(var(--primary) / 0.05));
   }
   
-  .holographic-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: conic-gradient(from 0deg, hsl(var(--primary) / 0.3), hsl(var(--neon-teal) / 0.3), hsl(var(--primary) / 0.3));
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: -1;
-  }
-  
-  .holographic-card:hover::before {
-    opacity: 1;
-    animation: rotate 3s linear infinite;
-  }
-  
   .holographic-card:hover {
     background: linear-gradient(145deg, hsl(var(--card) / 0.9), hsl(var(--primary) / 0.1));
     box-shadow: 
