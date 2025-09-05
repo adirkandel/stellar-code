@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import type { UseEmblaCarouselType,} from "embla-carousel-react";
+import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -75,14 +75,6 @@ const CaseStudiesSection = () => {
 
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-  const logSlidesInView = useCallback((emblaApi) => {
-    console.log(emblaApi.slidesInView())
-  }, [])
-
-  useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logSlidesInView)
-  }, [emblaApi, logSlidesInView])
-
   return (
     <section id="case-studies" className="py-24 bg-gradient-galaxy">
       <div className="container mx-auto px-6">
@@ -96,7 +88,7 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <Carousel setApi={carouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
           <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
