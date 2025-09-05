@@ -60,22 +60,7 @@ const HeroSection = () => {
             </button>
 
             {/* Stats */}
-            <div className="flex justify-center md:justify-start items-center gap-4 md:gap-8 pt-8 border-t border-nebula-blue/30">
-              <div className="text-center md:text-left">
-                <div className="text-2xl md:text-3xl font-bold font-space text-primary">50+</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Projects Delivered</div>
-              </div>
-              <div className="w-px h-8 md:h-12 bg-nebula-blue/30" />
-              <div className="text-center md:text-left">
-                <div className="text-2xl md:text-3xl font-bold font-space text-neon-teal">98%</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Client Satisfaction</div>
-              </div>
-              <div className="w-px h-8 md:h-12 bg-nebula-blue/30" />
-              <div className="text-center md:text-left">
-                <div className="text-2xl md:text-3xl font-bold font-space text-primary">24/7</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Support Available</div>
-              </div>
-            </div>
+            
           </div>
 
           {/* Right side - Image space (40% on mobile, 30% on large) */}
