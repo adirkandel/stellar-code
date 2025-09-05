@@ -42,11 +42,11 @@ const CaseStudiesSection = () => {
           </p>
         </div>
 
-        <Carousel className="w-full max-w-7xl mx-auto">
-          <CarouselContent className="-ml-4">
+        <Carousel className="w-full max-w-7xl mx-auto" opts={{ align: "center", loop: true }}>
+          <CarouselContent className="-ml-2">
             {caseStudies.map((study, index) => (
-              <CarouselItem key={index} className="pl-4 basis-full md:basis-4/5 lg:basis-3/5">
-                <div className="relative">
+              <CarouselItem key={index} className="pl-2 basis-full md:basis-1/2 lg:basis-1/3">
+                <div className="relative pb-12 transition-all duration-300 [&:not(.embla__slide--snapped)]:scale-90 [&:not(.embla__slide--snapped)]:opacity-70">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
@@ -79,8 +79,8 @@ const CaseStudiesSection = () => {
                     </div>
                   </div>
                   
-                  {/* Testimonial Card - Overlapping */}
-                  <div className="absolute -bottom-8 left-8 right-8 bg-stellar-white/95 backdrop-blur-sm rounded-lg p-6 border border-primary/10 shadow-lg">
+                  {/* Testimonial Card - Outside and Overlapping */}
+                  <div className="absolute -bottom-4 left-4 right-4 bg-stellar-white/95 backdrop-blur-sm rounded-lg p-6 border border-primary/10 shadow-lg z-20">
                     <p className="text-deep-space text-base italic leading-relaxed">
                       {study.testimonial}
                     </p>
@@ -90,8 +90,8 @@ const CaseStudiesSection = () => {
             ))}
           </CarouselContent>
           
-          <CarouselPrevious className="left-4" />
-          <CarouselNext className="right-4" />
+          <CarouselPrevious className="left-4 z-30" />
+          <CarouselNext className="right-4 z-30" />
         </Carousel>
 
         <div className="text-center mt-16">
