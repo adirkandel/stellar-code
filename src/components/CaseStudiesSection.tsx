@@ -80,7 +80,7 @@ const CaseStudiesSection = () => {
     if (currentSlideIndex >= 0) {
       const currentSlideNode = carouselApi.slideNodes()[currentSlideIndex];
       if (currentSlideNode) {
-        currentSlideNode.firstElementChild.classList.add('embla__slide--snapped');
+        currentSlideNode.firstElementChild.classList.add('embla--slide--snapped');
       }
     }
     console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
@@ -107,7 +107,7 @@ const CaseStudiesSection = () => {
           <CarouselContent className="-ml-6">
             {caseStudies.map((study, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
-                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla__slide--snapped)]:scale-75 [&:not(.embla__slide--snapped)]:opacity-50">
+                <div className="relative pb-12 transition-all duration-500 ease-out [&:not(.embla--slide--snapped)]:scale-75 [&:not(.embla--slide--snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
                     className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
