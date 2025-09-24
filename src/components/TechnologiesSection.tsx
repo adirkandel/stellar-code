@@ -20,22 +20,22 @@ import AzureLogo from "@/assets/azure-logo.svg";
 import AWSLogo from "@/assets/aws-logo.svg";
 
 const technologies = [
-  { name: "React", logo: ReactLogo, speed: 0.5, x: 15, y: 20, size: 90 },
-  { name: "Vue.js", logo: VueLogo, speed: 0.7, x: 75, y: 15, size: 80 },
-  { name: "Node.js", logo: NodeJSLogo, speed: 0.3, x: 25, y: 70, size: 100 },
-  { name: "Next.js", logo: NextJSLogo, speed: 0.6, x: 65, y: 65, size: 85 },
-  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4, x: 85, y: 40, size: 95 },
-  { name: "Laravel", logo: LaravelLogo, speed: 0.8, x: 10, y: 45, size: 75 },
-  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2, x: 45, y: 25, size: 110 },
-  { name: "Prisma", logo: PrismaLogo, speed: 0.9, x: 55, y: 80, size: 85 },
-  { name: "Docker", logo: DockerLogo, speed: 0.35, x: 40, y: 50, size: 90 },
-  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65, x: 80, y: 75, size: 105 },
-  { name: "TypeScript", logo: TypeScriptLogo, speed: 0.45, x: 30, y: 35, size: 95 },
-  { name: "OpenAI", logo: OpenAILogo, speed: 0.55, x: 70, y: 30, size: 88 },
-  { name: "Figma", logo: FigmaLogo, speed: 0.25, x: 20, y: 85, size: 82 },
-  { name: "PHP", logo: PHPLogo, speed: 0.75, x: 90, y: 20, size: 78 },
-  { name: "Azure", logo: AzureLogo, speed: 0.85, x: 50, y: 60, size: 92 },
-  { name: "AWS", logo: AWSLogo, speed: 0.15, x: 35, y: 90, size: 108 },
+  { name: "React", logo: ReactLogo, speed: 0.5, x: 12, y: 18, size: 90 },
+  { name: "Vue.js", logo: VueLogo, speed: 0.7, x: 78, y: 12, size: 80 },
+  { name: "Node.js", logo: NodeJSLogo, speed: 0.3, x: 20, y: 75, size: 100 },
+  { name: "Next.js", logo: NextJSLogo, speed: 0.6, x: 68, y: 68, size: 85 },
+  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4, x: 88, y: 38, size: 95 },
+  { name: "Laravel", logo: LaravelLogo, speed: 0.8, x: 8, y: 48, size: 75 },
+  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2, x: 42, y: 22, size: 110 },
+  { name: "Prisma", logo: PrismaLogo, speed: 0.9, x: 58, y: 82, size: 85 },
+  { name: "Docker", logo: DockerLogo, speed: 0.35, x: 35, y: 52, size: 90 },
+  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65, x: 82, y: 78, size: 105 },
+  { name: "TypeScript", logo: TypeScriptLogo, speed: 0.45, x: 28, y: 32, size: 95 },
+  { name: "OpenAI", logo: OpenAILogo, speed: 0.55, x: 72, y: 28, size: 88 },
+  { name: "Figma", logo: FigmaLogo, speed: 0.25, x: 15, y: 88, size: 82 },
+  { name: "PHP", logo: PHPLogo, speed: 0.75, x: 92, y: 18, size: 78 },
+  { name: "Azure", logo: AzureLogo, speed: 0.85, x: 52, y: 58, size: 92 },
+  { name: "AWS", logo: AWSLogo, speed: 0.15, x: 38, y: 92, size: 108 },
 ];
 
 const TechnologiesSection = () => {
