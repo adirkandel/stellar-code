@@ -86,7 +86,6 @@ const CaseStudiesSection = () => {
         }
       });
     }
-    console.log(carouselApi.slidesInView(), carouselApi.selectedScrollSnap(), carouselApi.slideNodes())
   }, [])
 
   useEffect(() => {
