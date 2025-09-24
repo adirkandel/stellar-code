@@ -144,7 +144,7 @@ const CaseStudiesSection = () => {
                   </div>
                   
                   {/* Testimonial Card - Outside and Overlapping */}
-                  <div className="m-x-auto -mt-5 w-[90%] bg-stellar-white/95 backdrop-blur-sm rounded-lg p-6 border border-primary/10 shadow-lg z-20">
+                  <div className="mx-auto -mt-5 w-[90%] bg-stellar-white/95 backdrop-blur-sm rounded-lg p-6 border border-primary/10 shadow-lg z-20">
                     <p className="text-deep-space text-base italic leading-relaxed">
                       {study.testimonial}
                     </p>
