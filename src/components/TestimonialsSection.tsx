@@ -59,6 +59,24 @@ const TestimonialsSection = () => {
       avatar: 'ET',
       rating: 5,
       quote: "As a non-technical founder, I needed a team I could trust completely. Stellar Code explained everything clearly, delivered on every promise, and built a platform that scales beautifully. Six months later, we're processing 10x the data with zero performance issues."
+    },
+    {
+      id: 4,
+      name: 'David Park',
+      title: 'Co-Founder',
+      company: 'AI Insights',
+      avatar: 'DP',
+      rating: 5,
+      quote: "The Stellar Code team brought our AI vision to life with incredible precision. Their deep understanding of machine learning frameworks and scalable architecture helped us process millions of data points daily. They delivered a robust platform that impressed our investors."
+    },
+    {
+      id: 5,
+      name: 'Lisa Williams',
+      title: 'Head of Product',
+      company: 'FinanceFlow',
+      avatar: 'LW',
+      rating: 5,
+      quote: "Security and compliance were critical for our fintech startup. Stellar Code implemented bank-level security measures and helped us achieve SOC 2 compliance ahead of schedule. Their attention to detail and regulatory expertise gave us complete confidence."
     }
   ];
 
@@ -67,7 +85,13 @@ const TestimonialsSection = () => {
       {/* Nebula background */}
       <div className="absolute inset-0 bg-gradient-nebula opacity-30" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Left gradient blend */}
+      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#080311] to-transparent z-10"></div>
+      
+      {/* Right gradient blend */}
+      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#080311] to-transparent z-10"></div>
+      
+      <div className="container mx-auto px-6 relative z-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">What Our</span>
