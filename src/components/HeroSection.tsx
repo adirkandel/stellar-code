@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import heroStarfield from '@/assets/hero-starfield.jpg';
+import astronaut from '@/assets/astronaut.png';
 const HeroSection = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -67,12 +68,11 @@ const HeroSection = () => {
           <div className="md:col-span-4 flex justify-center md:justify-end">
             <div className="w-full max-w-sm md:max-w-md h-64 md:h-96 bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl flex items-center justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-              <div className="relative z-10 text-center">
-                <div className="w-16 h-16 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sparkles className="w-8 h-8 text-primary" />
-                </div>
-                <p className="text-muted-foreground">Image placeholder</p>
-              </div>
+              <img 
+                src={astronaut} 
+                alt="Astronaut with laptop representing stellar web development" 
+                className="relative z-10 w-full h-full object-contain animate-float p-4"
+              />
             </div>
           </div>
         </div>
