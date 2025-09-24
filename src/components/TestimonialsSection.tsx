@@ -3,6 +3,7 @@ import { Star, Quote } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import type { UseEmblaCarouselType } from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -77,7 +78,18 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+        <Carousel 
+          setApi={setCarouselApi} 
+          className="w-full max-w-6xl mx-auto" 
+          opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+              stopOnInteraction: true,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+        >
           <CarouselContent className="-ml-6 py-8">
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
