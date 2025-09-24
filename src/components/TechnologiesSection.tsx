@@ -18,6 +18,7 @@ import TypeScriptLogo from "@/assets/typescript-logo.svg";
 import PHPLogo from "@/assets/php-logo.svg";
 import AzureLogo from "@/assets/azure-logo.svg";
 import AWSLogo from "@/assets/aws-logo.svg";
+import FloatingAstronautBg from "@/assets/floating-astronaut-background.jpg";
 
 const technologies = [
   { name: "React", logo: ReactLogo, speed: 0.5, x: 12, y: 18, size: 90 },
@@ -66,8 +67,20 @@ const TechnologiesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="technologies" className="py-20 relative overflow-hidden bg-deep-space">
-      <div className="container mx-auto px-4">
+    <section 
+      ref={sectionRef} 
+      id="technologies" 
+      className="py-20 relative overflow-hidden bg-deep-space"
+      style={{
+        backgroundImage: `url(${FloatingAstronautBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Dark overlay to maintain contrast */}
+      <div className="absolute inset-0 bg-deep-space/60"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Technologies We Master
