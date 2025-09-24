@@ -106,12 +106,6 @@ const TestimonialsSection = () => {
                         <Quote className="w-8 h-8 text-primary/60" />
                       </div>
 
-                      {/* Stars */}
-                      <div className="flex items-center gap-1 mb-6">
-                        {[...Array(testimonial.rating)].map((_, starIndex) => (
-                          <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
-                        ))}
-                      </div>
 
                       {/* Quote */}
                       <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
