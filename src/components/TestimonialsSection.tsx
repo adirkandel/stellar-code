@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" className="py-24 bg-deep-space relative overflow-hidden">      
-      <div className="container mx-auto px-6 relative z-20 relative">
+      <div className="w-full max-w-6xl mx-auto px-6 relative z-20 relative">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">What Our</span>
@@ -93,9 +93,6 @@ const TestimonialsSection = () => {
           </p>
         </div>
         
-        {/* Nebula background */}
-        <div className="absolute inset-0 bg-gradient-nebula opacity-30" />
-        
         {/* Left gradient blend */}
         <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#080311] to-transparent z-10"></div>
         
@@ -104,7 +101,7 @@ const TestimonialsSection = () => {
 
         <Carousel 
           setApi={setCarouselApi} 
-          className="w-full max-w-6xl mx-auto" 
+          className="w-full" 
           opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
           plugins={[
             Autoplay({
