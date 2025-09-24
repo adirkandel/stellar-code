@@ -113,7 +113,7 @@ const CaseStudiesSection = () => {
                 <div className="relative pb-14 pt-8 transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-75 [&:not(.embla-slide-snapped)]:opacity-50">
                   {/* Main Case Study Card */}
                   <div 
-                    className="relative h-96 rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
+                    className="relative rounded-xl overflow-hidden bg-gradient-card backdrop-blur-sm border border-primary/20 hover-glow transition-stellar"
                     style={{
                       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url(${study.logo})`,
                       backgroundSize: 'cover',
