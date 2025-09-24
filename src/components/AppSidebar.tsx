@@ -33,12 +33,12 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="bg-deep-space/95 backdrop-blur-xl border-primary/20">
-      <SidebarContent>
+    <Sidebar className="bg-deep-space/95 backdrop-blur-xl border-primary/20 h-full">
+      <SidebarContent className="flex flex-col h-full overflow-hidden">
         {/* Logo */}
-        <div className="p-6 border-b border-primary/20">
+        <div className="p-4 md:p-6 border-b border-primary/20 flex-shrink-0">
           <div 
-            className="text-2xl font-bold font-space cursor-pointer transition-stellar hover-glow"
+            className="text-xl md:text-2xl font-bold font-space cursor-pointer transition-stellar hover-glow"
             onClick={() => scrollToSection('hero')}
           >
             <span className="text-primary">Stellar</span>
@@ -46,30 +46,32 @@ export function AppSidebar() {
           </div>
         </div>
 
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-primary/80 font-space">Navigation</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton 
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-stellar cursor-pointer"
-                  >
-                    <item.icon className="mr-3 h-5 w-5" />
-                    <span className="font-medium">{item.label}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <div className="flex-1 overflow-y-auto">
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-primary/80 font-space px-4 md:px-6 py-2">Navigation</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="px-2 md:px-4">
+                {navItems.map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton 
+                      onClick={() => scrollToSection(item.id)}
+                      className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-stellar cursor-pointer w-full justify-start py-3"
+                    >
+                      <item.icon className="mr-3 h-5 w-5 flex-shrink-0" />
+                      <span className="font-medium">{item.label}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </div>
 
         {/* Get Started Button */}
-        <div className="mt-auto p-6 border-t border-primary/20">
+        <div className="p-4 md:p-6 border-t border-primary/20 flex-shrink-0">
           <button
             onClick={() => scrollToSection('contact')}
-            className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
+            className="w-full bg-primary text-primary-foreground px-4 py-3 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
           >
             Get Started
           </button>
