@@ -52,7 +52,7 @@ const Navigation = () => {
             onClick={() => scrollToSection('hero')}
           >
             <svg 
-              className="w-12 h-12 fill-primary logo" 
+              className="w-12 h-12 fill-primary logo-hover" 
               viewBox="0 0 321 259" 
               xmlns="http://www.w3.org/2000/svg"
             >
