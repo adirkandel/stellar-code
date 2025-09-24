@@ -11,55 +11,55 @@ const CaseStudiesSection = () => {
       title: 'SaaS MVP Launch',
       company: 'TechFlow Analytics',
       industry: 'Data Analytics',
-      story: 'A startup needed to launch their analytics platform MVP within 3 months to secure Series A funding. We assembled a full-stack team and delivered a React/Node.js platform with real-time data processing. The platform launched on time and secured $5M Series A funding within 6 weeks.',
-      testimonial: '"It was a game-changer for us. They took our vague ideas and transformed them into a sleek, user-friendly interface that our customers love. Their attention to detail truly sets them apart."',
+      story: 'A startup needed to launch their analytics platform MVP within 3 months to secure Series A funding. We assembled a full-stack team and delivered a React/Node.js platform with real-time data processing.',
+      testimonial: '"It was a game-changer for us. They took our vague ideas and transformed them into a sleek, user-friendly interface that our customers love."',
       logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'E-commerce Platform',
       company: 'RetailNext',
       industry: 'E-commerce',
-      story: 'A growing retail company needed to modernize their legacy e-commerce platform to handle increasing traffic and improve user experience. We rebuilt their entire frontend with React and optimized their backend infrastructure. The new platform reduced page load times by 70% and increased conversion rates by 45%.',
-      testimonial: '"The team delivered beyond our expectations. The new platform not only looks amazing but performs incredibly well. Our customers love the improved shopping experience."',
+      story: 'A growing retail company needed to modernize their legacy e-commerce platform to handle increasing traffic and improve user experience. We rebuilt their entire frontend with React and optimized their backend infrastructure.',
+      testimonial: '"The team delivered beyond our expectations. The new platform not only looks amazing but performs incredibly well."',
       logo: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'Team Training & Scale',
       company: 'InnovateCRM',
       industry: 'CRM Software',
-      story: 'A growing SaaS company struggled with code quality and team coordination. We provided technical leadership and established proper development processes. Successfully scaled team from 5 to 15 developers while maintaining velocity and reducing deployment time by 80%.',
-      testimonial: '"Their mentorship transformed our engineering culture. The processes they established helped us scale efficiently while maintaining high code quality standards."',
+      story: 'A growing SaaS company struggled with code quality and team coordination. We provided technical leadership and established proper development processes.',
+      testimonial: '"Their mentorship transformed our engineering culture."',
       logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'Mobile App Development',
       company: 'HealthTech Solutions',
       industry: 'Healthcare',
-      story: 'A healthcare startup needed a secure mobile app for patient data management and telemedicine consultations. We developed a React Native app with end-to-end encryption and HIPAA compliance. The app now serves 50,000+ patients and has a 4.8-star rating.',
-      testimonial: '"The security features and user experience exceeded our expectations. The app has transformed how we deliver healthcare services to our patients."',
+      story: 'A healthcare startup needed a secure mobile app for patient data management and telemedicine consultations. We developed a React Native app with end-to-end encryption and HIPAA compliance.',
+      testimonial: '"The security features and user experience exceeded our expectations."',
       logo: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'AI Integration Platform',
       company: 'DataFlow AI',
       industry: 'Artificial Intelligence',
-      story: 'An enterprise client needed to integrate AI capabilities across their existing systems without major infrastructure changes. We built a unified API gateway with machine learning pipelines. The solution reduced AI processing costs by 60% while improving accuracy by 35%.',
-      testimonial: '"They made AI accessible to our entire organization. The seamless integration and performance improvements have been remarkable."',
+      story: 'An enterprise client needed to integrate AI capabilities across their existing systems without major infrastructure changes. We built a unified API gateway with machine learning pipelines.',
+      testimonial: '"They made AI accessible to our entire organization."',
       logo: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'Financial Dashboard',
       company: 'WealthWise',
       industry: 'Fintech',
-      story: 'A financial services company required a real-time portfolio management dashboard with advanced analytics and risk assessment tools. We created a comprehensive platform with live market data integration. Client assets under management increased by 200% within 8 months.',
-      testimonial: '"The dashboard gives us insights we never had before. Our clients love the transparency and real-time updates on their investments."',
+      story: 'A financial services company required a real-time portfolio management dashboard with advanced analytics and risk assessment tools.',
+      testimonial: '"The dashboard gives us insights we never had before."',
       logo: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop&crop=center'
     },
     {
       title: 'Supply Chain Optimization',
       company: 'LogiCore Systems',
       industry: 'Logistics',
-      story: 'A logistics company needed to optimize their supply chain management with predictive analytics and automated routing. We developed an intelligent system that reduced delivery times by 40% and operational costs by 25%. The platform now handles over 10,000 shipments daily.',
+      story: 'A logistics company needed to optimize their supply chain management with predictive analytics and automated routing.',
       testimonial: '"The optimization algorithms have revolutionized our operations. We can now predict and prevent bottlenecks before they happen."',
       logo: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop&crop=center'
     },
@@ -67,8 +67,8 @@ const CaseStudiesSection = () => {
       title: 'Educational Platform',
       company: 'EduTech Pro',
       industry: 'Education Technology',
-      story: 'An educational institution wanted to create an interactive learning platform with virtual classrooms and AI-powered personalized learning paths. We built a comprehensive LMS that increased student engagement by 85% and completion rates by 60%.',
-      testimonial: '"Student outcomes have improved dramatically. The personalized learning approach has made education more effective and engaging."',
+      story: 'An educational institution wanted to create an interactive learning platform with virtual classrooms and AI-powered personalized learning paths.',
+      testimonial: '"Student outcomes have improved dramatically."',
       logo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop&crop=center'
     }
   ];
