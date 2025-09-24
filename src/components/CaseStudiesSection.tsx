@@ -19,7 +19,7 @@ const CaseStudiesSection = () => {
       title: 'E-commerce Platform',
       company: 'RetailNext',
       industry: 'E-commerce',
-      story: 'A growing retail company needed to modernize their legacy e-commerce platform to handle increasing traffic and improve user experience. We rebuilt their entire frontend with React and optimized their backend infrastructure.',
+      story: 'A growing retail company needed to modernize their legacy e-commerce platform to handle increasing traffic and improve user experience.',
       testimonial: '"The team delivered beyond our expectations. The new platform not only looks amazing but performs incredibly well."',
       logo: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center'
     },
