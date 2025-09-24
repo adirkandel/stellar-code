@@ -59,9 +59,9 @@ const ServicesSection = () => {
                   <div className="w-full h-full bg-gradient-card rounded-xl" />
                 </div>
                 
-                <div className="relative z-10 flex flex-col md:flex-row gap-6 h-full">
-                  {/* Header section - full width on mobile, 30% on desktop */}
-                  <div className="w-full md:w-[30%] flex flex-col items-center justify-center text-center">
+                <div className="relative z-10 flex flex-col lg:flex-row gap-6 h-full">
+                  {/* Header section - full width on mobile/tablet, 30% on desktop */}
+                  <div className="w-full lg:w-[30%] flex flex-col items-center justify-center text-center">
                     <IconComponent className="w-12 h-12 text-primary group-hover:text-neon-teal transition-colors mb-4" />
                     <h3 className="text-xl font-bold font-space text-stellar-white group-hover:text-primary transition-colors leading-tight">
                       {service.title}
@@ -69,16 +69,16 @@ const ServicesSection = () => {
                   </div>
 
                   {/* Divider */}
-                  <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
-                  <div className="block md:hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+                  <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
+                  <div className="block lg:hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
 
-                  {/* Content section - full width on mobile, 70% on desktop */}
-                  <div className="w-full md:w-[70%] space-y-4">
+                  {/* Content section - full width on mobile/tablet, 70% on desktop */}
+                  <div className="w-full lg:w-[70%] space-y-4">
                     <p className="text-muted-foreground text-base leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-2">
                           <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse flex-shrink-0" />
