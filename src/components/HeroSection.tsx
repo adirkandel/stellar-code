@@ -16,7 +16,7 @@ const HeroSection = () => {
     backgroundPosition: 'center'
   }}>
       {/* Overlay gradient for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-space/60 via-deep-space/40 to-deep-space/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep-space/40 via-deep-space/20 to-deep-space/40" />
       
       {/* Animated nebula overlay */}
       <div className="absolute inset-0 bg-gradient-nebula animate-pulse-slow" />
