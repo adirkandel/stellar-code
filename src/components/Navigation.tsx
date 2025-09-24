@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -55,13 +54,7 @@ const Navigation = () => {
             <span className="text-stellar-white">Code</span>
           </div>
 
-          {/* Mobile/Tablet Hamburger Menu */}
-          <div className="flex lg:hidden items-center">
-            <SidebarTrigger className="text-stellar-white hover:text-primary transition-stellar" />
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -79,10 +72,9 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Desktop Get Started Button */}
           <button
             onClick={() => scrollToSection('contact')}
-            className="hidden lg:block bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
+            className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
           >
             Get Started
           </button>
