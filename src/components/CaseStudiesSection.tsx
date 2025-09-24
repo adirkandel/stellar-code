@@ -122,7 +122,7 @@ const CaseStudiesSection = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
                     
-                    <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                    <div className="relative z-10 p-8 h-full flex flex-col">
                       {/* Company Info */}
                       <div>
                         <h3 className="text-3xl font-bold font-space text-stellar-white mb-2">
