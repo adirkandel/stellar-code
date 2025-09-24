@@ -55,44 +55,11 @@ const TechnologiesSection = () => {
 
   return (
     <section ref={sectionRef} id="technologies" className="py-20 relative overflow-hidden bg-deep-space">
-      {/* Background constellation */}
-      <div className="absolute inset-0 opacity-30">
-        <svg
-          viewBox="0 0 1000 1000"
-          className="w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <radialGradient id="star" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          {Array.from({ length: 50 }).map((_, i) => (
-            <circle
-              key={i}
-              cx={Math.random() * 1000}
-              cy={Math.random() * 1000}
-              r={Math.random() * 2 + 0.5}
-              fill="url(#star)"
-              className={`animate-twinkle`}
-              style={{
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))}
-        </svg>
-      </div>
-
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Technologies We Master
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            We leverage cutting-edge technologies to build scalable, high-performance solutions that propel your business forward.
-          </p>
         </div>
 
         <TooltipProvider>
@@ -146,23 +113,6 @@ const TechnologiesSection = () => {
             ))}
           </div>
         </TooltipProvider>
-      </div>
-
-      {/* Additional floating particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 5}s`,
-              transform: `translateY(${scrollY * (0.1 + Math.random() * 0.3)}px)`,
-            }}
-          />
-        ))}
       </div>
     </section>
   );
