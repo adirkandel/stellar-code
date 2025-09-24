@@ -1,8 +1,10 @@
 import { Star, Quote } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
+      id: 1,
       name: 'Sarah Chen',
       title: 'CTO',
       company: 'TechFlow Analytics',
@@ -11,6 +13,7 @@ const TestimonialsSection = () => {
       quote: "Stellar Code didn't just build our product – they became true partners in our vision. Their team's startup experience and technical excellence helped us launch on time and secure our Series A. The quality of their work and their commitment to our success is unmatched."
     },
     {
+      id: 2,
       name: 'Marcus Rodriguez',
       title: 'CEO',
       company: 'InnovateCRM',
@@ -19,6 +22,7 @@ const TestimonialsSection = () => {
       quote: "Working with Stellar Code transformed our entire engineering culture. Their leadership and mentorship helped our team grow from 5 to 15 developers while actually improving our code quality and deployment speed. They're not just developers – they're true technical leaders."
     },
     {
+      id: 3,
       name: 'Emily Thompson',
       title: 'Founder',
       company: 'CloudSync Pro',
@@ -71,11 +75,15 @@ const TestimonialsSection = () => {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/20 border-2 border-primary/40 rounded-full flex items-center justify-center">
-                    <span className="text-primary font-bold font-space">
+                  <Avatar className="w-12 h-12 border-2 border-primary/40">
+                    <AvatarImage 
+                      src={`https://testingbot.com/free-online-tools/random-avatar/200?img=${testimonial.id}`}
+                      alt={`${testimonial.name} avatar`}
+                    />
+                    <AvatarFallback className="bg-primary/20 text-primary font-bold font-space">
                       {testimonial.avatar}
-                    </span>
-                  </div>
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <div className="font-semibold text-stellar-white">
                       {testimonial.name}
