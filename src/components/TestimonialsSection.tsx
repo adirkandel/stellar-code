@@ -1,16 +1,18 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Star, Quote } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 type CarouselApi = UseEmblaCarouselType[1];
 
 const TestimonialsSection = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const logSlidesInView = useCallback((carouselApi) => {
     const currentSlideIndex = carouselApi.selectedScrollSnap();
+    setCurrentSlide(currentSlideIndex);
     if (currentSlideIndex >= 0) {
       carouselApi.slideNodes().forEach((node, nodeIdx) => {
         if (nodeIdx === currentSlideIndex) {
@@ -23,7 +25,10 @@ const TestimonialsSection = () => {
   }, [])
 
   useEffect(() => {
-    if (carouselApi) carouselApi.on('slidesInView', logSlidesInView)
+    if (carouselApi) {
+      carouselApi.on('slidesInView', logSlidesInView);
+      carouselApi.on('select', logSlidesInView);
+    }
   }, [carouselApi, logSlidesInView])
 
   const testimonials = [
@@ -72,12 +77,12 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
-          <CarouselContent className="-ml-6">
+        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+          <CarouselContent className="-ml-6 py-8">
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
                 <div className="transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-90 [&:not(.embla-slide-snapped)]:opacity-60">
-                  <div className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden">
+                  <div className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-visible">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
                     <div className="relative z-10">
                       {/* Quote Icon */}
@@ -123,10 +128,22 @@ const TestimonialsSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          
-          <CarouselPrevious className="left-4 z-30" />
-          <CarouselNext className="right-4 z-30" />
         </Carousel>
+
+        {/* Dots Navigation */}
+        <div className="flex justify-center gap-2 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => carouselApi?.scrollTo(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentSlide === index
+                  ? 'bg-primary scale-125'
+                  : 'bg-primary/30 hover:bg-primary/50'
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Additional social proof */}
         <div className="mt-16 text-center">
