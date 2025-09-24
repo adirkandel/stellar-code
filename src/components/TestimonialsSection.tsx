@@ -84,7 +84,7 @@ const TestimonialsSection = () => {
           opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
           plugins={[
             Autoplay({
-              delay: 3000,
+              delay: 5000,
               stopOnInteraction: false,
               stopOnMouseEnter: true,
               stopOnFocusIn: false,
@@ -95,7 +95,10 @@ const TestimonialsSection = () => {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
                 <div className="transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-90 [&:not(.embla-slide-snapped)]:opacity-60">
-                  <div className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-visible">
+                  <div 
+                    className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-visible cursor-pointer"
+                    onClick={() => carouselApi?.scrollTo(index)}
+                  >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
                     <div className="relative z-10">
                       {/* Quote Icon */}
