@@ -157,7 +157,7 @@
   
   /* Glow effects */
   .glow-stellar {
-    box-shadow: var(--glow-stellar);
+    text-shadow: var(--glow-stellar);
   }
   
   .glow-accent {
