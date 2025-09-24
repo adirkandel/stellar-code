@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
-import heroStarfield from '@/assets/hero-starfield.jpg';
+import heroStarfield from '@/assets/space-full-of-stars-min.jpg';
 import astronaut from '@/assets/astronaut.png';
 const HeroSection = () => {
   const scrollToContact = () => {
