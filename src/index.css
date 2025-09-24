@@ -196,6 +196,36 @@
     transform: scale(1.05) rotateY(5deg);
   }
   
+  /* Logo hover animation */
+  .logo-hover {
+    transition: var(--transition-smooth);
+  }
+
+  .logo-hover:hover path:nth-child(1) {
+    opacity: 0.8;
+    animation: logo-pulse 2s ease-in-out infinite;
+  }
+
+  .logo-hover:hover path:nth-child(2) {
+    opacity: 0.9;
+    animation: logo-pulse 2s ease-in-out infinite 0.2s;
+  }
+
+  .logo-hover:hover path:nth-child(3) {
+    opacity: 1;
+    animation: logo-pulse 2s ease-in-out infinite 0.4s;
+  }
+
+  .logo-hover:hover path:nth-child(4) {
+    opacity: 0.7;
+    animation: logo-pulse 2s ease-in-out infinite 0.6s;
+  }
+
+  .logo-hover:hover path:nth-child(5) {
+    opacity: 0.95;
+    animation: logo-pulse 2s ease-in-out infinite 0.8s;
+  }
+  
   /* Holographic card effect */
   .holographic-card {
     position: relative;
@@ -208,6 +238,15 @@
       0 0 30px hsl(var(--primary) / 0.3),
       0 0 60px hsl(var(--neon-teal) / 0.2),
       inset 0 0 20px hsl(var(--primary) / 0.1);
+  }
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    opacity: inherit;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
 
