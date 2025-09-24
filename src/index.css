@@ -216,12 +216,12 @@
     animation: logo-pulse 2s ease-in-out infinite 0.4s;
   }
 
-  .logo-hover:hover path:nth-child(4) {
+  .logo-hover:hover path:nth-child(5) {
     opacity: 0.7;
     animation: logo-pulse 2s ease-in-out infinite 0.6s;
   }
 
-  .logo-hover:hover path:nth-child(5) {
+  .logo-hover:hover path:nth-child(6) {
     opacity: 0.95;
     animation: logo-pulse 2s ease-in-out infinite 0.8s;
   }
