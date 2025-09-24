@@ -149,10 +149,10 @@ const TestimonialsSection = () => {
             <button
               key={index}
               onClick={() => carouselApi?.scrollTo(index)}
-              className={`rounded-full transition-all duration-300 ${
+              className={`h-3 rounded-full transition-all duration-300 ${
                 currentSlide === index
-                  ? 'w-6 h-6 bg-primary'
-                  : 'w-3 h-3 bg-primary/30 hover:bg-primary/50'
+                  ? 'w-6 bg-primary'
+                  : 'w-3 bg-primary/30 hover:bg-primary/50'
               }`}
             />
           ))}
