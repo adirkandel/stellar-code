@@ -90,7 +90,7 @@ const TechnologiesSection = () => {
                   >
                     {/* Bubble container */}
                     <div 
-                      className="relative mx-auto"
+                      className="relative mx-auto group-hover:animate-float"
                       style={{
                         width: `${tech.size}px`,
                         height: `${tech.size}px`,
