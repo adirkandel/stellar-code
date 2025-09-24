@@ -1,7 +1,31 @@
+import { useState, useCallback, useEffect } from 'react';
 import { Star, Quote } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import type { UseEmblaCarouselType } from "embla-carousel-react";
+
+type CarouselApi = UseEmblaCarouselType[1];
 
 const TestimonialsSection = () => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+
+  const logSlidesInView = useCallback((carouselApi) => {
+    const currentSlideIndex = carouselApi.selectedScrollSnap();
+    if (currentSlideIndex >= 0) {
+      carouselApi.slideNodes().forEach((node, nodeIdx) => {
+        if (nodeIdx === currentSlideIndex) {
+          node.firstElementChild.classList.add('embla-slide-snapped');
+        } else {
+          node.firstElementChild.classList.remove('embla-slide-snapped');
+        }
+      });
+    }
+  }, [])
+
+  useEffect(() => {
+    if (carouselApi) carouselApi.on('slidesInView', logSlidesInView)
+  }, [carouselApi, logSlidesInView])
+
   const testimonials = [
     {
       id: 1,
@@ -48,55 +72,61 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-              <div className="relative z-10">
-                {/* Quote Icon */}
-                <div className="mb-6">
-                  <Quote className="w-8 h-8 text-primary/60" />
-                </div>
+        <Carousel setApi={setCarouselApi} className="w-full max-w-6xl mx-auto overflow-hidden" opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}>
+          <CarouselContent className="-ml-6">
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
+                <div className="transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-90 [&:not(.embla-slide-snapped)]:opacity-60">
+                  <div className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                    <div className="relative z-10">
+                      {/* Quote Icon */}
+                      <div className="mb-6">
+                        <Quote className="w-8 h-8 text-primary/60" />
+                      </div>
 
-                {/* Stars */}
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, starIndex) => (
-                    <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
-                  ))}
-                </div>
+                      {/* Stars */}
+                      <div className="flex items-center gap-1 mb-6">
+                        {[...Array(testimonial.rating)].map((_, starIndex) => (
+                          <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
+                        ))}
+                      </div>
 
-                {/* Quote */}
-                <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
-                  "{testimonial.quote}"
-                </blockquote>
+                      {/* Quote */}
+                      <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
+                        "{testimonial.quote}"
+                      </blockquote>
 
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <Avatar className="w-12 h-12 border-2 border-primary/40">
-                    <AvatarImage 
-                      src={`https://testingbot.com/free-online-tools/random-avatar/200?img=${testimonial.id}`}
-                      alt={`${testimonial.name} avatar`}
-                    />
-                    <AvatarFallback className="bg-primary/20 text-primary font-bold font-space">
-                      {testimonial.avatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <div className="font-semibold text-stellar-white">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.title} at <span className="text-primary">{testimonial.company}</span>
+                      {/* Author */}
+                      <div className="flex items-center gap-4">
+                        <Avatar className="w-12 h-12 border-2 border-primary/40">
+                          <AvatarImage 
+                            src={`https://testingbot.com/free-online-tools/random-avatar/200?img=${testimonial.id}`}
+                            alt={`${testimonial.name} avatar`}
+                          />
+                          <AvatarFallback className="bg-primary/20 text-primary font-bold font-space">
+                            {testimonial.avatar}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="font-semibold text-stellar-white">
+                            {testimonial.name}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {testimonial.title} at <span className="text-primary">{testimonial.company}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          <CarouselPrevious className="left-4 z-30" />
+          <CarouselNext className="right-4 z-30" />
+        </Carousel>
 
         {/* Additional social proof */}
         <div className="mt-16 text-center">
