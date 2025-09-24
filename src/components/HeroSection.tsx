@@ -66,8 +66,7 @@ const HeroSection = () => {
 
           {/* Right side - Image space (40% on mobile, 30% on large) */}
           <div className="md:col-span-4 flex justify-center md:justify-end">
-            <div className="w-full max-w-sm md:max-w-md h-64 md:h-96 bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+            <div className="w-full max-w-sm md:max-w-md h-64 md:h-96">
               <img 
                 src={astronaut} 
                 alt="Astronaut with laptop representing stellar web development" 
