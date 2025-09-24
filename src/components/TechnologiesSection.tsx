@@ -14,16 +14,16 @@ import DockerLogo from "@/assets/docker-logo.svg";
 import KubernetesLogo from "@/assets/kubernetes-logo.svg";
 
 const technologies = [
-  { name: "React", logo: ReactLogo, speed: 0.5 },
-  { name: "Vue.js", logo: VueLogo, speed: 0.7 },
-  { name: "Node.js", logo: NodeJSLogo, speed: 0.3 },
-  { name: "Next.js", logo: NextJSLogo, speed: 0.6 },
-  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4 },
-  { name: "Laravel", logo: LaravelLogo, speed: 0.8 },
-  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2 },
-  { name: "Prisma", logo: PrismaLogo, speed: 0.9 },
-  { name: "Docker", logo: DockerLogo, speed: 0.35 },
-  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65 },
+  { name: "React", logo: ReactLogo, speed: 0.5, x: 15, y: 20, size: 90 },
+  { name: "Vue.js", logo: VueLogo, speed: 0.7, x: 75, y: 15, size: 80 },
+  { name: "Node.js", logo: NodeJSLogo, speed: 0.3, x: 25, y: 70, size: 100 },
+  { name: "Next.js", logo: NextJSLogo, speed: 0.6, x: 65, y: 65, size: 85 },
+  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4, x: 85, y: 40, size: 95 },
+  { name: "Laravel", logo: LaravelLogo, speed: 0.8, x: 10, y: 45, size: 75 },
+  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2, x: 45, y: 25, size: 110 },
+  { name: "Prisma", logo: PrismaLogo, speed: 0.9, x: 55, y: 80, size: 85 },
+  { name: "Docker", logo: DockerLogo, speed: 0.35, x: 40, y: 50, size: 90 },
+  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65, x: 80, y: 75, size: 105 },
 ];
 
 const TechnologiesSection = () => {
@@ -63,19 +63,27 @@ const TechnologiesSection = () => {
         </div>
 
         <TooltipProvider>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+          <div className="relative w-full h-96 max-w-6xl mx-auto">
             {technologies.map((tech, index) => (
               <Tooltip key={tech.name}>
                 <TooltipTrigger asChild>
                   <div
-                    className="relative group cursor-pointer"
+                    className="absolute group cursor-pointer"
                     style={{
-                      transform: `translateY(${scrollY * tech.speed}px)`,
+                      left: `${tech.x}%`,
+                      top: `${tech.y}%`,
+                      transform: `translate(-50%, -50%) translateY(${scrollY * tech.speed}px)`,
                       transition: "transform 0.1s ease-out",
                     }}
                   >
                     {/* Bubble container */}
-                    <div className="relative w-24 h-24 mx-auto">
+                    <div 
+                      className="relative mx-auto"
+                      style={{
+                        width: `${tech.size}px`,
+                        height: `${tech.size}px`,
+                      }}
+                    >
                       {/* Bubble background */}
                       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-primary/50 group-hover:scale-110">
                         {/* Shine effect */}
@@ -90,7 +98,11 @@ const TechnologiesSection = () => {
                         <img
                           src={tech.logo}
                           alt={tech.name}
-                          className="w-10 h-10 object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300 group-hover:scale-110"
+                          className="object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300 group-hover:scale-110"
+                          style={{
+                            width: `${tech.size * 0.4}px`,
+                            height: `${tech.size * 0.4}px`,
+                          }}
                         />
                       </div>
 
