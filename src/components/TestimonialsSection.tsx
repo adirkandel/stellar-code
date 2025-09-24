@@ -94,10 +94,10 @@ const TestimonialsSection = () => {
         </div>
         
         {/* Left gradient blend */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#080311] to-transparent z-10"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-deep-space to-transparent z-10"></div>
         
         {/* Right gradient blend */}
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#080311] to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-deep-space to-transparent z-10"></div>
 
         <Carousel 
           setApi={setCarouselApi} 
