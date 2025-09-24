@@ -21,22 +21,22 @@ import AWSLogo from "@/assets/aws-logo.svg";
 import FloatingAstronautBg from "@/assets/floating-astronaut-background.jpg";
 
 const technologies = [
-  { name: "React", logo: ReactLogo, speed: 0.5, x: 12, y: 18, size: 90 },
-  { name: "Vue.js", logo: VueLogo, speed: 0.7, x: 78, y: 12, size: 80 },
-  { name: "Node.js", logo: NodeJSLogo, speed: 0.3, x: 20, y: 75, size: 100 },
-  { name: "Next.js", logo: NextJSLogo, speed: 0.6, x: 68, y: 68, size: 85 },
-  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4, x: 88, y: 38, size: 95 },
-  { name: "Laravel", logo: LaravelLogo, speed: 0.8, x: 8, y: 48, size: 75 },
-  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2, x: 42, y: 22, size: 110 },
-  { name: "Prisma", logo: PrismaLogo, speed: 0.9, x: 58, y: 82, size: 85 },
-  { name: "Docker", logo: DockerLogo, speed: 0.35, x: 35, y: 52, size: 90 },
-  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65, x: 82, y: 78, size: 105 },
-  { name: "TypeScript", logo: TypeScriptLogo, speed: 0.45, x: 28, y: 32, size: 95 },
-  { name: "OpenAI", logo: OpenAILogo, speed: 0.55, x: 72, y: 28, size: 88 },
-  { name: "Figma", logo: FigmaLogo, speed: 0.25, x: 15, y: 88, size: 82 },
-  { name: "PHP", logo: PHPLogo, speed: 0.75, x: 92, y: 18, size: 78 },
-  { name: "Azure", logo: AzureLogo, speed: 0.85, x: 52, y: 58, size: 92 },
-  { name: "AWS", logo: AWSLogo, speed: 0.15, x: 38, y: 92, size: 108 },
+  { name: "React", logo: ReactLogo, speed: 0.5, x: 12, y: 18, size: 90, mobileSize: 60 },
+  { name: "Vue.js", logo: VueLogo, speed: 0.7, x: 78, y: 12, size: 80, mobileSize: 55 },
+  { name: "Node.js", logo: NodeJSLogo, speed: 0.3, x: 20, y: 75, size: 100, mobileSize: 65 },
+  { name: "Next.js", logo: NextJSLogo, speed: 0.6, x: 68, y: 68, size: 85, mobileSize: 58 },
+  { name: "Nuxt.js", logo: NuxtLogo, speed: 0.4, x: 88, y: 38, size: 95, mobileSize: 62 },
+  { name: "Laravel", logo: LaravelLogo, speed: 0.8, x: 8, y: 48, size: 75, mobileSize: 50 },
+  { name: "PostgreSQL", logo: PostgreSQLLogo, speed: 0.2, x: 42, y: 22, size: 110, mobileSize: 70 },
+  { name: "Prisma", logo: PrismaLogo, speed: 0.9, x: 58, y: 82, size: 85, mobileSize: 58 },
+  { name: "Docker", logo: DockerLogo, speed: 0.35, x: 35, y: 52, size: 90, mobileSize: 60 },
+  { name: "Kubernetes", logo: KubernetesLogo, speed: 0.65, x: 82, y: 78, size: 105, mobileSize: 68 },
+  { name: "TypeScript", logo: TypeScriptLogo, speed: 0.45, x: 28, y: 32, size: 95, mobileSize: 62 },
+  { name: "OpenAI", logo: OpenAILogo, speed: 0.55, x: 72, y: 28, size: 88, mobileSize: 58 },
+  { name: "Figma", logo: FigmaLogo, speed: 0.25, x: 15, y: 88, size: 82, mobileSize: 55 },
+  { name: "PHP", logo: PHPLogo, speed: 0.75, x: 92, y: 18, size: 78, mobileSize: 52 },
+  { name: "Azure", logo: AzureLogo, speed: 0.85, x: 52, y: 58, size: 92, mobileSize: 60 },
+  { name: "AWS", logo: AWSLogo, speed: 0.15, x: 38, y: 92, size: 108, mobileSize: 70 },
 ];
 
 const TechnologiesSection = () => {
@@ -111,8 +111,8 @@ const TechnologiesSection = () => {
                     <div 
                       className="relative mx-auto group-hover:animate-float"
                       style={{
-                        width: `${tech.size}px`,
-                        height: `${tech.size}px`,
+                        width: `${window.innerWidth < 768 ? tech.mobileSize : tech.size}px`,
+                        height: `${window.innerWidth < 768 ? tech.mobileSize : tech.size}px`,
                       }}
                     >
                       {/* Bubble background */}
@@ -131,8 +131,8 @@ const TechnologiesSection = () => {
                           alt={tech.name}
                           className="object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300 group-hover:scale-110"
                           style={{
-                            width: `${tech.size * 0.4}px`,
-                            height: `${tech.size * 0.4}px`,
+                            width: `${(window.innerWidth < 768 ? tech.mobileSize : tech.size) * 0.4}px`,
+                            height: `${(window.innerWidth < 768 ? tech.mobileSize : tech.size) * 0.4}px`,
                           }}
                         />
                       </div>
