@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
-import heroStarfield from '@/assets/space-full-of-stars-min.jpg';
+import heroStarfield from '@/assets/hero-starfield.jpg';
 import astronaut from '@/assets/astronaut.png';
 const HeroSection = () => {
   const scrollToContact = () => {
@@ -16,7 +16,7 @@ const HeroSection = () => {
     backgroundPosition: 'center'
   }}>
       {/* Overlay gradient for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-space/80 via-deep-space/60 to-deep-space/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep-space/60 via-deep-space/40 to-deep-space/60" />
       
       {/* Animated nebula overlay */}
       <div className="absolute inset-0 bg-gradient-nebula animate-pulse-slow" />
