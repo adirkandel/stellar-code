@@ -170,12 +170,11 @@ const TestimonialsSection = () => {
             <button
               key={index}
               onClick={() => carouselApi?.scrollTo(index)}
-              className={`h-3 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-deep-space ${
+              className={`h-3 rounded-full transition-all duration-300 ${
                 currentSlide === index
-                  ? 'w-6 bg-primary shadow-lg shadow-primary/30'
-                  : 'w-3 bg-primary/30 hover:bg-primary/70 hover:scale-110'
+                  ? 'w-6 bg-primary'
+                  : 'w-3 bg-primary/30 hover:bg-primary/50'
               }`}
-              aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>
