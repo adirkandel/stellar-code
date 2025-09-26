@@ -177,7 +177,7 @@ const SecondSuccessSection = () => {
               <div
                 key={card.id}
                 className={`absolute transition-all duration-500 ease-out will-change-transform ${
-                  isExpanded ? 'z-50' : 'z-10'
+                  isExpanded ? 'z-40' : 'z-10'
                 }`}
                 style={{
                   left: (isExpanded || isCentering) ? '50%' : position.x,
