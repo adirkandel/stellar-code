@@ -55,7 +55,7 @@ const Navigation = () => {
     { id: 'technologies', label: 'Technologies' },
     { id: 'why-us', label: 'Why Us' },
     { id: 'testimonials', label: 'Testimonials' },
-    { id: 'proven-results', label: 'Proven Results' },
+    { id: 'proven-results', label: 'Results' },
     { id: 'contact', label: 'Contact' },
   ];
 
