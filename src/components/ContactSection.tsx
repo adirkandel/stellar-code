@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Send, Calendar, Mail, MessageSquare, User } from 'lucide-react';
-import { GlowButton } from '@/components/ui/glow-button';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
@@ -156,9 +155,9 @@ const ContactSection = () => {
                       <p className="text-muted-foreground">Free 30-minute consultation</p>
                     </div>
                   </div>
-                  <GlowButton color="primary" className="w-full">
+                  <button className="w-full bg-primary/20 border border-primary/30 text-primary px-4 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30">
                     Book a Free Consultation
-                  </GlowButton>
+                  </button>
                 </div>
               </div>
 
