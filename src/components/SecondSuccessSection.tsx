@@ -151,7 +151,7 @@ const SecondSuccessSection = () => {
   };
 
   return (
-    <section className="relative py-24 bg-gradient-galaxy overflow-hidden">
+    <section className="relative py-24 bg-gradient-galaxy overflow-hidden" id="proven-results">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
