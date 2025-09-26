@@ -31,9 +31,9 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-8 items-center min-h-screen py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center min-h-screen py-20">
           {/* Left side - Text content (60% on mobile, 70% on large) */}
-          <div className="md:col-span-6 text-center md:text-left">
+          <div className="md:col-span-7 text-center md:text-left">
             {/* Badge */}
             
 
@@ -65,7 +65,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right side - Image space (40% on mobile, 30% on large) */}
-          <div className="md:col-span-4 flex justify-center md:justify-end">
+          <div className="md:col-span-5 flex justify-center md:justify-end">
             <div className="w-full max-w-sm md:max-w-md h-64 md:h-96">
               <img 
                 src={astronaut} 
