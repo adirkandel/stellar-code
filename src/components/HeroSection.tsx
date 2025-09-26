@@ -66,7 +66,7 @@ const HeroSection = () => {
 
           {/* Right side - Image space (40% on mobile, 30% on large) */}
           <div className="md:col-span-4 flex justify-center md:justify-end">
-            <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
+            <div className="w-full max-w-sm md:max-w-5">
               <img 
                 src={astronaut} 
                 alt="Astronaut with laptop representing stellar web development" 
