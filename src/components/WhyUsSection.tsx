@@ -94,13 +94,13 @@ const WhyUsSection = () => {
           {/* CTA Card */}
           <div className="group text-center">
             <div className="relative inline-flex items-center justify-center mb-6">
-              <div className="absolute w-20 h-20 bg-secondary/20 rounded-full animate-pulse" />
-              <div className="relative p-4 bg-secondary/30 border-2 border-secondary/60 rounded-full group-hover:border-secondary transition-stellar group-hover:scale-110 group-hover:bg-secondary/40">
-                <Rocket className="w-8 h-8 text-secondary" />
+              <div className="absolute w-20 h-20 bg-neon-teal/20 rounded-full animate-pulse" />
+              <div className="relative p-4 bg-neon-teal/30 border-2 border-neon-teal/60 rounded-full group-hover:border-neon-teal transition-stellar group-hover:scale-110 group-hover:bg-neon-teal/40">
+                <Rocket className="w-8 h-8 text-neon-teal" />
               </div>
             </div>
             
-            <h3 className="text-xl font-bold font-space text-stellar-white mb-4 group-hover:text-secondary transition-stellar">
+            <h3 className="text-xl font-bold font-space text-stellar-white mb-4 group-hover:text-neon-teal transition-stellar">
               Ready to Launch?
             </h3>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -113,7 +113,7 @@ const WhyUsSection = () => {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-secondary/20 border border-secondary/40 text-secondary px-6 py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-stellar font-medium"
+              className="bg-neon-teal/20 border border-neon-teal/40 text-neon-teal px-6 py-3 rounded-lg hover:bg-neon-teal hover:text-background transition-stellar font-medium"
             >
               Get Started
             </button>
