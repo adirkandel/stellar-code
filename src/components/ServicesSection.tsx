@@ -74,7 +74,7 @@ const ServicesSection = () => {
 
                   {/* Content section - full width on mobile/tablet, 70% on desktop */}
                   <div className="w-full lg:w-[70%] space-y-4">
-                    <p className="text-muted-foreground text-base leading-relaxed">
+                    <p className="text-stellar-white text-base leading-relaxed">
                       {service.description}
                     </p>
 
@@ -82,7 +82,7 @@ const ServicesSection = () => {
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full group-hover:animate-pulse flex-shrink-0" />
-                          <span className="text-stellar-white text-sm">{feature}</span>
+                          <span className="text-muted-foreground text-sm">{feature}</span>
                         </div>
                       ))}
                     </div>
