@@ -1,9 +1,9 @@
-import { Rocket, Handshake, Layers, Crown, Heart } from 'lucide-react';
+import { Rocket, Handshake, Layers, Crown, Heart, Lightbulb } from 'lucide-react';
 
 const WhyUsSection = () => {
   const reasons = [
     {
-      icon: Rocket,
+      icon: Lightbulb,
       title: 'Startup DNA',
       description: 'We\'ve been in your shoes. Our team has built and scaled startups, so we understand the urgency, constraints, and vision.'
     },
@@ -94,13 +94,13 @@ const WhyUsSection = () => {
           {/* CTA Card */}
           <div className="group text-center">
             <div className="relative inline-flex items-center justify-center mb-6">
-              <div className="absolute w-20 h-20 bg-primary/20 rounded-full animate-pulse" />
-              <div className="relative p-4 bg-primary/30 border-2 border-primary/60 rounded-full group-hover:border-primary transition-stellar group-hover:scale-110 group-hover:bg-primary/40">
-                <Rocket className="w-8 h-8 text-primary" />
+              <div className="absolute w-20 h-20 bg-secondary/20 rounded-full animate-pulse" />
+              <div className="relative p-4 bg-secondary/30 border-2 border-secondary/60 rounded-full group-hover:border-secondary transition-stellar group-hover:scale-110 group-hover:bg-secondary/40">
+                <Rocket className="w-8 h-8 text-secondary" />
               </div>
             </div>
             
-            <h3 className="text-xl font-bold font-space text-stellar-white mb-4 group-hover:text-primary transition-stellar">
+            <h3 className="text-xl font-bold font-space text-stellar-white mb-4 group-hover:text-secondary transition-stellar">
               Ready to Launch?
             </h3>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -113,7 +113,7 @@ const WhyUsSection = () => {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-primary/20 border border-primary/40 text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-background transition-stellar font-medium"
+              className="bg-secondary/20 border border-secondary/40 text-secondary px-6 py-3 rounded-lg hover:bg-secondary hover:text-secondary-foreground transition-stellar font-medium"
             >
               Get Started
             </button>
