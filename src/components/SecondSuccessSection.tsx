@@ -6,7 +6,8 @@ interface SuccessCard {
   valueTitle: string;
   companyName: string;
   companyLogoUrl: string;
-  story: string;
+  briefDescription: string;
+  fullStory: string;
   initialTiltDeg: number;
 }
 
@@ -38,7 +39,8 @@ const SecondSuccessSection = () => {
       valueTitle: "Cut Time-to-Ship by 35%",
       companyName: "Orion Labs",
       companyLogoUrl: "/logos/orion.svg",
-      story: "We integrated a CI pipeline and a canary strategy which reduced rollbacks and boosted deploy frequency.",
+      briefDescription: "Streamlined deployment process through automation and strategic rollout techniques.",
+      fullStory: "We integrated a comprehensive CI/CD pipeline with automated testing, code quality checks, and canary deployment strategies for Orion Labs. The implementation included setting up containerized environments, implementing blue-green deployments, and establishing rollback protocols that reduced deployment failures by 85%. We also introduced feature flags and automated monitoring that provided real-time insights into application performance. The canary strategy allowed for gradual traffic shifting, ensuring zero-downtime deployments while maintaining system reliability. Additionally, we established comprehensive logging and alerting systems that enabled the team to proactively identify and resolve issues before they impacted users. This holistic approach not only reduced rollbacks but also boosted deploy frequency from weekly to multiple daily releases, dramatically accelerating their development velocity and time-to-market for new features.",
       initialTiltDeg: -6
     },
     {
@@ -46,7 +48,8 @@ const SecondSuccessSection = () => {
       valueTitle: "Conversion +22%",
       companyName: "Nebula Commerce",
       companyLogoUrl: "/logos/nebula.svg",
-      story: "Rebuilt the checkout flow with edge caching and A/B tested microcopy to lift conversions.",
+      briefDescription: "Optimized checkout experience with performance improvements and data-driven UX enhancements.",
+      fullStory: "We completely rebuilt Nebula Commerce's checkout flow from the ground up, implementing edge caching strategies and conducting extensive A/B testing on microcopy and user interface elements. Our team analyzed user behavior patterns, identified friction points in the conversion funnel, and systematically addressed each bottleneck. We implemented progressive web app technologies, reduced page load times by 60%, and optimized the mobile experience for seamless transactions. The A/B testing involved over 50 different variations of copy, button placements, form layouts, and trust signals. We also integrated advanced analytics to track user interactions at a granular level, enabling real-time optimization based on conversion data. The implementation included smart form validation, guest checkout options, multiple payment methods, and personalized product recommendations during checkout. Our data-driven approach to UX optimization, combined with technical performance improvements, resulted in a significant lift in conversion rates and substantial revenue growth for Nebula Commerce.",
       initialTiltDeg: 8
     },
     {
@@ -54,7 +57,8 @@ const SecondSuccessSection = () => {
       valueTitle: "MTTR down 48%",
       companyName: "StellarPay",
       companyLogoUrl: "/logos/stellarpay.svg", 
-      story: "Introduced structured logging and on-call playbooks; mean time to recovery nearly halved.",
+      briefDescription: "Enhanced incident response capabilities through structured monitoring and automated recovery procedures.",
+      fullStory: "We introduced a comprehensive observability strategy for StellarPay that included structured logging, distributed tracing, and real-time monitoring across their entire payment processing infrastructure. Our implementation involved setting up centralized log aggregation with Elasticsearch, creating custom dashboards for different stakeholder groups, and establishing automated alerting based on business-critical metrics. We developed detailed on-call playbooks with step-by-step incident response procedures, automated diagnostic tools, and escalation protocols. The system included intelligent alerting that reduced false positives by 70% while ensuring critical issues were immediately escalated to the right team members. We also implemented automated health checks, circuit breakers, and self-healing mechanisms that could resolve common issues without human intervention. Training sessions were conducted for the entire engineering team on incident response best practices, post-mortem analysis, and continuous improvement methodologies. This comprehensive approach to reliability engineering nearly halved their mean time to recovery, significantly reducing revenue impact from system outages and improving customer satisfaction.",
       initialTiltDeg: 3
     },
     {
@@ -62,7 +66,8 @@ const SecondSuccessSection = () => {
       valueTitle: "Revenue +65%",
       companyName: "Quantum Analytics",
       companyLogoUrl: "/logos/quantum.svg",
-      story: "Implemented real-time data processing and ML-driven insights that doubled their customer retention.",
+      briefDescription: "Implemented advanced data processing and machine learning systems to drive customer insights and retention.",
+      fullStory: "We implemented a real-time data processing pipeline and machine learning platform for Quantum Analytics that transformed their customer intelligence capabilities. Our solution included building scalable data ingestion systems using Apache Kafka, implementing stream processing with Apache Flink, and developing custom ML models for predictive analytics. We created a unified customer data platform that consolidated information from multiple touchpoints, enabling 360-degree customer views and personalized experiences. The ML-driven insights engine provided real-time recommendations, churn prediction models, and automated customer segmentation based on behavior patterns. We also developed a self-service analytics platform that empowered business users to create custom reports and dashboards without technical assistance. The implementation included A/B testing frameworks for continuous optimization, automated model retraining pipelines, and comprehensive data governance protocols. Our advanced analytics capabilities enabled Quantum Analytics to identify high-value customer segments, optimize pricing strategies, and implement proactive retention campaigns. The combination of real-time processing, predictive modeling, and actionable insights doubled their customer retention rate and drove substantial revenue growth through improved customer lifetime value.",
       initialTiltDeg: -4
     },
     {
@@ -70,7 +75,8 @@ const SecondSuccessSection = () => {
       valueTitle: "Load Time -78%",
       companyName: "VelocityCore",
       companyLogoUrl: "/logos/velocity.svg",
-      story: "Optimized database queries and implemented CDN caching, dramatically improving user experience.",
+      briefDescription: "Achieved dramatic performance improvements through database optimization and intelligent caching strategies.",
+      fullStory: "We conducted a comprehensive performance audit and optimization initiative for VelocityCore that addressed bottlenecks across their entire technology stack. Our approach included database query optimization, implementing Redis caching layers, setting up CDN distribution, and refactoring critical application components for improved efficiency. We identified and resolved N+1 query problems, implemented database indexing strategies, and established connection pooling to reduce database load. The CDN implementation included intelligent cache invalidation, image optimization, and strategic content distribution across global edge locations. We also implemented lazy loading techniques, code splitting for JavaScript bundles, and progressive image loading to reduce initial page load times. Server-side optimizations included implementing HTTP/2, enabling gzip compression, and setting up proper cache headers. Our team established performance monitoring with real-user metrics, synthetic testing, and automated performance regression detection. We also implemented service worker caching strategies and offline functionality to improve user experience during network instability. The comprehensive optimization effort not only dramatically improved load times but also reduced server costs by 40% while significantly enhancing user experience and engagement metrics across VelocityCore's platform.",
       initialTiltDeg: 7
     }
   ];
@@ -230,6 +236,13 @@ const SecondSuccessSection = () => {
                       <span className="text-muted-foreground font-medium">{card.companyName}</span>
                     </div>
                     
+                    {/* Brief Description (collapsed state) */}
+                    {!isExpanded && (
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {card.briefDescription}
+                      </p>
+                    )}
+                    
                     {/* Expand Button */}
                     {!isExpanded && (
                       <div className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium">
@@ -238,7 +251,7 @@ const SecondSuccessSection = () => {
                       </div>
                     )}
                     
-                    {/* Story (expanded state) */}
+                    {/* Full Story (expanded state) */}
                     {isExpanded && (
                       <div 
                         id={`story-${card.id}`}
@@ -247,7 +260,7 @@ const SecondSuccessSection = () => {
                         tabIndex={-1}
                       >
                         <p className="text-muted-foreground leading-relaxed">
-                          {card.story}
+                          {card.fullStory}
                         </p>
                       </div>
                     )}
@@ -285,6 +298,13 @@ const SecondSuccessSection = () => {
                     <span className="text-muted-foreground font-medium">{card.companyName}</span>
                   </div>
                   
+                  {/* Brief Description (collapsed state) */}
+                  {!isExpanded && (
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                      {card.briefDescription}
+                    </p>
+                  )}
+                  
                   {/* Expand Button */}
                   <button
                     onClick={() => isExpanded ? collapseCard() : expandCard(card.id)}
@@ -305,14 +325,14 @@ const SecondSuccessSection = () => {
                     )}
                   </button>
                   
-                  {/* Story (expanded state) */}
+                  {/* Full Story (expanded state) */}
                   {isExpanded && (
                     <div 
                       id={`story-mobile-${card.id}`}
                       className="mt-4 pt-4 border-t border-primary/20 animate-fade-in"
                     >
                       <p className="text-muted-foreground leading-relaxed">
-                        {card.story}
+                        {card.fullStory}
                       </p>
                     </div>
                   )}
