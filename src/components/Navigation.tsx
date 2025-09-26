@@ -106,7 +106,7 @@ const Navigation = () => {
             onClick={() => scrollToSection('contact')}
             className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
           >
-            Get Started
+            Results
           </button>
         </div>
       </div>
