@@ -1,4 +1,5 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { GlowButton } from '@/components/ui/glow-button';
 import heroStarfield from '@/assets/space-full-of-stars-min.jpg';
 import astronaut from '@/assets/astronaut.png';
 const HeroSection = () => {
@@ -55,10 +56,14 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Button */}
-            <button onClick={scrollToContact} className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold transition-stellar hover-glow hover:-translate-y-1 shadow-cosmic mb-12 md:mb-16">
+            <GlowButton 
+              onClick={scrollToContact} 
+              color="primary"
+              className="group text-base md:text-lg px-6 md:px-8 py-3 md:py-4 hover:-translate-y-1 shadow-cosmic mb-12 md:mb-16"
+            >
               Let's Talk
               <ArrowRight className="w-5 h-5 transition-stellar group-hover:translate-x-1" />
-            </button>
+            </GlowButton>
 
             {/* Stats */}
             
