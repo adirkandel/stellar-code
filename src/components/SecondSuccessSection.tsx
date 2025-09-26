@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 
 interface SuccessCard {
   id: string;
@@ -12,6 +12,7 @@ interface SuccessCard {
 
 const SecondSuccessSection = () => {
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+  const [centeringCardId, setCenteringCardId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,9 @@ const SecondSuccessSection = () => {
       { x: '65%', y: '5%' },
       { x: '10%', y: '55%' },
       { x: '70%', y: '60%' },
-      { x: '40%', y: '25%' }
+      { x: '40%', y: '25%' },
+      { x: '25%', y: '75%' },
+      { x: '80%', y: '30%' }
     ];
     return positions;
   }, []);
@@ -53,6 +56,22 @@ const SecondSuccessSection = () => {
       companyLogoUrl: "/logos/stellarpay.svg", 
       story: "Introduced structured logging and on-call playbooks; mean time to recovery nearly halved.",
       initialTiltDeg: 3
+    },
+    {
+      id: "c4",
+      valueTitle: "Revenue +65%",
+      companyName: "Quantum Analytics",
+      companyLogoUrl: "/logos/quantum.svg",
+      story: "Implemented real-time data processing and ML-driven insights that doubled their customer retention.",
+      initialTiltDeg: -4
+    },
+    {
+      id: "c5",
+      valueTitle: "Load Time -78%",
+      companyName: "VelocityCore",
+      companyLogoUrl: "/logos/velocity.svg",
+      story: "Optimized database queries and implemented CDN caching, dramatically improving user experience.",
+      initialTiltDeg: 7
     }
   ];
 
@@ -84,10 +103,10 @@ const SecondSuccessSection = () => {
     }
     
     if (hoveredCardId === cardId && window.innerWidth > 768) {
-      const maxTilt = 8;
-      const rotateY = (mousePosition.x / 100) * maxTilt;
-      const rotateX = -(mousePosition.y / 100) * maxTilt;
-      return `rotate(${initialTilt}deg) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      const maxTilt = 20;
+      const rotateY = (mousePosition.x / 80) * maxTilt;
+      const rotateX = -(mousePosition.y / 80) * maxTilt;
+      return `rotate(${initialTilt}deg) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08) translateZ(20px)`;
     }
 
     return expandedCardId ? 
@@ -96,11 +115,16 @@ const SecondSuccessSection = () => {
   };
 
   const expandCard = (cardId: string) => {
-    setExpandedCardId(cardId);
-    // Focus trap for accessibility
+    setCenteringCardId(cardId);
+    // Delay expansion until centering animation completes
     setTimeout(() => {
-      expandedCardRef.current?.focus();
-    }, 300);
+      setExpandedCardId(cardId);
+      setCenteringCardId(null);
+      // Focus trap for accessibility
+      setTimeout(() => {
+        expandedCardRef.current?.focus();
+      }, 100);
+    }, 500);
   };
 
   const collapseCard = () => {
@@ -142,37 +166,53 @@ const SecondSuccessSection = () => {
         {/* Desktop scattered layout */}
         <div 
           ref={sectionRef}
-          className="hidden md:block relative h-[600px] w-full"
+          className="hidden md:block relative h-[700px] w-full"
         >
           {successCards.map((card, index) => {
             const position = scatteredPositions[index] || { x: '50%', y: '50%' };
             const isExpanded = expandedCardId === card.id;
+            const isCentering = centeringCardId === card.id;
             
             return (
               <div
                 key={card.id}
                 className={`absolute transition-all duration-500 ease-out will-change-transform ${
-                  isExpanded ? 'z-50' : 'z-10'
+                  isExpanded ? 'z-40' : 'z-10'
                 }`}
                 style={{
-                  left: isExpanded ? '50%' : position.x,
-                  top: isExpanded ? '50%' : position.y,
+                  left: (isExpanded || isCentering) ? '50%' : position.x,
+                  top: (isExpanded || isCentering) ? '50%' : position.y,
                   transform: get3DTransform(card.id, card.initialTiltDeg),
                   transformStyle: 'preserve-3d'
                 }}
               >
                 <div
-                  className={`bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 cursor-pointer transition-all duration-300 hover:shadow-cosmic ${
+                  className={`bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 cursor-pointer transition-all duration-300 hover:shadow-cosmic relative ${
                     isExpanded ? 'w-96' : 'w-72'
                   }`}
                   onMouseMove={(e) => handleMouseMove(e, card.id)}
                   onMouseLeave={handleMouseLeave}
+                  onClick={() => isExpanded ? collapseCard() : expandCard(card.id)}
                   style={{
                     boxShadow: hoveredCardId === card.id && !isExpanded ? 
-                      `${mousePosition.x / 10}px ${mousePosition.y / 10}px 30px rgba(139, 92, 246, 0.3)` :
+                      `${mousePosition.x / 8}px ${mousePosition.y / 8}px 40px rgba(139, 92, 246, 0.4)` :
                       undefined
                   }}
                 >
+                  {/* Close button for expanded state */}
+                  {isExpanded && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        collapseCard();
+                      }}
+                      className="absolute top-4 right-4 text-stellar-white/60 hover:text-stellar-white transition-colors z-10"
+                      aria-label="Close expanded card"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  )}
+                  
                   {/* Card Content */}
                   <div className="space-y-4">
                     {/* Value Title */}
@@ -191,24 +231,12 @@ const SecondSuccessSection = () => {
                     </div>
                     
                     {/* Expand Button */}
-                    <button
-                      onClick={() => isExpanded ? collapseCard() : expandCard(card.id)}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium"
-                      aria-expanded={isExpanded}
-                      aria-controls={`story-${card.id}`}
-                    >
-                      {isExpanded ? (
-                        <>
-                          <ChevronUp className="w-4 h-4" />
-                          Collapse
-                        </>
-                      ) : (
-                        <>
-                          <ChevronDown className="w-4 h-4" />
-                          Read Story
-                        </>
-                      )}
-                    </button>
+                    {!isExpanded && (
+                      <div className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium">
+                        <Plus className="w-4 h-4" />
+                        Read Story
+                      </div>
+                    )}
                     
                     {/* Story (expanded state) */}
                     {isExpanded && (
@@ -221,13 +249,6 @@ const SecondSuccessSection = () => {
                         <p className="text-muted-foreground leading-relaxed">
                           {card.story}
                         </p>
-                        <button
-                          onClick={collapseCard}
-                          className="mt-4 flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm"
-                        >
-                          <X className="w-4 h-4" />
-                          Close
-                        </button>
                       </div>
                     )}
                   </div>
@@ -273,12 +294,12 @@ const SecondSuccessSection = () => {
                   >
                     {isExpanded ? (
                       <>
-                        <ChevronUp className="w-4 h-4" />
-                        Collapse
+                        <X className="w-4 h-4" />
+                        Close
                       </>
                     ) : (
                       <>
-                        <ChevronDown className="w-4 h-4" />
+                        <Plus className="w-4 h-4" />
                         Read Story
                       </>
                     )}
