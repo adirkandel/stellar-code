@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { GlowButton } from '@/components/ui/glow-button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import type { UseEmblaCarouselType,} from "embla-carousel-react";
 
@@ -135,9 +136,9 @@ const CaseStudiesSection = () => {
                       
                       {/* View Button */}
                       <div className="mt-6">
-                        <button className="inline-flex items-center gap-3 bg-primary/20 border border-primary/30 text-primary px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 hover-glow">
+                        <GlowButton color="primary">
                           VIEW
-                        </button>
+                        </GlowButton>
                       </div>
                     </div>
                   </div>
@@ -158,10 +159,10 @@ const CaseStudiesSection = () => {
         </Carousel>
 
         <div className="text-center mt-16">
-          <button className="inline-flex items-center gap-3 bg-primary/20 border border-primary/30 text-primary px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 hover-glow">
+          <GlowButton color="primary">
             View More Case Studies
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </GlowButton>
         </div>
       </div>
     </section>
