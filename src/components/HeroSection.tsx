@@ -49,7 +49,7 @@ const HeroSection = () => {
 
             {/* Subheading */}
             <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-12 leading-relaxed">
-              We partner with SaaS startups, entrepreneurs, and tech leaders to create 
+              We partner with entrepreneurs and tech leaders to create 
               <span className="text-stellar-white font-medium"> top-tier web applications</span>, 
               scalable cloud infrastructure, and high-performing development teams.
             </p>
