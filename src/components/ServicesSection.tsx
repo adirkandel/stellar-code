@@ -1,40 +1,32 @@
 import { Code, Cloud, Users, GraduationCap } from 'lucide-react';
-
 const ServicesSection = () => {
-  const services = [
-    {
-      icon: Code,
-      title: 'Full-Stack Web Development',
-      description: 'Modern React, Node.js, and cloud-native applications built for scale and performance.',
-      features: ['React & TypeScript', 'API Development', 'Database Design', 'Performance Optimization']
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Infrastructure & DevOps',
-      description: 'Scalable, secure, and cost-effective cloud solutions using AWS, GCP, and modern DevOps practices.',
-      features: ['Infrastructure as Code', 'CI/CD Pipelines', 'Monitoring & Alerts', 'Cost Optimization']
-    },
-    {
-      icon: Users,
-      title: 'Dedicated Developers',
-      description: 'Skilled developers who integrate seamlessly with your team and understand startup culture.',
-      features: ['Full-time Commitment', 'Startup Experience', 'Direct Communication', 'Flexible Scaling']
-    },
-    {
-      icon: GraduationCap,
-      title: 'Team Training & Leadership',
-      description: 'Transform your engineering culture with mentorship, best practices, and leadership development.',
-      features: ['Code Reviews', 'Architecture Guidance', 'Team Processes', 'Technical Leadership']
-    }
-  ];
-
-  return (
-    <section id="services" className="py-24 bg-gradient-galaxy">
+  const services = [{
+    icon: Code,
+    title: 'Full-Stack Web Development',
+    description: 'Modern React, Node.js, and cloud-native applications built for scale and performance.',
+    features: ['React & TypeScript', 'API Development', 'Database Design', 'Performance Optimization']
+  }, {
+    icon: Cloud,
+    title: 'Cloud Infrastructure & DevOps',
+    description: 'Scalable, secure, and cost-effective cloud solutions using AWS, GCP, and modern DevOps practices.',
+    features: ['Infrastructure as Code', 'CI/CD Pipelines', 'Monitoring & Alerts', 'Cost Optimization']
+  }, {
+    icon: Users,
+    title: 'Dedicated Developers',
+    description: 'Skilled developers who integrate seamlessly with your team and understand startup culture.',
+    features: ['Full-time Commitment', 'Startup Experience', 'Direct Communication', 'Flexible Scaling']
+  }, {
+    icon: GraduationCap,
+    title: 'Team Training & Leadership',
+    description: 'Transform your engineering culture with mentorship, best practices, and leadership development.',
+    features: ['Code Reviews', 'Architecture Guidance', 'Team Processes', 'Technical Leadership']
+  }];
+  return <section id="services" className="py-24 bg-gradient-galaxy">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">Our</span>
-            <span className="text-primary glow-stellar"> Services</span>
+            <span className="text-primary glow-stellar"> Expertise</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             From MVP to scale, we provide the technical expertise and partnership your startup needs to succeed
@@ -43,12 +35,8 @@ const ServicesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div
-                key={index}
-                className="group holographic-card bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden"
-              >
+          const IconComponent = service.icon;
+          return <div key={index} className="group holographic-card bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-6 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden">
                 {/* Holographic background layers */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-tl from-neon-teal/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-80 transition-opacity duration-700" />
@@ -79,22 +67,17 @@ const ServicesSection = () => {
                     </p>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2">
-                      {service.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center gap-2">
+                      {service.features.map((feature, featureIndex) => <div key={featureIndex} className="flex items-center gap-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full group-hover:animate-pulse flex-shrink-0" />
                           <span className="text-muted-foreground text-sm">{feature}</span>
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              </div>;
+        })}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ServicesSection;
