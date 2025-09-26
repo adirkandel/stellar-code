@@ -113,7 +113,7 @@ const WhyUsSection = () => {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-neon-teal/20 border border-neon-teal/30 text-neon-teal px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-neon-teal/30 hover-glow"
+              className="bg-neon-teal/20 border border-neon-teal/30 text-neon-teal px-6 py-3 rounded-lg font-medium transition-stellar hover:bg-neon-teal/30 hover:shadow-[0_0_30px_rgba(64,224,208,0.5)]"
             >
               Get Started
             </button>
