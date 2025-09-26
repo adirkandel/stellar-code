@@ -6,7 +6,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['services', 'why-us', 'proven-results', 'technologies', 'testimonials', 'contact'];
+      const sections = ['services', 'technologies', 'why-us', 'testimonials', 'proven-results', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -24,10 +24,26 @@ const Navigation = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Handle initial hash on page load
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        setActiveSection(hash);
+      }
+    };
+    
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    window.location.hash = sectionId;
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -36,10 +52,10 @@ const Navigation = () => {
 
   const navItems = [
     { id: 'services', label: 'Expertise' },
-    { id: 'why-us', label: 'Why Us' },
-    { id: 'proven-results', label: 'Proven Results' },
     { id: 'technologies', label: 'Technologies' },
+    { id: 'why-us', label: 'Why Us' },
     { id: 'testimonials', label: 'Testimonials' },
+    { id: 'proven-results', label: 'Proven Results' },
     { id: 'contact', label: 'Contact' },
   ];
 
