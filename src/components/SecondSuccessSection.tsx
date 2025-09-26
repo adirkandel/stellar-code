@@ -177,7 +177,7 @@ const SecondSuccessSection = () => {
               <div
                 key={card.id}
                 className={`absolute transition-all duration-500 ease-out will-change-transform ${
-                  isExpanded ? 'z-40' : 'z-10'
+                  isExpanded ? 'z-50' : 'z-10'
                 }`}
                 style={{
                   left: (isExpanded || isCentering) ? '50%' : position.x,
@@ -326,7 +326,7 @@ const SecondSuccessSection = () => {
       {/* Backdrop for expanded state (desktop only) */}
       {expandedCardId && (
         <div 
-          className="hidden md:block fixed inset-0 bg-deep-space/80 backdrop-blur-sm z-40"
+          className="hidden md:block fixed inset-0 bg-deep-space/80 backdrop-blur-sm z-30"
           onClick={handleBackdropClick}
         />
       )}
