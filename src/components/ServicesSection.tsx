@@ -62,8 +62,8 @@ const ServicesSection = () => {
                 <div className="relative z-10 flex flex-col lg:flex-row gap-6 h-full">
                   {/* Header section - full width on mobile/tablet, 30% on desktop */}
                   <div className="w-full lg:w-[30%] flex flex-col items-center justify-center text-center">
-                    <IconComponent className="w-12 h-12 text-primary group-hover:text-neon-teal transition-colors mb-4" />
-                    <h3 className="text-xl font-bold font-space text-stellar-white group-hover:text-primary transition-colors leading-tight">
+                    <IconComponent className="w-12 h-12 text-primary mb-4" />
+                    <h3 className="text-xl font-bold font-space text-stellar-white leading-tight">
                       {service.title}
                     </h3>
                   </div>
@@ -81,7 +81,7 @@ const ServicesSection = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-neon-teal rounded-full group-hover:animate-pulse flex-shrink-0" />
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full group-hover:animate-pulse flex-shrink-0" />
                           <span className="text-stellar-white text-sm">{feature}</span>
                         </div>
                       ))}
