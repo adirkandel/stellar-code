@@ -222,12 +222,22 @@ const SecondSuccessSection = () => {
                   {/* Card Content */}
                   <div className="space-y-4">
                     {/* Value Title */}
-                    <h3 className="text-xl font-bold text-stellar-white font-space">
+                    <h3 className={`text-xl font-bold text-stellar-white font-space transition-all duration-300 ${
+                      hoveredCardId === card.id && !isExpanded ? 'transform translate-z-8 scale-105' : ''
+                    }`}
+                    style={{
+                      transform: hoveredCardId === card.id && !isExpanded ? 'translateZ(15px) scale(1.05)' : 'translateZ(0px) scale(1)'
+                    }}>
                       {card.valueTitle}
                     </h3>
                     
                     {/* Company Logo and Name */}
-                    <div className="flex items-center gap-3">
+                    <div className={`flex items-center gap-3 transition-all duration-300 ${
+                      hoveredCardId === card.id && !isExpanded ? 'transform translate-z-6' : ''
+                    }`}
+                    style={{
+                      transform: hoveredCardId === card.id && !isExpanded ? 'translateZ(10px) scale(1.02)' : 'translateZ(0px) scale(1)'
+                    }}>
                       <div className="w-12 h-10 flex items-center justify-center bg-stellar-white/10 rounded-lg">
                         <span className="text-stellar-white font-bold text-sm">
                           {card.companyName.split(' ').map(word => word[0]).join('')}
@@ -238,14 +248,24 @@ const SecondSuccessSection = () => {
                     
                     {/* Brief Description (collapsed state) */}
                     {!isExpanded && (
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className={`text-muted-foreground text-sm leading-relaxed transition-all duration-300 ${
+                        hoveredCardId === card.id ? 'transform translate-z-4' : ''
+                      }`}
+                      style={{
+                        transform: hoveredCardId === card.id ? 'translateZ(8px) scale(1.01)' : 'translateZ(0px) scale(1)'
+                      }}>
                         {card.briefDescription}
                       </p>
                     )}
                     
                     {/* Expand Button */}
                     {!isExpanded && (
-                      <div className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium">
+                      <div className={`flex items-center gap-2 text-primary hover:text-primary/80 transition-all duration-300 text-sm font-medium ${
+                        hoveredCardId === card.id ? 'transform translate-z-6' : ''
+                      }`}
+                      style={{
+                        transform: hoveredCardId === card.id ? 'translateZ(12px) scale(1.03)' : 'translateZ(0px) scale(1)'
+                      }}>
                         <Plus className="w-4 h-4" />
                         Read Story
                       </div>
