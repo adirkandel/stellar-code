@@ -39,7 +39,10 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-space mb-6 leading-tight">
-              <span className="text-stellar-white">Achieve Your Mission Objectives </span>
+              <span className="text-stellar-white">Achieve Your</span>
+              <br />
+              <span className="text-stellar-white">Mission Objectives</span>
+              <br />
               <span className="text-neon-teal">On Time</span>,
               <br />
               <span className="text-stellar-white">With a </span>
@@ -50,7 +53,7 @@ const HeroSection = () => {
             {/* Subheading */}
             <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-12 leading-relaxed">
               Build and expand your product with
-              <span className="text-stellar-white font-medium"> top-tier web engineers</span>, 
+              <span className="text-stellar-white font-medium"> top-tier engineers</span>, 
               seamlessly integrated, fully managed, and always ready for launch.
             </p>
 
