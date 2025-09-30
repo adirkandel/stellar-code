@@ -22,7 +22,7 @@ const ServicesSection = () => {
     features: ['Code Reviews', 'Architecture Guidance', 'Team Processes', 'Technical Leadership']
   }];
   return <section id="services" className="py-24 bg-gradient-galaxy">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
             <span className="text-stellar-white">Our</span>
