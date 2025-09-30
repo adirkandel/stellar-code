@@ -65,7 +65,7 @@ const SolutionsSection = () => {
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     setHoveredIndex(null);
   };
-  return <section className="py-20 relative overflow-hidden">
+  return <section id="solutions" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
       
       <div className="container mx-auto relative z-10">
