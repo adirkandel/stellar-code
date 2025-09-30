@@ -109,11 +109,11 @@ const SolutionsSection = () => {
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
-                  <h3 className="text-xl font-semibold text-foreground mt-4">
+                  <h3 className="text-xl font-semibold text-foreground mt-3">
                     {solution.title}
                   </h3>
                   
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed mb-2">
                     {solution.description}
                   </p>
                 </div>
