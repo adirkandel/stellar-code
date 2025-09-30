@@ -4,27 +4,7 @@ import logoSvg from '../assets/logo.svg';
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['solutions', 'services', 'technologies', 'testimonials', 'why-us', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
+  useEffect(() => {    
     // Handle initial hash on page load
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
@@ -37,7 +17,6 @@ const Navigation = () => {
     window.addEventListener('hashchange', handleHashChange);
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
@@ -86,9 +65,10 @@ const Navigation = () => {
 
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                {/* onClick={() => scrollToSection(item.id)} */}
+                href={`#${item.id}`}
                 className={`
                   font-medium transition-stellar hover:text-primary
                   ${activeSection === item.id 
