@@ -79,10 +79,9 @@ const SolutionsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {solutions.map((solution, index) => {
-          const Icon = solution.icon;
-          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20" style={{
+          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20 flex flex-col md:flex-row min-h-[280px]" style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.1s ease-out'
           }} onMouseMove={e => {
@@ -95,27 +94,28 @@ const SolutionsSection = () => {
               handleMouseLeave(index);
             }
           }}>
-                {/* Background Image */}
-                <div className="absolute inset-0">
+                {/* Content on Left */}
+                <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-center" style={{
+              transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
+              transition: 'transform 0.3s ease-out'
+            }}>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    {solution.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground leading-relaxed">
+                    {solution.description}
+                  </p>
+                </div>
+
+                {/* Image on Right */}
+                <div className="relative w-full md:w-2/5 min-h-[200px] md:min-h-full">
                   <img 
                     src={solution.image} 
                     alt={solution.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/50" />
-                </div>
-
-                <div className="relative z-10 py-10 px-8 space-y-5" style={{
-              transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
-              transition: 'transform 0.3s ease-out'
-            }}>
-                  <h3 className="text-xl font-semibold text-foreground mt-3">
-                    {solution.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground leading-relaxed mb-2">
-                    {solution.description}
-                  </p>
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/30 to-background" />
                 </div>
 
                 <div className="holographic-overlay absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
