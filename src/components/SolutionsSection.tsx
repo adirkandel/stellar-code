@@ -81,7 +81,7 @@ const SolutionsSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {solutions.map((solution, index) => {
-          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20 flex flex-col lg:flex-row min-h-[280px]" style={{
+          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20 flex flex-col md:flex-row min-h-[280px]" style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.1s ease-out'
           }} onMouseMove={e => {
@@ -94,7 +94,7 @@ const SolutionsSection = () => {
               handleMouseLeave(index);
             }
           }}>
-                {/* Content on Left (desktop) / Top (mobile/tablet) */}
+                {/* Content on Left (tablet/desktop) / Top (mobile) */}
                 <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-center" style={{
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
@@ -108,15 +108,15 @@ const SolutionsSection = () => {
                   </p>
                 </div>
 
-                {/* Image on Right (desktop) / Bottom (mobile/tablet) */}
-                <div className="relative w-full lg:w-2/5 min-h-[200px] lg:min-h-full">
+                {/* Image on Right (tablet/desktop) / Bottom (mobile) */}
+                <div className="relative w-full md:w-2/5 min-h-[200px] md:min-h-full">
                   <img 
                     src={solution.image} 
                     alt={solution.title}
                     className="w-full h-full object-cover"
                   />
-                  {/* Gradient from top on mobile/tablet, from left on desktop */}
-                  <div className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-l from-background via-background/30 to-transparent lg:from-transparent lg:via-background/30 lg:to-background" />
+                  {/* Gradient from top on mobile, from left on tablet/desktop */}
+                  <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-l from-background via-background/30 to-transparent md:from-transparent md:via-background/30 md:to-background" />
                 </div>
 
                 <div className="holographic-overlay absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
