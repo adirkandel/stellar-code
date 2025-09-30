@@ -1,42 +1,29 @@
-import { Users, Rocket, ShieldCheck, Puzzle, Sparkles, Gauge } from "lucide-react";
 import { useState, useRef } from "react";
-import missionScaleCrewExpansion from "@/assets/mission-scale-crew-expansion.jpg";
-import fasterTimeToMarket from "@/assets/faster-time-to-market.jpg";
-import readyToDeployMissionCrew from "@/assets/ready-to-deploy-mission-crew.jpg";
-import seamlessTechDocking from "@/assets/seamless-tech-docking.jpg";
-import resourceEfficientOrbit from "@/assets/resource-efficient-orbit.jpg";
-import noTimeCrewAssembling from "@/assets/no-time-crew-assembling.jpg";
+import stellarExpertiseOnDemand from "@/assets/stellar-expertise-on-demand.jpg";
+import focusOnYourVision from "@/assets/focus-on-your-vision.jpg";
+import launchFasterLeadMarket from "@/assets/launch-faster-lead-market.jpg";
+import alwaysAlignedLatestTech from "@/assets/always-aligned-latest-tech.jpg";
 
 const solutions = [{
-  icon: Users,
-  title: "Crew Expansion",
-  description: "Flexible team augmentation lets your product scale engineering force instantly - whether you need to ramp up for a new mission or orbit down for efficiency, adapt on a project-by-project basis as your trajectory evolves.",
-  image: missionScaleCrewExpansion
+  problem: "limited access to expertise",
+  title: "Stellar Expertise On Demand",
+  description: "Instantly access a universe of seasoned developers and specialists ready to join your mission. Our team augmentation connects you with the right talent for every technology challenge, accelerating progress without hiring delays.",
+  image: stellarExpertiseOnDemand
 }, {
-  icon: Rocket,
-  title: "Faster time-to-market",
-  description: "Rapid access to top-tier specialists propels your product through the development lifecycle and helps you reach launch windows faster, giving you a competitive advantage in the innovation cosmos.",
-  image: fasterTimeToMarket
+  problem: "loosing focus on core business",
+  title: "Focus on Your Vision",
+  description: "Free your leadership from recruitment and team management gravity wells. Stellar Code takes care of building and scaling your engineering crew, so you can concentrate on navigating your startup's strategic trajectory.",
+  image: focusOnYourVision
 }, {
-  icon: ShieldCheck,
-  title: "Ready-to-Deploy Mission Crew",
-  description: "Our augmentation approach assembles a unified squad of technical experts, working alongside your existing crew, enabling efficient collaboration and focused thrust towards mission milestones.",
-  image: readyToDeployMissionCrew
+  problem: "market competitiveness",
+  title: "Launch Faster, Lead the Market",
+  description: "Stay ahead in the innovation cosmos by speeding up your development lifecycle. Our stellar teams propel your product to launch windows quickly and efficiently, giving you the momentum to outpace competitors.",
+  image: launchFasterLeadMarket
 }, {
-  icon: Puzzle,
-  title: "Seamless Tech Docking",
-  description: "Our engineers synchronize with your technology ecosystem, mastering your tools, frameworks, and methodologies for frictionless integration and perfect alignment on every mission.",
-  image: seamlessTechDocking
-}, {
-  icon: Sparkles,
-  title: "Resource Efficiency",
-  description: "No need for extra infrastructure or licenses - expand your crew without additional overhead or losing velocity to costly recruitment wormholes.",
-  image: resourceEfficientOrbit
-}, {
-  icon: Gauge,
-  title: "No-Time Crew Assembling",
-  description: "Access battle-tested, pre-vetted professionals instantly - no getting stuck in the recruitment gravity well, so development lifts off without delays.",
-  image: noTimeCrewAssembling
+  problem: "stay up to date with technologies",
+  title: "Always Aligned with the Latest Tech",
+  description: "Our mission experts continuously adapt to cutting-edge tools, frameworks, and methodologies. We ensure your engineering force stays in sync with the newest technological frontiers, fueling your product's evolution and relevance.",
+  image: alwaysAlignedLatestTech
 }];
 const SolutionsSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
