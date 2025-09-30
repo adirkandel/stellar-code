@@ -39,19 +39,19 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-space mb-6 leading-tight">
-              <span className="text-stellar-white">Building</span>
+              <span className="text-stellar-white">Achieve Your Mission Objectives</span>
+              <span className="text-neon-teal"> On Time,</span>
               <br />
-              <span className="text-primary glow-stellar">Stellar</span>
-              <span className="text-stellar-white"> Web Products,</span>
+              <span className="text-stellar-white">With</span>
+              <span className="text-primary glow-stellar"> a Stellar Team</span>
               <br />
-              <span className="text-neon-teal">Together</span>
             </h1>
 
             {/* Subheading */}
             <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-12 leading-relaxed">
-              We partner with entrepreneurs and tech leaders to create 
-              <span className="text-stellar-white font-medium"> top-tier web applications</span>, 
-              scalable cloud infrastructure, and high-performing development teams.
+              Build and expand your product with
+              <span className="text-stellar-white font-medium"> top-tier web engineers</span>, 
+              seamlessly integrated, fully managed, and always ready for launch.
             </p>
 
             {/* CTA Button */}
