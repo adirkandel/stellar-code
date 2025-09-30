@@ -102,17 +102,13 @@ const SolutionsSection = () => {
                     alt={solution.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/50" />
                 </div>
 
                 <div className="relative z-10 p-6 space-y-4" style={{
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  
                   <h3 className="text-xl font-semibold text-foreground">
                     {solution.title}
                   </h3>
