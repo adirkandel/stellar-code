@@ -7,12 +7,12 @@ import alwaysAlignedLatestTech from "@/assets/always-aligned-latest-tech.jpg";
 const solutions = [{
   problem: "limited access to expertise",
   title: "Stellar Expertise On Demand",
-  description: "Instantly access a universe of seasoned developers and specialists ready to join your mission. Our team augmentation connects you with the right talent for every technology challenge, accelerating progress without hiring delays.",
+  description: "Instantly access a team of seasoned developers and specialists ready to join your mission. Our team augmentation connects you with the right talent for every technology challenge, accelerating progress without hiring delays.",
   image: stellarExpertiseOnDemand
 }, {
   problem: "loosing focus on core business",
   title: "Focus on Your Vision",
-  description: "Free your leadership from recruitment and team management gravity wells. Stellar Code takes care of building and scaling your engineering crew, so you can concentrate on navigating your startup's strategic trajectory.",
+  description: "Free your leadership from recruitment and team management gravity wells. Stellar Code takes care of building and scaling your engineering crew, so you can concentrate on navigating your product's strategic trajectory.",
   image: focusOnYourVision
 }, {
   problem: "market competitiveness",
