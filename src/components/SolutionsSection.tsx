@@ -1,29 +1,42 @@
 import { Users, Rocket, ShieldCheck, Puzzle, Sparkles, Gauge } from "lucide-react";
 import { useState, useRef } from "react";
+import missionScaleCrewExpansion from "@/assets/mission-scale-crew-expansion.jpg";
+import fasterTimeToMarket from "@/assets/faster-time-to-market.jpg";
+import readyToDeployMissionCrew from "@/assets/ready-to-deploy-mission-crew.jpg";
+import seamlessTechDocking from "@/assets/seamless-tech-docking.jpg";
+import resourceEfficientOrbit from "@/assets/resource-efficient-orbit.jpg";
+import immediateCrewLaunch from "@/assets/immediate-crew-launch.jpg";
+
 const solutions = [{
   icon: Users,
   title: "Mission-Scale Crew Expansion",
-  description: "Flexible team augmentation lets your product scale engineering force instantly - whether you need to ramp up for a new mission or orbit down for efficiency, adapt on a project-by-project basis as your trajectory evolves."
+  description: "Flexible team augmentation lets your product scale engineering force instantly - whether you need to ramp up for a new mission or orbit down for efficiency, adapt on a project-by-project basis as your trajectory evolves.",
+  image: missionScaleCrewExpansion
 }, {
   icon: Rocket,
   title: "Faster time-to-market",
-  description: "Rapid access to top-tier specialists propels your product through the development lifecycle and helps you reach launch windows faster, giving you a competitive advantage in the innovation cosmos."
+  description: "Rapid access to top-tier specialists propels your product through the development lifecycle and helps you reach launch windows faster, giving you a competitive advantage in the innovation cosmos.",
+  image: fasterTimeToMarket
 }, {
   icon: ShieldCheck,
   title: "Ready-to-Deploy Mission Crew",
-  description: "Our augmentation approach assembles a unified squad of technical experts, docked alongside your existing crew, enabling efficient collaboration and focused thrust towards mission milestones."
+  description: "Our augmentation approach assembles a unified squad of technical experts, docked alongside your existing crew, enabling efficient collaboration and focused thrust towards mission milestones.",
+  image: readyToDeployMissionCrew
 }, {
   icon: Puzzle,
   title: "Seamless Tech Docking",
-  description: "Our engineers synchronize with your technology ecosystem, mastering your tools, frameworks, and methodologies for frictionless integration and perfect alignment on every mission."
+  description: "Our engineers synchronize with your technology ecosystem, mastering your tools, frameworks, and methodologies for frictionless integration and perfect alignment on every mission.",
+  image: seamlessTechDocking
 }, {
   icon: Sparkles,
   title: "Resource-Efficient Orbit",
-  description: "No need for extra infrastructure or licenses - expand your crew without additional overhead or losing velocity to costly recruitment wormholes."
+  description: "No need for extra infrastructure or licenses - expand your crew without additional overhead or losing velocity to costly recruitment wormholes.",
+  image: resourceEfficientOrbit
 }, {
   icon: Gauge,
   title: "Immediate Crew Launch",
-  description: "Access battle-tested, pre-vetted professionals instantly - no getting stuck in the recruitment gravity well, so development lifts off without delays."
+  description: "Access battle-tested, pre-vetted professionals instantly - no getting stuck in the recruitment gravity well, so development lifts off without delays.",
+  image: immediateCrewLaunch
 }];
 const SolutionsSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -69,7 +82,7 @@ const SolutionsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {solutions.map((solution, index) => {
           const Icon = solution.icon;
-          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg p-6 transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20" style={{
+          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20" style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.1s ease-out'
           }} onMouseMove={e => {
@@ -82,7 +95,17 @@ const SolutionsSection = () => {
               handleMouseLeave(index);
             }
           }}>
-                <div className="space-y-4" style={{
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={solution.image} 
+                    alt={solution.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/80" />
+                </div>
+
+                <div className="relative z-10 p-6 space-y-4" style={{
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
