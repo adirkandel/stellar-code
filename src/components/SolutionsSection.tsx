@@ -82,7 +82,7 @@ const SolutionsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {solutions.map((solution, index) => {
           const Icon = solution.icon;
-          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20" style={{
+          return <div key={index} ref={el => cardRefs.current[index] = el} className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-lg overflow-hidden transition-all duration-300 md:hover:shadow-lg md:hover:shadow-primary/20 min-h-[400px]" style={{
             transformStyle: 'preserve-3d',
             transition: 'transform 0.1s ease-out'
           }} onMouseMove={e => {
@@ -105,7 +105,7 @@ const SolutionsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/50" />
                 </div>
 
-                <div className="relative z-10 p-6 space-y-4" style={{
+                <div className="relative z-10 p-8 space-y-6" style={{
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
