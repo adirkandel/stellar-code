@@ -43,9 +43,9 @@ const HeroSection = () => {
               <br />
               <span className="text-stellar-white">Mission Objectives</span>
               <br />
-              <span className="text-neon-teal">On Time</span>,
+              <span className="text-neon-teal">On Time</span>
+              <span className="text-stellar-white"> With a </span>
               <br />
-              <span className="text-stellar-white">With a </span>
               <span className="text-primary glow-stellar">Stellar Team</span>
               <br />
             </h1>
