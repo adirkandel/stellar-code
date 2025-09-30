@@ -9,7 +9,7 @@ import immediateCrewLaunch from "@/assets/immediate-crew-launch.jpg";
 
 const solutions = [{
   icon: Users,
-  title: "Mission-Scale Crew Expansion",
+  title: "Crew Expansion",
   description: "Flexible team augmentation lets your product scale engineering force instantly - whether you need to ramp up for a new mission or orbit down for efficiency, adapt on a project-by-project basis as your trajectory evolves.",
   image: missionScaleCrewExpansion
 }, {
@@ -20,7 +20,7 @@ const solutions = [{
 }, {
   icon: ShieldCheck,
   title: "Ready-to-Deploy Mission Crew",
-  description: "Our augmentation approach assembles a unified squad of technical experts, docked alongside your existing crew, enabling efficient collaboration and focused thrust towards mission milestones.",
+  description: "Our augmentation approach assembles a unified squad of technical experts, working alongside your existing crew, enabling efficient collaboration and focused thrust towards mission milestones.",
   image: readyToDeployMissionCrew
 }, {
   icon: Puzzle,
@@ -29,12 +29,12 @@ const solutions = [{
   image: seamlessTechDocking
 }, {
   icon: Sparkles,
-  title: "Resource-Efficient Orbit",
+  title: "Resource Efficiency",
   description: "No need for extra infrastructure or licenses - expand your crew without additional overhead or losing velocity to costly recruitment wormholes.",
   image: resourceEfficientOrbit
 }, {
   icon: Gauge,
-  title: "Immediate Crew Launch",
+  title: "No-Time Crew Assembling",
   description: "Access battle-tested, pre-vetted professionals instantly - no getting stuck in the recruitment gravity well, so development lifts off without delays.",
   image: immediateCrewLaunch
 }];
