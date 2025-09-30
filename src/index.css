@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 /* Stellar Code Design System - Space-themed consulting agency */
 
 @layer base {
