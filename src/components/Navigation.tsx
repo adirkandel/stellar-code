@@ -67,7 +67,7 @@ const Navigation = () => {
             {navItems.map((item) => (
               <a
                 key={item.id}
-                {/* onClick={() => scrollToSection(item.id)} */}
+                // onClick={() => scrollToSection(item.id)}
                 href={`#${item.id}`}
                 className={`
                   font-medium transition-stellar hover:text-primary
