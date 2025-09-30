@@ -85,18 +85,18 @@ const SolutionsSection = () => {
             transformStyle: 'preserve-3d',
             transition: 'transform 0.1s ease-out'
           }} onMouseMove={e => {
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth >= 1024) {
               handleMouseMove(e, index);
               setHoveredIndex(index);
             }
           }} onMouseLeave={() => {
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth >= 1024) {
               handleMouseLeave(index);
             }
           }}>
                 {/* Content on Left (tablet/desktop) / Top (mobile) */}
                 <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-center" style={{
-              transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
+              transform: hoveredIndex === index && window.innerWidth >= 1024 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
                   <h3 className="text-xl font-semibold text-foreground">
