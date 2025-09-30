@@ -78,7 +78,7 @@ const Navigation = () => {
                 `}
               >
                 {item.label}
-              </button>
+              </a>
             ))}
           </div>
 
