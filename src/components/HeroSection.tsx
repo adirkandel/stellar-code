@@ -39,11 +39,11 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-space mb-6 leading-tight">
-              <span className="text-stellar-white">Achieve Your Mission Objectives</span>
-              <span className="text-neon-teal"> On Time,</span>
+              <span className="text-stellar-white">Achieve Your Mission Objectives </span>
+              <span className="text-neon-teal">On Time</span>,
               <br />
-              <span className="text-stellar-white">With</span>
-              <span className="text-primary glow-stellar"> a Stellar Team</span>
+              <span className="text-stellar-white">With a </span>
+              <span className="text-primary glow-stellar">Stellar Team</span>
               <br />
             </h1>
 
