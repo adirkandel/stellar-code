@@ -105,11 +105,11 @@ const SolutionsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/50" />
                 </div>
 
-                <div className="relative z-10 py-10 px-8 space-y-10" style={{
+                <div className="relative z-10 py-10 px-8 space-y-5" style={{
               transform: hoveredIndex === index && window.innerWidth >= 768 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
-                  <h3 className="text-xl font-semibold text-foreground">
+                  <h3 className="text-xl font-semibold text-foreground mt-4">
                     {solution.title}
                   </h3>
                   
