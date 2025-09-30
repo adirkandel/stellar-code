@@ -49,9 +49,9 @@ const SolutionsSection = () => {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
     
     // Update holographic effect position with gentle space-themed colors
     const holographic = card.querySelector('.holographic-overlay') as HTMLElement;
@@ -96,7 +96,7 @@ const SolutionsSection = () => {
           }}>
                 {/* Content on Left (tablet/desktop) / Top (mobile) */}
                 <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-start" style={{
-              transform: hoveredIndex === index && window.innerWidth >= 1024 ? 'translateZ(40px)' : 'translateZ(0px)',
+              transform: hoveredIndex === index && window.innerWidth >= 1024 ? 'translateZ(25px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
                   <h3 className="text-xl font-semibold text-foreground">
