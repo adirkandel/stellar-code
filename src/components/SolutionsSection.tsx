@@ -5,7 +5,7 @@ import fasterTimeToMarket from "@/assets/faster-time-to-market.jpg";
 import readyToDeployMissionCrew from "@/assets/ready-to-deploy-mission-crew.jpg";
 import seamlessTechDocking from "@/assets/seamless-tech-docking.jpg";
 import resourceEfficientOrbit from "@/assets/resource-efficient-orbit.jpg";
-import immediateCrewLaunch from "@/assets/immediate-crew-launch.jpg";
+import noTimeCrewAssembling from "@/assets/no-time-crew-assembling.jpg";
 
 const solutions = [{
   icon: Users,
@@ -36,7 +36,7 @@ const solutions = [{
   icon: Gauge,
   title: "No-Time Crew Assembling",
   description: "Access battle-tested, pre-vetted professionals instantly - no getting stuck in the recruitment gravity well, so development lifts off without delays.",
-  image: immediateCrewLaunch
+  image: noTimeCrewAssembling
 }];
 const SolutionsSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
