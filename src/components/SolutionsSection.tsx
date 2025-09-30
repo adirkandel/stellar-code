@@ -40,10 +40,10 @@ const SolutionsSection = () => {
     const rotateY = (centerX - x) / 10;
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     
-    // Update holographic effect position
+    // Update holographic effect position with gentle space-themed colors
     const holographic = card.querySelector('.holographic-overlay') as HTMLElement;
     if (holographic) {
-      holographic.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.2), rgba(255, 255, 0, 0.1), transparent 60%)`;
+      holographic.style.background = `radial-gradient(circle at ${x}px ${y}px, hsl(var(--primary) / 0.12), hsl(260 60% 65% / 0.08), hsl(200 70% 60% / 0.06), transparent 50%)`;
     }
   };
   const handleMouseLeave = (index: number) => {
@@ -100,7 +100,7 @@ const SolutionsSection = () => {
                 </div>
 
                 <div className="holographic-overlay absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
-              background: 'radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.2), rgba(255, 255, 0, 0.1), transparent 60%)',
+              background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.12), hsl(260 60% 65% / 0.08), hsl(200 70% 60% / 0.06), transparent 50%)',
               mixBlendMode: 'screen'
             }} />
               </div>;
