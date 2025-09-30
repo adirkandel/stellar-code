@@ -95,7 +95,7 @@ const SolutionsSection = () => {
             }
           }}>
                 {/* Content on Left (tablet/desktop) / Top (mobile) */}
-                <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-center" style={{
+                <div className="relative z-10 py-8 px-8 space-y-4 flex-1 flex flex-col justify-start" style={{
               transform: hoveredIndex === index && window.innerWidth >= 1024 ? 'translateZ(40px)' : 'translateZ(0px)',
               transition: 'transform 0.3s ease-out'
             }}>
