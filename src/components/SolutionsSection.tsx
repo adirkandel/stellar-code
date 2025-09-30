@@ -52,8 +52,8 @@ const SolutionsSection = () => {
       <div className="container mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
-            <span className="text-stellar-white">Solutions</span>
-            <span className="text-primary glow-stellar"> Planned for Scale</span>
+            <span className="text-primary glow-stellar">Solutions</span>
+            <span className="text-stellar-white"> Planned for Scale</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Mission-critical capabilities that propel your development velocity to new frontiers
