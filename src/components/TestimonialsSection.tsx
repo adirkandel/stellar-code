@@ -4,6 +4,10 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import izikAvatar from '@/assets/izik.png';
+import gilAvatar from '@/assets/gil.jpeg';
+import flamingoLogo from '@/assets/flamingo-logo.png';
+import meckanoLogo from '@/assets/meckano-logo.png';
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -35,48 +39,25 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Chen',
-      title: 'CTO',
-      company: 'TechFlow Analytics',
-      avatar: 'SC',
+      name: 'Izik Binaev',
+      title: 'CEO',
+      company: 'Flamingo Holdings',
+      avatar: 'IB',
+      avatarImage: izikAvatar,
+      companyLogo: flamingoLogo,
       rating: 5,
-      quote: "Stellar Code didn't just build our product – they became true partners in our vision. Their team's startup experience and technical excellence helped us launch on time and secure our Series A. The quality of their work and their commitment to our success is unmatched."
+      quote: "Working with Stellar Code was easy and professional. They built our SaaS platform for property management end to end and really understood what we needed — both technically and from a business perspective. The admin console they developed made our daily work much more efficient. I'd happily work with Stellar Code again."
     },
     {
       id: 2,
-      name: 'Marcus Rodriguez',
+      name: 'Gil Cohen',
       title: 'CEO',
-      company: 'InnovateCRM',
-      avatar: 'MR',
+      company: 'Meckano',
+      avatar: 'GC',
+      avatarImage: gilAvatar,
+      companyLogo: meckanoLogo,
       rating: 5,
-      quote: "Working with Stellar Code transformed our entire engineering culture. Their leadership and mentorship helped our team grow from 5 to 15 developers while actually improving our code quality and deployment speed. They're not just developers – they're true technical leaders."
-    },
-    {
-      id: 3,
-      name: 'Emily Thompson',
-      title: 'Founder',
-      company: 'CloudSync Pro',
-      avatar: 'ET',
-      rating: 5,
-      quote: "As a non-technical founder, I needed a team I could trust completely. Stellar Code explained everything clearly, delivered on every promise, and built a platform that scales beautifully. Six months later, we're processing 10x the data with zero performance issues."
-    },
-    {
-      id: 4,
-      name: 'David Park',
-      title: 'Co-Founder',
-      company: 'AI Insights',
-      avatar: 'DP',
-      rating: 5,
-      quote: "The Stellar Code team brought our AI vision to life with incredible precision. Their deep understanding of machine learning frameworks and scalable architecture helped us process millions of data points daily. They delivered a robust platform that impressed our investors."
-    },
-    {
-      id: 5,
-      name: 'Lisa Williams',
-      title: 'Head of Product',
-      company: 'FinanceFlow',
-      avatar: 'LW',
-      rating: 5,
-      quote: "Security and compliance were critical for our fintech startup. Stellar Code implemented bank-level security measures and helped us achieve SOC 2 compliance ahead of schedule. Their attention to detail and regulatory expertise gave us complete confidence."
+      quote: "Stellar Code helped us streamline and professionalize our developer recruitment process. They quickly understood our challenges and built a clear, effective structure that saved us time and improved the candidate experience. Communication was always straightforward and transparent. It felt like working with a true partner, not just a service provider."
     }
   ];
 
@@ -117,16 +98,25 @@ const TestimonialsSection = () => {
               <CarouselItem key={index} className="pl-6 basis-full md:basis-2/3 lg:basis-1/2">
                 <div className="transition-all duration-500 ease-out [&:not(.embla-slide-snapped)]:scale-90 [&:not(.embla-slide-snapped)]:opacity-60">
                   <div 
-                    className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-visible cursor-pointer"
+                    className="group bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 transition-stellar hover-glow hover:-translate-y-2 relative overflow-hidden cursor-pointer"
                     onClick={() => carouselApi?.scrollTo(index)}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                    
+                    {/* Company Logo Background */}
+                    <div className="absolute right-4 bottom-4 opacity-10">
+                      <img 
+                        src={testimonial.companyLogo} 
+                        alt={`${testimonial.company} logo`}
+                        className="h-10 w-auto object-contain"
+                      />
+                    </div>
+
                     <div className="relative z-10">
                       {/* Quote Icon */}
                       <div className="mb-6">
                         <Quote className="w-8 h-8 text-primary/60" />
                       </div>
-
 
                       {/* Quote */}
                       <blockquote className="text-muted-foreground leading-relaxed mb-8 italic">
@@ -137,7 +127,7 @@ const TestimonialsSection = () => {
                       <div className="flex items-center gap-4">
                         <Avatar className="w-12 h-12 border-2 border-primary/40">
                           <AvatarImage 
-                            src={`https://testingbot.com/free-online-tools/random-avatar/200?img=${testimonial.id}`}
+                            src={testimonial.avatarImage}
                             alt={`${testimonial.name} avatar`}
                           />
                           <AvatarFallback className="bg-primary/20 text-primary font-bold font-space">
@@ -179,14 +169,11 @@ const TestimonialsSection = () => {
         {/* Additional social proof */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground mb-8">
-            Trusted by startups that have raised over <span className="text-primary font-semibold">$50M+</span> in funding
+            Trusted by innovative companies building the future
           </p>
           <div className="flex justify-center items-center gap-8 opacity-50">
-            {/* Placeholder for company logos */}
-            <div className="text-2xl font-bold font-space text-stellar-white">TechFlow</div>
-            <div className="text-2xl font-bold font-space text-stellar-white">InnovateCRM</div>
-            <div className="text-2xl font-bold font-space text-stellar-white">CloudSync</div>
-            <div className="text-2xl font-bold font-space text-stellar-white">DataVault</div>
+            <img src={flamingoLogo} alt="Flamingo Holdings" className="h-10 w-auto object-contain" />
+            <img src={meckanoLogo} alt="Meckano" className="h-10 w-auto object-contain" />
           </div>
         </div>
       </div>
