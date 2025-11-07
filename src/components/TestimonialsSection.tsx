@@ -181,6 +181,7 @@ const TestimonialsSection = () => {
           <div className="flex justify-center items-center gap-8 opacity-50">
             <img src={flamingoLogo} alt="Flamingo Holdings" className="h-10 w-auto object-contain" />
             <img src={meckanoLogo} alt="Meckano" className="h-10 w-auto object-contain" />
+            <img src={citySystemsLogo} alt="City Systems" className="h-10 w-auto object-contain" />
           </div>
         </div>
       </div>
