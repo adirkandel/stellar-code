@@ -29,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to your inbox
     const emailResponse = await resend.emails.send({
-      from: "Stellar Code Contact <onboarding@resend.dev>",
+      from: "Stellar Code Contact <contact@stellar-code.dev>",
       to: ["akandel@stellar-code.dev"],
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
@@ -47,13 +47,13 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the user
     await resend.emails.send({
-      from: "Stellar Code <onboarding@resend.dev>",
+      from: "Stellar Code <contact@stellar-code.dev>",
       to: [email],
       subject: "We received your message!",
       html: `
         <h1>Thank you for contacting Stellar Code, ${name}!</h1>
         <p>We have received your message and will get back to you within 24 hours.</p>
-        <p>In the meantime, feel free to check out our <a href="${Deno.env.get('VITE_SUPABASE_URL') || 'https://stellar-code.dev'}">latest projects</a>.</p>
+        <p>In the meantime, feel free to check out our <a href="https://stellar-code.dev">latest projects</a>.</p>
         <br>
         <p>Best regards,<br>The Stellar Code Team</p>
       `,
