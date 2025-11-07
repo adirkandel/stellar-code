@@ -46,7 +46,7 @@ const TestimonialsSection = () => {
       avatarImage: izikAvatar,
       companyLogo: flamingoLogo,
       rating: 5,
-      quote: "Working with Stellar Code was easy and professional. They built our SaaS platform for property management end to end and really understood what we needed — both technically and from a business perspective. The admin console they developed made our daily work much more efficient. I'd happily work with Stellar Code again."
+      quote: "Working with Stellar Code was easy and professional. They built our SaaS platform for property management end to end and really understood what we needed, both technically and from a business perspective. The admin console they developed made our daily work much more efficient. I'd happily work with Stellar Code again."
     },
     {
       id: 2,
@@ -58,6 +58,17 @@ const TestimonialsSection = () => {
       companyLogo: meckanoLogo,
       rating: 5,
       quote: "Stellar Code helped us streamline and professionalize our developer recruitment process. They quickly understood our challenges and built a clear, effective structure that saved us time and improved the candidate experience. Communication was always straightforward and transparent. It felt like working with a true partner, not just a service provider."
+    },
+    {
+      id: 3,
+      name: 'Moshe Tangi',
+      title: 'CEO',
+      company: 'City Systems',
+      avatar: 'MT',
+      avatarImage: null,
+      companyLogo: null,
+      rating: 5,
+      quote: "Stellar Code led the process of turning our old Windows system into a modern web-based SaaS product. They managed the team, guided the development, and made sure everything moved forward smoothly. The result is a stable, user friendly product that’s ready for the future. I strongly recommend working with Stellar Code."
     }
   ];
 
@@ -104,11 +115,11 @@ const TestimonialsSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
                     
                     {/* Company Logo Background */}
-                    <div className="absolute right-4 bottom-4 opacity-10">
+                    <div className="absolute -right-4 -bottom-4 opacity-20">
                       <img 
                         src={testimonial.companyLogo} 
                         alt={`${testimonial.company} logo`}
-                        className="h-10 w-auto object-contain"
+                        className="h-20 w-auto object-contain"
                       />
                     </div>
 
