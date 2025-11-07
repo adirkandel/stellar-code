@@ -59,7 +59,7 @@ const TestimonialsSection = () => {
       avatarImage: gilAvatar,
       companyLogo: meckanoLogo,
       rating: 5,
-      logoClassName: "h-14 mb-1",
+      logoClassName: "!h-14 mb-1",
       quote:
         "Stellar Code helped us streamline and professionalize our developer recruitment process. They quickly understood our challenges and built a clear, effective structure that saved us time and improved the candidate experience. Communication was always straightforward and transparent. It felt like working with a true partner, not just a service provider.",
     },
