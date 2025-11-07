@@ -59,6 +59,7 @@ const TestimonialsSection = () => {
       avatarImage: gilAvatar,
       companyLogo: meckanoLogo,
       rating: 5,
+      logoClassName: "h-20",
       quote:
         "Stellar Code helped us streamline and professionalize our developer recruitment process. They quickly understood our challenges and built a clear, effective structure that saved us time and improved the candidate experience. Communication was always straightforward and transparent. It felt like working with a true partner, not just a service provider.",
     },
@@ -123,7 +124,7 @@ const TestimonialsSection = () => {
                       <img
                         src={testimonial.companyLogo}
                         alt={`${testimonial.company} logo`}
-                        className="h-28 max-w-52 w-auto object-contain"
+                        className={`h-28 w-auto object-contain ${testimonial.logoClassName || ""}`}
                       />
                     </div>
 
