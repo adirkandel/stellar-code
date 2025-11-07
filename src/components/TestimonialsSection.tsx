@@ -8,6 +8,7 @@ import izikAvatar from '@/assets/izik.png';
 import gilAvatar from '@/assets/gil.jpeg';
 import flamingoLogo from '@/assets/flamingo-logo.png';
 import meckanoLogo from '@/assets/meckano-logo.png';
+import citySystemsLogo from '@/assets/city-systems-logo.svg';
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -66,7 +67,7 @@ const TestimonialsSection = () => {
       company: 'City Systems',
       avatar: 'MT',
       avatarImage: null,
-      companyLogo: null,
+      companyLogo: citySystemsLogo,
       rating: 5,
       quote: "Stellar Code led the process of turning our old Windows system into a modern web-based SaaS product. They managed the team, guided the development, and made sure everything moved forward smoothly. The result is a stable, user friendly product that’s ready for the future. I strongly recommend working with Stellar Code."
     }
