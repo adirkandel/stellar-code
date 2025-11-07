@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Send, Calendar, Mail, MessageSquare, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -24,15 +25,36 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        console.error('Error sending email:', error);
+        toast({
+          title: "Error sending message",
+          description: "Please try again or contact us directly at akandel@stellar-code.dev",
+          variant: "destructive",
+        });
+        return;
+      }
+
       toast({
         title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 24 hours. Check your email for confirmation.",
       });
       setFormData({ name: '', email: '', company: '', message: '' });
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly at akandel@stellar-code.dev",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
