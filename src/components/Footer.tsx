@@ -1,4 +1,5 @@
 import { Mail, Linkedin, Twitter, Github } from 'lucide-react';
+import stellarcodeLogo from '../assets/stellarcode-logo.svg';
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
@@ -14,10 +15,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="text-3xl font-bold font-space mb-4">
-              <span className="text-primary">Stellar</span>
-              <span className="text-stellar-white">Code</span>
-            </div>
+            <img 
+              src={stellarcodeLogo} 
+              alt="Stellar Code" 
+              className="h-10 w-auto mb-4"
+            />
             <p className="text-muted-foreground mb-6 max-w-md">
               Building stellar web products together. We partner with SaaS startups to create 
               top-tier applications and high-performing development teams.
