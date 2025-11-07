@@ -119,7 +119,7 @@ const TestimonialsSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
 
                     {/* Company Logo Background */}
-                    <div className="absolute -right-2 -bottom-2 opacity-15">
+                    <div className="absolute right-4 bottom-4 opacity-15">
                       <img
                         src={testimonial.companyLogo}
                         alt={`${testimonial.company} logo`}
