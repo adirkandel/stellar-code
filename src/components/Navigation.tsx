@@ -69,7 +69,7 @@ const Navigation = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => scrollToSection("contact")}
-              className="hidden md:block bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
+              className="hidden lg:block bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
             >
               Get Started
             </button>
