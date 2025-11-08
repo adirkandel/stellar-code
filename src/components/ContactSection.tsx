@@ -41,7 +41,7 @@ const ContactSection = () => {
 
       // Check the HTTP status code from the response
       const statusCode = response.error?.context?.status;
-      
+
       // If we get a 429 status code, show rate limit message
       if (statusCode === 429 || error?.message?.includes("429")) {
         toast({
@@ -231,9 +231,9 @@ const ContactSection = () => {
                       <p className="text-muted-foreground">Free 30-minute consultation</p>
                     </div>
                   </div>
-                  <a 
-                    href="https://calendar.app.google/pnZiXAnM3vSHyWiK6" 
-                    target="_blank" 
+                  <a
+                    href="https://calendar.app.google/pnZiXAnM3vSHyWiK6"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-primary/20 border border-primary/30 text-primary px-4 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 inline-block text-center"
                   >
