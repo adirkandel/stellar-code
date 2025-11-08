@@ -1,48 +1,53 @@
-import { Send, Calendar, Mail, MessageSquare, User } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { Send, Calendar, Mail, MessageSquare, User } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   company: z.string().trim().max(100, "Company name must be less than 100 characters").optional(),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters")
+  message: z
+    .string()
+    .trim()
+    .min(10, "Message must be at least 10 characters")
+    .max(2000, "Message must be less than 2000 characters"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactSection = () => {
   const { toast } = useToast();
-  
+
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      company: '',
-      message: ''
-    }
+      name: "",
+      email: "",
+      company: "",
+      message: "",
+    },
   });
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const { data: responseData, error } = await supabase.functions.invoke('send-contact-email', {
-        body: data
+      const response = await supabase.functions.invoke("send-contact-email", {
+        body: data,
       });
+      console.log(response);
+      const { data: responseData, error } = response;
 
       if (error) {
-        console.error('Error sending email:', error);
-        
+        console.error("Error sending email:", error);
+
         // Check the response data for the actual error message from the edge function
-        const actualError = responseData?.error || error.message || '';
-        const isRateLimit = actualError.includes('wait') || 
-                           actualError.includes('minute') ||
-                           actualError.includes('rate limit');
-        
+        const actualError = responseData?.error || error.message || "";
+        const isRateLimit =
+          actualError.includes("wait") || actualError.includes("minute") || actualError.includes("rate limit");
+
         if (isRateLimit) {
           toast({
             title: "Please wait a moment",
@@ -65,7 +70,7 @@ const ContactSection = () => {
       });
       form.reset();
     } catch (error: any) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       toast({
         title: "Error sending message",
         description: "Please try again or contact us directly at akandel@stellar-code.dev",
@@ -80,7 +85,10 @@ const ContactSection = () => {
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="w-96 h-96 border border-primary/30 rounded-full animate-orbit" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-neon-teal/30 rounded-full animate-orbit" style={{ animationDirection: 'reverse', animationDuration: '15s' }} />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-neon-teal/30 rounded-full animate-orbit"
+            style={{ animationDirection: "reverse", animationDuration: "15s" }}
+          />
         </div>
       </div>
 
@@ -103,25 +111,65 @@ const ContactSection = () => {
             <div className="bg-gradient-card backdrop-blur-sm border border-primary/20 rounded-xl p-8 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold font-space text-stellar-white mb-6">
-                  Let's Talk
-                </h3>
+                <h3 className="text-2xl font-bold font-space text-stellar-white mb-6">Let's Talk</h3>
 
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <div className="relative">
+                                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                                <input
+                                  {...field}
+                                  type="text"
+                                  placeholder="Your Name"
+                                  className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                                />
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                                <input
+                                  {...field}
+                                  type="email"
+                                  placeholder="Email Address"
+                                  className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                                />
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
                     <FormField
                       control={form.control}
-                      name="name"
+                      name="company"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
                             <div className="relative">
-                              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                              <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-muted-foreground z-10" />
                               <input
                                 {...field}
                                 type="text"
-                                placeholder="Your Name"
+                                placeholder="Company Name (Optional)"
                                 className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
                               />
                             </div>
@@ -130,86 +178,44 @@ const ContactSection = () => {
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
-                      name="email"
+                      name="message"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <div className="relative">
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
-                              <input
-                                {...field}
-                                type="email"
-                                placeholder="Email Address"
-                                className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
-                              />
-                            </div>
+                            <textarea
+                              {...field}
+                              placeholder="Tell us about your project or challenges..."
+                              rows={6}
+                              className="w-full p-4 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar resize-none"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                  </div>
 
-                  <FormField
-                    control={form.control}
-                    name="company"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <div className="relative">
-                            <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-muted-foreground z-10" />
-                            <input
-                              {...field}
-                              type="text"
-                              placeholder="Company Name (Optional)"
-                              className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <textarea
-                            {...field}
-                            placeholder="Tell us about your project or challenges..."
-                            rows={6}
-                            className="w-full p-4 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar resize-none"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <button
-                    type="submit"
-                    disabled={form.formState.isSubmitting}
-                    className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-lg font-semibold transition-stellar hover-glow hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                  >
-                    {form.formState.isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              </Form>
+                    <button
+                      type="submit"
+                      disabled={form.formState.isSubmitting}
+                      className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-lg font-semibold transition-stellar hover-glow hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                    >
+                      {form.formState.isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </Form>
               </div>
             </div>
 
@@ -243,7 +249,9 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <p className="text-stellar-white font-medium">Initial Discovery</p>
-                        <p className="text-muted-foreground text-sm">We'll discuss your goals, challenges, and timeline</p>
+                        <p className="text-muted-foreground text-sm">
+                          We'll discuss your goals, challenges, and timeline
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
@@ -252,7 +260,9 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <p className="text-stellar-white font-medium">Proposal & Planning</p>
-                        <p className="text-muted-foreground text-sm">Custom solution with timeline and team structure</p>
+                        <p className="text-muted-foreground text-sm">
+                          Custom solution with timeline and team structure
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
