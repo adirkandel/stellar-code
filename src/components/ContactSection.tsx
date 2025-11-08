@@ -37,7 +37,7 @@ const ContactSection = () => {
       const response = await supabase.functions.invoke("send-contact-email", {
         body: data,
       });
-      console.log(response);
+      console.log(response.response.json(), response.response.text());
       const { data: responseData, error } = response;
 
       if (error) {
