@@ -1,7 +1,12 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.80.0";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const supabase = createClient(
+  Deno.env.get("SUPABASE_URL")!,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,6 +30,62 @@ const handler = async (req: Request): Promise<Response> => {
     const { name, email, company, message }: ContactFormData = await req.json();
 
     console.log("Received contact form submission:", { name, email, company });
+
+    // Extract IP address from request headers
+    const ip_address = req.headers.get("x-forwarded-for")?.split(",")[0] || 
+                       req.headers.get("x-real-ip") || 
+                       "unknown";
+
+    // Check rate limit for email (1 submission per minute)
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
+    
+    const { data: recentEmailSubmissions } = await supabase
+      .from("contact_submissions")
+      .select("submitted_at")
+      .eq("email", email)
+      .gte("submitted_at", oneMinuteAgo)
+      .order("submitted_at", { ascending: false })
+      .limit(1);
+
+    if (recentEmailSubmissions && recentEmailSubmissions.length > 0) {
+      console.log("Rate limit exceeded for email:", email);
+      return new Response(
+        JSON.stringify({ 
+          error: "Please wait at least 1 minute before submitting another message from this email." 
+        }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Check rate limit for IP (1 submission per minute)
+    const { data: recentIpSubmissions } = await supabase
+      .from("contact_submissions")
+      .select("submitted_at")
+      .eq("ip_address", ip_address)
+      .gte("submitted_at", oneMinuteAgo)
+      .order("submitted_at", { ascending: false })
+      .limit(1);
+
+    if (recentIpSubmissions && recentIpSubmissions.length > 0) {
+      console.log("Rate limit exceeded for IP:", ip_address);
+      return new Response(
+        JSON.stringify({ 
+          error: "Please wait at least 1 minute before submitting another message." 
+        }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Record this submission
+    await supabase
+      .from("contact_submissions")
+      .insert({ email, ip_address });
 
     // Send email to your inbox
     const emailResponse = await resend.emails.send({
