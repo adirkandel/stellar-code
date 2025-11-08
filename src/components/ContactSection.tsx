@@ -39,31 +39,26 @@ const ContactSection = () => {
       });
       const { data: responseData, error } = response;
 
-      // Check for rate limit or other errors
-      // When edge function returns 429, responseData contains the error object from the function
-      if (error || responseData?.error) {
-        const errorMessage = responseData?.error || error?.message || "Unknown error occurred";
-        
-        // Check if this is a rate limit error
-        const isRateLimit =
-          errorMessage.includes("wait") || 
-          errorMessage.includes("minute") || 
-          errorMessage.includes("rate limit") ||
-          errorMessage.includes("before submitting");
+      // Check the HTTP status code from the response
+      const statusCode = response.error?.context?.status;
+      
+      // If we get a 429 status code, show rate limit message
+      if (statusCode === 429 || error?.message?.includes("429")) {
+        toast({
+          title: "Please wait a moment",
+          description: "To prevent spam, we limit form submissions to once per minute. Please try again shortly.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-        if (isRateLimit) {
-          toast({
-            title: "Please wait a moment",
-            description: "To prevent spam, we limit form submissions to once per minute. Please try again shortly.",
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Error sending message",
-            description: "Please try again or contact us directly at akandel@stellar-code.dev",
-            variant: "destructive",
-          });
-        }
+      // Check for other errors
+      if (error || responseData?.error) {
+        toast({
+          title: "Error sending message",
+          description: "Please try again or contact us directly at akandel@stellar-code.dev",
+          variant: "destructive",
+        });
         return;
       }
 
