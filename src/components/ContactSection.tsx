@@ -234,7 +234,6 @@ const ContactSection = () => {
                   <a
                     href="https://calendar.app.google/pnZiXAnM3vSHyWiK6"
                     target="_blank"
-                    rel="noopener noreferrer"
                     className="w-full bg-primary/20 border border-primary/30 text-primary px-4 py-3 rounded-lg font-medium transition-stellar hover:bg-primary/30 inline-block text-center"
                   >
                     Book a Free Consultation
