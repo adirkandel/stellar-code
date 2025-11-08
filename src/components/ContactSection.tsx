@@ -37,11 +37,11 @@ const ContactSection = () => {
       if (error) {
         console.error('Error sending email:', error);
         
-        // Check if it's a rate limit error
-        const errorMessage = error.message || '';
-        const isRateLimit = errorMessage.includes('rate limit') || 
-                           errorMessage.includes('wait') || 
-                           errorMessage.includes('minute');
+        // Check the response data for the actual error message from the edge function
+        const actualError = responseData?.error || error.message || '';
+        const isRateLimit = actualError.includes('wait') || 
+                           actualError.includes('minute') ||
+                           actualError.includes('rate limit');
         
         if (isRateLimit) {
           toast({
@@ -52,7 +52,7 @@ const ContactSection = () => {
         } else {
           toast({
             title: "Error sending message",
-            description: error.message || "Please try again or contact us directly at akandel@stellar-code.dev",
+            description: actualError || "Please try again or contact us directly at akandel@stellar-code.dev",
             variant: "destructive",
           });
         }
@@ -66,18 +66,9 @@ const ContactSection = () => {
       form.reset();
     } catch (error: any) {
       console.error('Error:', error);
-      
-      // Check if the caught error contains rate limit information
-      const errorMsg = error?.message || error?.toString() || '';
-      const isRateLimit = errorMsg.includes('rate limit') || 
-                         errorMsg.includes('wait') || 
-                         errorMsg.includes('minute');
-      
       toast({
-        title: isRateLimit ? "Please wait a moment" : "Error sending message",
-        description: isRateLimit 
-          ? "To prevent spam, we limit form submissions to once per minute. Please try again shortly."
-          : "Please try again or contact us directly at akandel@stellar-code.dev",
+        title: "Error sending message",
+        description: "Please try again or contact us directly at akandel@stellar-code.dev",
         variant: "destructive",
       });
     }
