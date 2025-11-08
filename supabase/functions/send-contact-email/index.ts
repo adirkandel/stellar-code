@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.80.0";
+import { z } from "npm:zod@3.25.76";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const supabase = createClient(
@@ -20,6 +21,13 @@ interface ContactFormData {
   message: string;
 }
 
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  company: z.string().trim().max(100, "Company name must be less than 100 characters").optional(),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters")
+});
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -27,9 +35,29 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, company, message }: ContactFormData = await req.json();
+    const rawData = await req.json();
+    
+    // Validate input data
+    const validation = contactSchema.safeParse(rawData);
+    if (!validation.success) {
+      console.error("Validation failed:", validation.error.issues);
+      return new Response(
+        JSON.stringify({ 
+          error: "Invalid input data", 
+          details: validation.error.issues.map(issue => ({
+            field: issue.path.join('.'),
+            message: issue.message
+          }))
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
-    console.log("Received contact form submission:", { name, email, company });
+    const { name, email, company, message } = validation.data;
+    console.log("Received valid contact form submission:", { name, email, company });
 
     // Extract IP address from request headers
     const ip_address = req.headers.get("x-forwarded-for")?.split(",")[0] || 
@@ -95,11 +123,11 @@ const handler = async (req: Request): Promise<Response> => {
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        ${company ? `<p><strong>Company:</strong> ${company}</p>` : ""}
+        <p><strong>Name:</strong> ${name.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+        <p><strong>Email:</strong> ${email.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+        ${company ? `<p><strong>Company:</strong> ${company.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>` : ""}
         <h3>Message:</h3>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <p>${message.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>")}</p>
       `,
     });
 

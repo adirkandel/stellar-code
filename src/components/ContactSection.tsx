@@ -1,40 +1,44 @@
-import { useState } from 'react';
 import { Send, Calendar, Mail, MessageSquare, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  company: z.string().trim().max(100, "Company name must be less than 100 characters").optional(),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters")
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactSection = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
+  
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      company: '',
+      message: ''
+    }
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  const onSubmit = async (data: ContactFormData) => {
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: data
       });
 
       if (error) {
         console.error('Error sending email:', error);
         toast({
           title: "Error sending message",
-          description: "Please try again or contact us directly at akandel@stellar-code.dev",
+          description: error.message || "Please try again or contact us directly at akandel@stellar-code.dev",
           variant: "destructive",
         });
         return;
@@ -44,7 +48,7 @@ const ContactSection = () => {
         title: "Message sent successfully!",
         description: "We'll get back to you within 24 hours. Check your email for confirmation.",
       });
-      setFormData({ name: '', email: '', company: '', message: '' });
+      form.reset();
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -52,8 +56,6 @@ const ContactSection = () => {
         description: "Please try again or contact us directly at akandel@stellar-code.dev",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -90,76 +92,109 @@ const ContactSection = () => {
                   Let's Talk
                 </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <input
-                      type="text"
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
                       name="name"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <div className="relative">
+                              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                              <input
+                                {...field}
+                                type="text"
+                                placeholder="Your Name"
+                                className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <input
-                      type="email"
+                    <FormField
+                      control={form.control}
                       name="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <div className="relative">
+                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                              <input
+                                {...field}
+                                type="email"
+                                placeholder="Email Address"
+                                className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                </div>
 
-                <div className="relative">
-                  <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-muted-foreground" />
-                  <input
-                    type="text"
+                  <FormField
+                    control={form.control}
                     name="company"
-                    placeholder="Company Name (Optional)"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <div className="relative">
+                            <MessageSquare className="absolute left-3 top-4 w-5 h-5 text-muted-foreground z-10" />
+                            <input
+                              {...field}
+                              type="text"
+                              placeholder="Company Name (Optional)"
+                              className="w-full pl-12 pr-4 py-3 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar"
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <div className="relative">
-                  <textarea
+                  <FormField
+                    control={form.control}
                     name="message"
-                    placeholder="Tell us about your project or challenges..."
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={6}
-                    className="w-full p-4 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar resize-none"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <textarea
+                            {...field}
+                            placeholder="Tell us about your project or challenges..."
+                            rows={6}
+                            className="w-full p-4 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar resize-none"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-lg font-semibold transition-stellar hover-glow hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                    className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-lg font-semibold transition-stellar hover-glow hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  >
+                    {form.formState.isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              </Form>
               </div>
             </div>
 
