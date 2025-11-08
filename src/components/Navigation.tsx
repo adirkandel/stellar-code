@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import stellarcodeLogo from '../assets/stellarcode-logo.svg';
+import { Menu, X } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {    
     // Handle initial hash on page load
@@ -27,6 +30,7 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsOpen(false);
   };
 
   const navItems = [
@@ -72,12 +76,48 @@ const Navigation = () => {
             ))}
           </div>
 
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
-          >
-            Get Started
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="hidden md:block bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
+            >
+              Get Started
+            </button>
+
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <button className="md:hidden text-stellar-white p-2">
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-deep-space/95 backdrop-blur-xl border-l border-white/10 w-[300px]">
+                <div className="flex flex-col gap-8 mt-8">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={() => setIsOpen(false)}
+                      className={`
+                        text-lg font-medium transition-stellar
+                        ${activeSection === item.id 
+                          ? 'text-primary' 
+                          : 'text-muted-foreground hover:text-stellar-white'
+                        }
+                      `}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                  <button
+                    onClick={() => scrollToSection('contact')}
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-stellar hover-glow w-full"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </nav>
