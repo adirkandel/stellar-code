@@ -30,17 +30,32 @@ const ContactSection = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const { error } = await supabase.functions.invoke('send-contact-email', {
+      const { data: responseData, error } = await supabase.functions.invoke('send-contact-email', {
         body: data
       });
 
       if (error) {
         console.error('Error sending email:', error);
-        toast({
-          title: "Error sending message",
-          description: error.message || "Please try again or contact us directly at akandel@stellar-code.dev",
-          variant: "destructive",
-        });
+        
+        // Check if it's a rate limit error
+        const errorMessage = error.message || '';
+        const isRateLimit = errorMessage.includes('rate limit') || 
+                           errorMessage.includes('wait') || 
+                           errorMessage.includes('minute');
+        
+        if (isRateLimit) {
+          toast({
+            title: "Please wait a moment",
+            description: "To prevent spam, we limit form submissions to once per minute. Please try again shortly.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error sending message",
+            description: error.message || "Please try again or contact us directly at akandel@stellar-code.dev",
+            variant: "destructive",
+          });
+        }
         return;
       }
 
@@ -49,11 +64,20 @@ const ContactSection = () => {
         description: "We'll get back to you within 24 hours. Check your email for confirmation.",
       });
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error);
+      
+      // Check if the caught error contains rate limit information
+      const errorMsg = error?.message || error?.toString() || '';
+      const isRateLimit = errorMsg.includes('rate limit') || 
+                         errorMsg.includes('wait') || 
+                         errorMsg.includes('minute');
+      
       toast({
-        title: "Error sending message",
-        description: "Please try again or contact us directly at akandel@stellar-code.dev",
+        title: isRateLimit ? "Please wait a moment" : "Error sending message",
+        description: isRateLimit 
+          ? "To prevent spam, we limit form submissions to once per minute. Please try again shortly."
+          : "Please try again or contact us directly at akandel@stellar-code.dev",
         variant: "destructive",
       });
     }
