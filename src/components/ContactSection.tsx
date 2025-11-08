@@ -37,11 +37,10 @@ const ContactSection = () => {
       const response = await supabase.functions.invoke("send-contact-email", {
         body: data,
       });
-      console.log(response.response.json(), response.response.text());
       const { data: responseData, error } = response;
 
       if (error) {
-        console.error("Error sending email:", error);
+        console.error("Error sending email:", error, "Response data:", responseData);
 
         // Check the response data for the actual error message from the edge function
         const actualError = responseData?.error || error.message || "";
