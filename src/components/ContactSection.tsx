@@ -9,8 +9,7 @@ const ContactSection = () => {
     name: '',
     email: '',
     company: '',
-    message: '',
-    website: '' // Honeypot field
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,7 +44,7 @@ const ContactSection = () => {
         title: "Message sent successfully!",
         description: "We'll get back to you within 24 hours. Check your email for confirmation.",
       });
-      setFormData({ name: '', email: '', company: '', message: '', website: '' });
+      setFormData({ name: '', email: '', company: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -142,18 +141,6 @@ const ContactSection = () => {
                     className="w-full p-4 bg-input border border-nebula-blue/30 rounded-lg text-stellar-white placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-stellar resize-none"
                   />
                 </div>
-
-                {/* Honeypot field - hidden from users but visible to bots */}
-                <input
-                  type="text"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  className="absolute opacity-0 pointer-events-none"
-                  aria-hidden="true"
-                />
 
                 <button
                   type="submit"

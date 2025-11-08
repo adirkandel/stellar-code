@@ -13,7 +13,6 @@ interface ContactFormData {
   email: string;
   company?: string;
   message: string;
-  website?: string; // Honeypot field
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -23,19 +22,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, company, message, website }: ContactFormData = await req.json();
-
-    // Honeypot check - if website field is filled, it's likely a bot
-    if (website) {
-      console.log('Bot submission detected - honeypot field filled');
-      return new Response(
-        JSON.stringify({ error: 'Invalid submission' }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
-    }
+    const { name, email, company, message }: ContactFormData = await req.json();
 
     console.log("Received contact form submission:", { name, email, company });
 
