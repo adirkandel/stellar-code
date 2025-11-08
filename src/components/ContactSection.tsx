@@ -39,13 +39,17 @@ const ContactSection = () => {
       });
       const { data: responseData, error } = response;
 
-      if (error) {
-        console.error("Error sending email:", error, "Response data:", responseData);
-
-        // Check the response data for the actual error message from the edge function
-        const actualError = responseData?.error || error.message || "";
+      // Check for rate limit or other errors
+      // When edge function returns 429, responseData contains the error object from the function
+      if (error || responseData?.error) {
+        const errorMessage = responseData?.error || error?.message || "Unknown error occurred";
+        
+        // Check if this is a rate limit error
         const isRateLimit =
-          actualError.includes("wait") || actualError.includes("minute") || actualError.includes("rate limit");
+          errorMessage.includes("wait") || 
+          errorMessage.includes("minute") || 
+          errorMessage.includes("rate limit") ||
+          errorMessage.includes("before submitting");
 
         if (isRateLimit) {
           toast({
@@ -56,7 +60,7 @@ const ContactSection = () => {
         } else {
           toast({
             title: "Error sending message",
-            description: actualError || "Please try again or contact us directly at akandel@stellar-code.dev",
+            description: "Please try again or contact us directly at akandel@stellar-code.dev",
             variant: "destructive",
           });
         }
