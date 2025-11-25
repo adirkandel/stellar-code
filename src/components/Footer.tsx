@@ -133,7 +133,7 @@ const Footer = () => {
 
         <div className="border-t border-nebula-blue/20 mt-12 pt-8 text-center">
           <p className="text-muted-foreground">
-            © 2024 Stellar Code. All rights reserved. Building the future, one stellar project at a time.
+            © {new Date().getFullYear()} Stellar Code. All rights reserved. Building the future, one stellar project at a time.
           </p>
         </div>
       </div>
