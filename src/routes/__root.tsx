@@ -1,5 +1,11 @@
-import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
-
+import {
+  HeadContent,
+  Link,
+  Outlet,
+  Scripts,
+  createRootRoute,
+} from '@tanstack/react-router'
+import { Toaster } from '@/components/ui/toaster'
 import appCss from '../styles.css?url'
 
 // SEO Configuration
@@ -11,7 +17,26 @@ const siteConfig = {
   twitterHandle: '@stellarcode',
 }
 
+function NotFoundPage() {
+  return (
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 p-8 text-center">
+      <h1 className="font-space text-2xl font-bold text-stellar-white">Page not found</h1>
+      <p className="text-muted-foreground text-sm max-w-md">
+        There is no page at this URL. If you opened a link, it may be broken or the page was
+        removed.
+      </p>
+      <Link
+        to="/"
+        className="text-primary font-medium underline underline-offset-4 hover:text-primary/90"
+      >
+        Back to home
+      </Link>
+    </div>
+  )
+}
+
 export const Route = createRootRoute({
+  notFoundComponent: NotFoundPage,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -96,6 +121,7 @@ function RootComponent() {
       </head>
       <body className="min-h-screen bg-deep-space text-stellar-white antialiased">
         <Outlet />
+        <Toaster />
         <Scripts />
       </body>
     </html>
