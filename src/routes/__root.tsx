@@ -5,6 +5,7 @@ import {
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router'
+import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from '@/components/ui/toaster'
 import appCss from '../styles.css?url'
 
@@ -122,6 +123,7 @@ function RootComponent() {
       <body className="min-h-screen bg-deep-space text-stellar-white antialiased">
         <Outlet />
         <Toaster />
+        <Analytics />
         <Scripts />
       </body>
     </html>
