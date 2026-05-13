@@ -78,6 +78,17 @@ function BlogPostPage() {
 						{meta.description}
 					</p>
 				</header>
+				{meta.image ? (
+					<div className="not-prose mb-10 overflow-hidden rounded-xl border border-nebula-blue/30 shadow-lg shadow-primary/10">
+						<div className="relative aspect-[21/9] w-full bg-nebula-blue/30">
+							<img
+								src={meta.image}
+								alt={meta.title}
+								className="h-full w-full object-cover"
+							/>
+						</div>
+					</div>
+				) : null}
 				<div className="prose prose-invert prose-lg max-w-none prose-headings:font-space prose-a:text-primary prose-headings:text-stellar-white">
 					<Body />
 				</div>

@@ -6,6 +6,7 @@ export type PostMeta = {
 	date: string;
 	slug: string;
 	draft?: boolean;
+	/** Resolved cover image URL (e.g. from Vite `import` in MDX) */
 	image?: string;
 };
 

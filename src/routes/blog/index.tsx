@@ -41,7 +41,7 @@ function BlogIndexPage() {
 
 	return (
 		<BlogShell>
-			<div className="container mx-auto max-w-3xl px-6">
+			<div className="container mx-auto max-w-6xl px-6">
 				<h1 className="font-space mb-2 text-3xl font-bold text-stellar-white md:text-4xl">
 					Blog
 				</h1>
@@ -49,16 +49,31 @@ function BlogIndexPage() {
 					Notes on shipping software, scaling teams, and the craft of building
 					SaaS products.
 				</p>
-				<ul className="flex flex-col gap-6">
+				<ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					{posts.map((post) => (
 						<li key={post.slug}>
 							<Link
 								to="/blog/$slug"
 								params={{ slug: post.slug }}
-								className="block transition-stellar hover:-translate-y-0.5"
+								className="block h-full transition-stellar hover:-translate-y-0.5"
 							>
-								<Card className="border-nebula-blue/30 bg-deep-space/50 hover:border-primary/40">
-									<CardHeader>
+								<Card className="flex h-full flex-col overflow-hidden border-nebula-blue/30 bg-deep-space/50 p-0 hover:border-primary/40">
+									<div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-nebula-blue/30">
+										{post.image ? (
+											<img
+												src={post.image}
+												alt={post.title}
+												className="h-full w-full object-cover"
+											/>
+										) : (
+											<div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-nebula-blue/40">
+												<span className="text-muted-foreground text-sm font-medium">
+													{post.title}
+												</span>
+											</div>
+										)}
+									</div>
+									<CardHeader className="flex flex-1 flex-col">
 										<p className="text-muted-foreground mb-1 text-sm">
 											{post.date}
 										</p>
