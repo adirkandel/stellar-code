@@ -8,8 +8,12 @@ export const siteConfig = {
 	twitterHandle: "@stellarcode",
 } as const;
 
-export function absoluteUrl(path: string) {
+/** Build an absolute https URL for meta tags. Passes through full URLs unchanged. */
+export function absoluteUrl(pathOrUrl: string) {
+	if (pathOrUrl.startsWith("https://") || pathOrUrl.startsWith("http://")) {
+		return pathOrUrl;
+	}
 	const base = siteConfig.url.replace(/\/$/, "");
-	const p = path.startsWith("/") ? path : `/${path}`;
+	const p = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
 	return `${base}${p}`;
 }

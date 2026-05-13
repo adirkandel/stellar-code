@@ -12,11 +12,14 @@ export const Route = createFileRoute("/blog/$slug")({
 		const { title, description, date, slug, image } = entry;
 		return { meta: { title, description, date, slug, image } };
 	},
-	head: ({ loaderData }) => {
+	head: ({ loaderData, params }) => {
 		const { meta } = loaderData;
+		// Prefer entry image: serialized loader data may omit `image` on the wire.
+		const entry = getPostEntryBySlug(params.slug);
+		const cover = entry?.image ?? meta.image;
 		const url = absoluteUrl(`/blog/${meta.slug}`);
-		const ogImage = meta.image
-			? absoluteUrl(meta.image)
+		const ogImage = cover
+			? absoluteUrl(cover)
 			: absoluteUrl(siteConfig.ogImage);
 		const jsonLd = {
 			"@context": "https://schema.org",
