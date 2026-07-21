@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { Mail, Linkedin, Twitter, Github } from 'lucide-react';
 import stellarcodeLogo from '@/assets/stellarcode-logo.svg';
 
@@ -95,6 +96,14 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-stellar-white mb-4">Company</h3>
             <ul className="space-y-2 text-muted-foreground">
+              <li>
+                <Link
+                  to="/blog"
+                  className="hover:text-primary transition-stellar"
+                >
+                  Blog
+                </Link>
+              </li>
               <li>
                 <button
                   onClick={() => scrollToSection('why-us')}

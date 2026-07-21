@@ -7,6 +7,8 @@ import { fileURLToPath, URL } from 'url'
 
 import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
+import mdx from '@mdx-js/rollup'
+import remarkGfm from 'remark-gfm'
 
 const config = defineConfig({
   resolve: {
@@ -22,8 +24,12 @@ const config = defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
+    {
+      enforce: 'pre',
+      ...mdx({ remarkPlugins: [remarkGfm] }),
+    },
     tanstackStart(),
-    viteReact(),
+    viteReact({ include: /\.(jsx|js|ts|tsx|mdx)$/ }),
   ],
 })
 

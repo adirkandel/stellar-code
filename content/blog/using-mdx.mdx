@@ -1,0 +1,30 @@
+import coverImage from "@/assets/floating-astronaut-background.jpg";
+import { Callout } from "@/components/mdx/Callout";
+
+export const meta = {
+	title: "MDX on this site",
+	description:
+		"Why we chose MDX for the blog and how you can embed React components in posts.",
+	date: "2026-05-10",
+	slug: "using-mdx",
+	image: coverImage,
+};
+
+# MDX when you need more than Markdown
+
+This post renders from an **MDX** file. That means we can drop in interactive or branded UI right inside an article.
+
+<Callout>
+	This callout is a React component imported in the MDX file—useful for tips,
+	warnings, or CTAs without maintaining a separate CMS field for every pattern.
+</Callout>
+
+## Tables (GitHub-flavored)
+
+| Concern        | MDX                         |
+| -------------- | --------------------------- |
+| Authoring      | Familiar Markdown + JSX     |
+| Design system  | Import shared UI components |
+| Static hosting | Pre-bundled at build time   |
+
+We will keep posts in the repository under `content/blog` so they stay reviewed and versioned like the rest of the codebase.
