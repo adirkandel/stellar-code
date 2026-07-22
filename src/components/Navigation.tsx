@@ -46,28 +46,22 @@ const Navigation = () => {
 		<nav className="fixed top-0 left-0 right-0 z-50 bg-deep-space/30 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-primary/5">
 			<div className="container mx-auto px-6 py-4">
 				<div className="flex items-center justify-between">
-					<div
+					<Link
+						to="/"
 						className="flex items-center gap-3 cursor-pointer"
-						onClick={() => scrollToSection("hero")}
 					>
 						<img
 							src={stellarcodeLogo}
 							alt="Stellar Code"
 							className="h-8 w-auto logo-hover"
 						/>
-					</div>
+					</Link>
 
 					<div className="hidden lg:flex items-center space-x-8">
-						<Link
-							to="/blog"
-							className="font-medium transition-stellar text-muted-foreground hover:text-stellar-white"
-						>
-							Blog
-						</Link>
 						{navItems.map((item) => (
 							<a
 								key={item.id}
-								href={`#${item.id}`}
+								href={`/#${item.id}`}
 								className={`
                   font-medium transition-stellar hover:text-primary
                   ${activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-stellar-white"}
@@ -97,13 +91,6 @@ const Navigation = () => {
 								className="bg-deep-space/95 backdrop-blur-xl border-l border-white/10 w-[300px]"
 							>
 								<div className="flex flex-col gap-8 mt-8">
-									<Link
-										to="/blog"
-										onClick={() => setIsOpen(false)}
-										className="text-lg font-medium text-muted-foreground transition-stellar hover:text-stellar-white"
-									>
-										Blog
-									</Link>
 									{navItems.map((item) => (
 										<a
 											key={item.id}

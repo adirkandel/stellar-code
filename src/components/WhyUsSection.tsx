@@ -49,7 +49,7 @@ const WhyUsSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold font-space mb-6">
             <span className="text-stellar-white">Why</span>
             <span className="text-primary glow-stellar"> Stellar Code?</span>
           </h2>
