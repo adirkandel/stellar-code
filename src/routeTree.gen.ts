@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as ServicesAgenticSdlcImpactMethodRouteImport } from './routes/services/agentic-sdlc-impact-method'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as ApiImpactInterestRouteImport } from './routes/api/impact-interest'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,9 +26,20 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesAgenticSdlcImpactMethodRoute =
+  ServicesAgenticSdlcImpactMethodRouteImport.update({
+    id: '/services/agentic-sdlc-impact-method',
+    path: '/services/agentic-sdlc-impact-method',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiImpactInterestRoute = ApiImpactInterestRouteImport.update({
+  id: '/api/impact-interest',
+  path: '/api/impact-interest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiContactRoute = ApiContactRouteImport.update({
@@ -38,34 +51,61 @@ const ApiContactRoute = ApiContactRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/agentic-sdlc-impact-method': typeof ServicesAgenticSdlcImpactMethodRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/agentic-sdlc-impact-method': typeof ServicesAgenticSdlcImpactMethodRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/services/agentic-sdlc-impact-method': typeof ServicesAgenticSdlcImpactMethodRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/contact' | '/blog/$slug' | '/blog/'
+  fullPaths:
+    | '/'
+    | '/api/contact'
+    | '/api/impact-interest'
+    | '/blog/$slug'
+    | '/services/agentic-sdlc-impact-method'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/contact' | '/blog/$slug' | '/blog'
-  id: '__root__' | '/' | '/api/contact' | '/blog/$slug' | '/blog/'
+  to:
+    | '/'
+    | '/api/contact'
+    | '/api/impact-interest'
+    | '/blog/$slug'
+    | '/services/agentic-sdlc-impact-method'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/contact'
+    | '/api/impact-interest'
+    | '/blog/$slug'
+    | '/services/agentic-sdlc-impact-method'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiContactRoute: typeof ApiContactRoute
+  ApiImpactInterestRoute: typeof ApiImpactInterestRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  ServicesAgenticSdlcImpactMethodRoute: typeof ServicesAgenticSdlcImpactMethodRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -85,11 +125,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/agentic-sdlc-impact-method': {
+      id: '/services/agentic-sdlc-impact-method'
+      path: '/services/agentic-sdlc-impact-method'
+      fullPath: '/services/agentic-sdlc-impact-method'
+      preLoaderRoute: typeof ServicesAgenticSdlcImpactMethodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/impact-interest': {
+      id: '/api/impact-interest'
+      path: '/api/impact-interest'
+      fullPath: '/api/impact-interest'
+      preLoaderRoute: typeof ApiImpactInterestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/contact': {
@@ -105,7 +159,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiContactRoute: ApiContactRoute,
+  ApiImpactInterestRoute: ApiImpactInterestRoute,
   BlogSlugRoute: BlogSlugRoute,
+  ServicesAgenticSdlcImpactMethodRoute: ServicesAgenticSdlcImpactMethodRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport

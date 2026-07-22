@@ -32,7 +32,7 @@ const ServicesSection = () => {
     <section id="services" className="py-24 bg-gradient-galaxy">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold font-space mb-6">
             <span className="text-stellar-white">Our</span>
             <span className="text-primary glow-stellar"> Expertise</span>
           </h2>

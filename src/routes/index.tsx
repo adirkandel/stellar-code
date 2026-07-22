@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation'
 import HeroSection from '@/components/HeroSection'
 import SolutionsSection from '@/components/SolutionsSection'
 import ServicesSection from '@/components/ServicesSection'
+import ImpactPromoSection from '@/components/ImpactPromoSection'
 import TechnologiesSection from '@/components/TechnologiesSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import WhyUsSection from '@/components/WhyUsSection'
@@ -21,6 +22,7 @@ function HomePage() {
         <HeroSection />
         <SolutionsSection />
         <ServicesSection />
+        <ImpactPromoSection />
         <TechnologiesSection />
         <TestimonialsSection />
         <WhyUsSection />

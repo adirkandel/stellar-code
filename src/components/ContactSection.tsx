@@ -107,7 +107,7 @@ const ContactSection = () => {
 				<div className="max-w-4xl mx-auto">
 					{/* Header */}
 					<div className="text-center mb-16">
-						<h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
+						<h2 className="text-3xl md:text-4xl font-bold font-space mb-6">
 							<span className="text-stellar-white">
 								Ready to Build Something
 							</span>

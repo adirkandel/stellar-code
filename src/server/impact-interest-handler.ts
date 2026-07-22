@@ -1,3 +1,4 @@
+import { IMPACT_ROLES, type ImpactRole } from "@/lib/impact-service";
 import {
 	escapeHtml,
 	handleResendMailApi,
@@ -6,33 +7,34 @@ import {
 	type ResendMailEnv,
 } from "@/server/form-handler";
 
-export type ContactEnv = ResendMailEnv;
+export type ImpactInterestEnv = ResendMailEnv;
 
-/**
- * Shared by Vercel Edge (`api/contact.ts`) and Vite dev middleware.
- */
-export async function handleContactApi(
+function isImpactRole(value: string): value is ImpactRole {
+	return (IMPACT_ROLES as readonly string[]).includes(value);
+}
+
+export async function handleImpactInterestApi(
 	request: Request,
-	env: ContactEnv,
+	env: ImpactInterestEnv,
 ): Promise<Response> {
 	return handleResendMailApi(request, env, (body) => {
 		const data = body as {
 			name?: string;
 			email?: string;
 			company?: string;
-			message?: string;
+			role?: string;
 		};
 
 		const name = data.name?.trim() ?? "";
 		const email = data.email?.trim() ?? "";
 		const company = data.company?.trim() ?? "";
-		const message = data.message?.trim() ?? "";
+		const role = data.role?.trim() ?? "";
 
-		if (!name || !email || !message) {
+		if (!name || !email || !role) {
 			return {
 				ok: false,
 				response: jsonResponse(
-					{ error: "name, email, and message are required" },
+					{ error: "name, email, and role are required" },
 					400,
 				),
 			};
@@ -40,30 +42,26 @@ export async function handleContactApi(
 		if (!isValidEmail(email)) {
 			return { ok: false, response: jsonResponse({ error: "Invalid email" }, 400) };
 		}
-		if (message.length < 10) {
-			return {
-				ok: false,
-				response: jsonResponse(
-					{ error: "message must be at least 10 characters" },
-					400,
-				),
-			};
+		if (!isImpactRole(role)) {
+			return { ok: false, response: jsonResponse({ error: "Invalid role" }, 400) };
 		}
 
 		const companyLine = company
 			? `<p><strong>Company:</strong> ${escapeHtml(company)}</p>`
 			: "";
+		const submittedAt = new Date().toISOString();
 
 		return {
 			ok: true,
 			replyTo: email,
-			subject: `Contact form: ${name}`,
+			subject: `IMPACT interest: ${name} (${role})`,
 			html: `
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Role:</strong> ${escapeHtml(role)}</p>
         ${companyLine}
-        <p><strong>Message:</strong></p>
-        <p>${escapeHtml(message).replaceAll("\n", "<br />")}</p>
+        <p><strong>Source:</strong> /services/agentic-sdlc-impact-method</p>
+        <p><strong>Submitted:</strong> ${escapeHtml(submittedAt)}</p>
       `,
 		};
 	});

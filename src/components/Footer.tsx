@@ -58,6 +58,14 @@ const Footer = () => {
             <h3 className="font-semibold text-stellar-white mb-4">Services</h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
+                <Link
+                  to="/services/agentic-sdlc-impact-method"
+                  className="hover:text-primary transition-stellar"
+                >
+                  IMPACT Method
+                </Link>
+              </li>
+              <li>
                 <button
                   onClick={() => scrollToSection('services')}
                   className="hover:text-primary transition-stellar"
@@ -96,14 +104,6 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-stellar-white mb-4">Company</h3>
             <ul className="space-y-2 text-muted-foreground">
-              <li>
-                <Link
-                  to="/blog"
-                  className="hover:text-primary transition-stellar"
-                >
-                  Blog
-                </Link>
-              </li>
               <li>
                 <button
                   onClick={() => scrollToSection('why-us')}

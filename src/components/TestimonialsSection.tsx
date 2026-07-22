@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
     <section id="testimonials" className="py-24 bg-deep-space relative overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-6 relative z-20">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold font-space mb-6">
             <span className="text-stellar-white">What Our</span>
             <span className="text-primary glow-stellar"> Clients Say</span>
           </h2>
