@@ -214,18 +214,6 @@ const ImpactSuccessSection = () => {
 					))}
 				</div>
 			</div>
-
-			{/*
-			=== Previous Success section (chart + metric cards) - kept for reference ===
-
-			import { impactSuccessLook } from "@/lib/impact-service";
-			// Illustrative Velocity / Quality chart + 6 vision metric cards with IMPACT levers.
-			// See git history for full implementation (VELOCITY_POINTS, QUALITY_POINTS, metrics grid).
-
-			const { subhead, series, metrics } = impactSuccessLook;
-			// Chart: dual polyline (velocity + quality) with legend
-			// Grid: metrics.map → metric / vision / IMPACT lever
-			*/}
 		</section>
 	);
 };

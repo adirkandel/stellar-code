@@ -164,24 +164,6 @@ export const impactAbout = {
 	],
 } as const;
 
-export const impactPilotReasons = [
-	{
-		title: "Pilot pricing",
-		description:
-			"Early teams get a lower entry than later Launch and Expansion pricing - custom proposal, pilot rate.",
-	},
-	{
-		title: "More attention",
-		description:
-			"Founder-led install on your golden path - not a junior bench running a playbook from a slide deck.",
-	},
-	{
-		title: "Operator credibility",
-		description:
-			"0→1 through acquisition at Eureka, enterprise cyber scale at Tenable, and a large Israeli eng community behind the work.",
-	},
-] as const;
-
 export const impactLaunchDeliverables = [
 	"Living shared context (markdown vault in git + retrieval)",
 	"Thin Intent bridge between tickets and agent sessions",
@@ -269,18 +251,6 @@ export const impactSuccessLook = {
 	eyebrow: "Pilot / Launch scorecard targets",
 	subhead:
 		"What we aim to move on a pilot. Velocity has to improve, Quality has to improve.",
-	series: [
-		{
-			id: "velocity",
-			label: "Velocity",
-			color: "oklch(68.63% 0.129 191.84)",
-		},
-		{
-			id: "quality",
-			label: "Quality",
-			color: "oklch(60.59% 0.213 292.72)",
-		},
-	],
 	/** Vision targets for R&D leaders - not claimed client results */
 	pillars: [
 		{
@@ -447,10 +417,6 @@ export type ImpactUseCase = {
 	path: string;
 };
 
-/** Alias kept for the wiring diagram */
-export type ImpactPerspective = ImpactUseCase;
-export type ImpactPerspectiveId = ImpactUseCaseId;
-
 export const impactUseCases: ImpactUseCase[] = [
 	{
 		id: "dev-pulls-ticket",
@@ -577,9 +543,6 @@ export const impactUseCases: ImpactUseCase[] = [
 		path: "Telemetry ↔ Memory ↔ Policy",
 	},
 ];
-
-/** Alias used by the wiring diagram */
-export const impactPerspectives = impactUseCases;
 
 export type ImpactFaq = {
 	id: string;
