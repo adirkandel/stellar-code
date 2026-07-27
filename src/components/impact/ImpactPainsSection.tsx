@@ -14,11 +14,14 @@ const ImpactPainsSection = () => {
 					</h2>
 					<p className="text-lg text-stellar-white/85">
 						R&D leaders need competitive velocity without giving up quality.
-						Ad-hoc agent adoption usually creates AI tax in three places:
+						Ad-hoc agent adoption usually creates{" "}
+						<span className="text-stellar-white">AI tax</span> - review
+						bottlenecks, rework, and seniors drowning in verification while
+						throughput looks busy - in three places:
 					</p>
 				</div>
 
-				<div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+				<div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
 					{impactPains.map((pain) => (
 						<article
 							key={pain.title}
@@ -27,7 +30,7 @@ const ImpactPainsSection = () => {
 							<h3 className="mb-3 font-space text-xl font-bold text-white">
 								{pain.title}
 							</h3>
-							<p className="mb-4 leading-relaxed text-stellar-white/85">
+							<p className="leading-relaxed text-stellar-white/85">
 								{pain.description}
 							</p>
 						</article>
