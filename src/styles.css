@@ -82,6 +82,15 @@ html, body {
     color: var(--color-foreground);
     font-family: var(--font-space);
   }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
 }
 
 @layer utilities {

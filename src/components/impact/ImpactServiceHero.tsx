@@ -18,7 +18,7 @@ const ImpactServiceHero = () => {
 				backgroundRepeat: "no-repeat",
 			}}
 		>
-			<div className="absolute inset-0 bg-deep-space/55" />
+			<div className="absolute inset-0 bg-deep-space/55 opacity-50" />
 			<div className="absolute inset-0 bg-gradient-to-b from-deep-space/60 via-deep-space/20 to-deep-space/80" />
 
 			<div className="container relative z-10 mx-auto px-6 py-20">
