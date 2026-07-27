@@ -7,7 +7,10 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { impactLaunchSteps } from "@/lib/impact-service";
+import {
+	impactLaunchDeliverables,
+	impactLaunchSteps,
+} from "@/lib/impact-service";
 
 type LaunchStep = (typeof impactLaunchSteps)[number];
 
@@ -39,8 +42,9 @@ function StepNode({
 	return (
 		<article
 			data-launch-enter
+			data-launch-step
 			data-enter-index={enterIndex}
-			className="relative min-w-0 flex-1 overflow-hidden rounded-2xl bg-[linear-gradient(to_right,transparent,oklch(68.63%_0.129_191.84_/_0.55),transparent),radial-gradient(ellipse_at_top_left,oklch(68.63%_0.129_191.84_/_0.16),transparent_55%),radial-gradient(ellipse_at_bottom_right,oklch(0.55_0.2_300_/_0.14),transparent_50%)] bg-[length:100%_1px,auto,auto] bg-[position:top,0_0,0_0] bg-no-repeat px-7 py-6 opacity-0 [backface-visibility:hidden]"
+			className="relative min-w-0 flex-1 overflow-hidden rounded-2xl bg-[linear-gradient(to_right,transparent,oklch(68.63%_0.129_191.84_/_0.55),transparent),radial-gradient(ellipse_at_top_left,oklch(68.63%_0.129_191.84_/_0.16),transparent_55%),radial-gradient(ellipse_at_bottom_right,oklch(0.55_0.2_300_/_0.14),transparent_50%)] bg-[length:100%_1px,auto,auto] bg-[position:top,0_0,0_0] bg-no-repeat px-6 py-5 opacity-0 [backface-visibility:hidden]"
 			style={{ transform: enterTransform }}
 		>
 			<span
@@ -50,8 +54,11 @@ function StepNode({
 				{number}
 			</span>
 
-			<div>
-				<h3 className="mb-2 font-space text-xl font-bold text-white">
+			<div className="relative z-[1]">
+				<p className="mb-1 font-space text-xs font-semibold tracking-[0.16em] text-neon-teal uppercase">
+					{step.week}
+				</p>
+				<h3 className="mb-1.5 font-space text-xl font-bold text-white">
 					{step.title}
 				</h3>
 				<p className="text-sm leading-relaxed text-stellar-white/85">
@@ -62,57 +69,100 @@ function StepNode({
 	);
 }
 
-function useConnectorPaint(
-	x1: number,
-	y1: number,
-	x2: number,
-	y2: number,
-	options?: { entryFadeOnly?: boolean },
-) {
+const ARROW_COLOR = "oklch(60.59% 0.213 292.72)";
+/** Soft light highlight - gentle contrast on the purple shaft */
+const ARROW_PULSE_COLOR = "oklab(0.61 0.08 -0.2)";
+
+function usePrefersReducedMotion() {
+	const [reduced, setReduced] = useState(() => prefersReducedMotion());
+
+	useEffect(() => {
+		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const sync = () => setReduced(mq.matches);
+		sync();
+		mq.addEventListener("change", sync);
+		return () => mq.removeEventListener("change", sync);
+	}, []);
+
+	return reduced;
+}
+
+/**
+ * Stable arrow fill + separate soft pulse overlay that walks base → tip.
+ */
+function useConnectorPaint(x1: number, y1: number, x2: number, y2: number) {
 	const uid = useId().replace(/:/g, "");
-	const gradId = `launch-grad-${uid}`;
-	const entryFadeOnly = options?.entryFadeOnly ?? false;
+	const baseGradId = `launch-grad-base-${uid}`;
+	const pulseGradId = `launch-grad-pulse-${uid}`;
+	const reducedMotion = usePrefersReducedMotion();
+
+	const dx = x2 - x1;
+	const dy = y2 - y1;
+	const len = Math.hypot(dx, dy) || 1;
+	const ux = dx / len;
+	const uy = dy / len;
+	// Start before the base; end past the tip so the band clears the head
+	const overshoot = len * 1.05;
+	const startX = -ux * overshoot;
+	const startY = -uy * overshoot;
+	const endX = ux * overshoot;
+	const endY = uy * overshoot;
 
 	const defs = (
 		<defs>
+			{/* Original soft purple shaft - does not animate */}
 			<linearGradient
-				id={gradId}
+				id={baseGradId}
 				gradientUnits="userSpaceOnUse"
 				x1={x1}
 				y1={y1}
 				x2={x2}
 				y2={y2}
 			>
-				<stop
-					offset="0%"
-					stopColor="oklch(60.59% 0.213 292.72)"
-					stopOpacity="0"
-				/>
-				{entryFadeOnly ? (
-					<stop
-						offset="72%"
-						stopColor="oklch(60.59% 0.213 292.72)"
-						stopOpacity="0.5"
+				<stop offset="0%" stopColor={ARROW_COLOR} stopOpacity="0" />
+				<stop offset="100%" stopColor={ARROW_COLOR} stopOpacity="0.5" />
+			</linearGradient>
+
+			{/* Mostly transparent; soft light band walks along the arrow */}
+			<linearGradient
+				id={pulseGradId}
+				gradientUnits="userSpaceOnUse"
+				x1={x1}
+				y1={y1}
+				x2={x2}
+				y2={y2}
+			>
+				<stop offset="0%" stopColor={ARROW_PULSE_COLOR} stopOpacity="0" />
+				<stop offset="50%" stopColor={ARROW_PULSE_COLOR} stopOpacity="0.2" />
+				<stop offset="100%" stopColor={ARROW_PULSE_COLOR} stopOpacity="0" />
+				{reducedMotion ? null : (
+					<animateTransform
+						attributeName="gradientTransform"
+						type="translate"
+						from={`${startX} ${startY}`}
+						to={`${endX} ${endY}`}
+						dur="2.5s"
+						repeatCount="indefinite"
+						calcMode="linear"
 					/>
-				) : null}
-				<stop
-					offset="100%"
-					stopColor="oklch(60.59% 0.213 292.72)"
-					stopOpacity="0.5"
-				/>
+				)}
 			</linearGradient>
 		</defs>
 	);
 
-	return { defs, fill: `url(#${gradId})` };
+	return {
+		defs,
+		baseFill: `url(#${baseGradId})`,
+		pulseFill: `url(#${pulseGradId})`,
+	};
 }
 
-/** Shared ribbon geometry — horizontal + bracket tips stay identical */
+/** Shared ribbon geometry for horizontal step connectors */
 const ARROW_SHAFT_HALF = 5;
 const ARROW_HEAD_HALF = 12;
 const ARROW_TIP_EXTEND = 26;
 
-/** Thin ribbon + tip — same language as operating-cycle arrows. */
+/** Original ribbon + tip style between steps in a row. */
 function HorizontalConnector({
 	direction,
 	enterIndex,
@@ -122,7 +172,7 @@ function HorizontalConnector({
 }) {
 	const toRight = direction === "right";
 	const cy = 20;
-	const { defs, fill } = useConnectorPaint(
+	const { defs, baseFill, pulseFill } = useConnectorPaint(
 		toRight ? 4 : 76,
 		cy,
 		toRight ? 76 : 4,
@@ -176,20 +226,33 @@ function HorizontalConnector({
 				aria-hidden="true"
 			>
 				{defs}
-				<path d={d} fill={fill} />
+				<path d={d} fill={baseFill} />
+				<path d={d} fill={pulseFill} />
 			</svg>
 		</div>
 	);
 }
 
-function VerticalConnector({ enterIndex }: { enterIndex: number }) {
-	const cx = 28;
-	const { defs, fill } = useConnectorPaint(cx, 4, cx, 72);
+/**
+ * Ribbon vertical arrow - same geometry as HorizontalConnector, rotated.
+ * viewBox 40×80 mirrors the horizontal 80×40; display size matches w/h swap.
+ */
+function VerticalConnector({
+	enterIndex,
+	className,
+	style,
+}: {
+	enterIndex: number;
+	className?: string;
+	style?: CSSProperties;
+}) {
+	const cx = 20;
+	const { defs, baseFill, pulseFill } = useConnectorPaint(cx, 4, cx, 76);
 	const x0 = cx - ARROW_SHAFT_HALF;
 	const x1 = cx + ARROW_SHAFT_HALF;
 	const hx0 = cx - ARROW_HEAD_HALF;
 	const hx1 = cx + ARROW_HEAD_HALF;
-	const shaftEnd = 46;
+	const shaftEnd = 50;
 	const tipY = shaftEnd + ARROW_TIP_EXTEND;
 
 	const d = [
@@ -207,128 +270,31 @@ function VerticalConnector({ enterIndex }: { enterIndex: number }) {
 		<div
 			data-launch-enter
 			data-enter-index={enterIndex}
-			className="flex justify-center py-1 opacity-0 [backface-visibility:hidden]"
-			style={{ transform: "translate3d(0, 0.75rem, 0)" }}
+			className={
+				className ??
+				"flex h-16 shrink-0 justify-center opacity-0 sm:h-20 md:h-24 [backface-visibility:hidden]"
+			}
+			style={style ?? { transform: "translate3d(0, 0.5rem, 0)" }}
 			aria-hidden="true"
 		>
 			<svg
-				viewBox="0 0 56 76"
-				className="h-14 w-12 overflow-visible"
+				viewBox="0 0 40 80"
+				className="h-full w-10 overflow-visible"
 				aria-hidden="true"
 			>
 				{defs}
-				<path d={d} fill={fill} />
+				<path d={d} fill={baseFill} />
+				<path d={d} fill={pulseFill} />
 			</svg>
 		</div>
 	);
 }
 
-/**
- * Absolute flipped-C / `]`.
- * Tip size/alignment matches horizontal arrows.
- * Gradient fades only on the top entry stub (horizontal), then holds solid.
- */
-function BracketTurn({
-	side,
-	enterIndex,
-	style,
-}: {
-	side: "right" | "left";
+type WrapArrowLayout = {
+	rowIndex: number;
 	enterIndex: number;
 	style: CSSProperties;
-}) {
-	const isRight = side === "right";
-	// Longer entry fade along the top flange (toward the spine).
-	// Tip is painted solid so the shared X band does not wash it out.
-	const { defs, fill } = useConnectorPaint(
-		isRight ? 4 : 116,
-		25,
-		isRight ? 82 : 38,
-		25,
-		{ entryFadeOnly: true },
-	);
-
-	const shaft = ARROW_SHAFT_HALF * 2;
-	const topOuter = 20;
-	const topInner = topOuter + shaft;
-	const botOuter = 170;
-	const botInner = botOuter - shaft;
-	const botCy = (botOuter + botInner) / 2;
-	const spineOuter = 90;
-	const spineInner = spineOuter - shaft;
-	const headBaseX = isRight ? 50 : 70;
-	const tipX = isRight
-		? headBaseX - ARROW_TIP_EXTEND
-		: headBaseX + ARROW_TIP_EXTEND;
-	const hy0 = botCy - ARROW_HEAD_HALF;
-	const hy1 = botCy + ARROW_HEAD_HALF;
-	const solidFill = "oklch(60.59% 0.213 292.72 / 0.5)";
-
-	const bodyD = isRight
-		? [
-				`M 8 ${topOuter}`,
-				"H 68",
-				`Q ${spineOuter} ${topOuter} ${spineOuter} 42`,
-				"V 150",
-				`Q ${spineOuter} ${botOuter} 68 ${botOuter}`,
-				`H ${headBaseX}`,
-				`V ${botInner}`,
-				"H 64",
-				`Q ${spineInner} ${botInner} ${spineInner} 150`,
-				"V 42",
-				`Q ${spineInner} ${topInner} 68 ${topInner}`,
-				"H 8",
-				"Z",
-			].join(" ")
-		: [
-				`M 112 ${topOuter}`,
-				"H 52",
-				`Q ${120 - spineOuter} ${topOuter} ${120 - spineOuter} 42`,
-				"V 150",
-				`Q ${120 - spineOuter} ${botOuter} 52 ${botOuter}`,
-				`H ${headBaseX}`,
-				`V ${botInner}`,
-				"H 56",
-				`Q ${120 - spineInner} ${botInner} ${120 - spineInner} 150`,
-				"V 42",
-				`Q ${120 - spineInner} ${topInner} 52 ${topInner}`,
-				"H 112",
-				"Z",
-			].join(" ");
-
-	const tipD = [
-		`M ${headBaseX} ${hy0}`,
-		`L ${tipX} ${botCy}`,
-		`L ${headBaseX} ${hy1}`,
-		"Z",
-	].join(" ");
-
-	return (
-		<div
-			data-launch-enter
-			data-enter-index={enterIndex}
-			className={`pointer-events-none absolute z-10 w-24 opacity-0 [backface-visibility:hidden] sm:w-28 ${
-				isRight ? "-right-30" : "-left-30"
-			}`}
-			style={{
-				...style,
-				transform: "translate3d(0, 0.85rem, 0)",
-			}}
-			aria-hidden="true"
-		>
-			<svg
-				viewBox="0 0 120 196"
-				preserveAspectRatio={isRight ? "xMaxYMid meet" : "xMinYMid meet"}
-				className="h-full w-full overflow-visible"
-				aria-hidden="true"
-			>
-				{defs}
-				<path d={bodyD} fill={fill} />
-				<path d={tipD} fill={solidFill} />
-			</svg>
-		</div>
-	);
-}
+};
 
 function chunkSteps(size: number) {
 	const rows: { step: LaunchStep; index: number }[][] = [];
@@ -342,13 +308,6 @@ function chunkSteps(size: number) {
 	}
 	return rows;
 }
-
-type BracketLayout = {
-	rowIndex: number;
-	side: "right" | "left";
-	enterIndex: number;
-	style: CSSProperties;
-};
 
 function prefersReducedMotion() {
 	if (typeof window === "undefined") return false;
@@ -426,8 +385,8 @@ function SnakeMap({
 	const rows = chunkSteps(columns);
 	const mapRef = useRef<HTMLDivElement | null>(null);
 	const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
-	const turnEnterRef = useRef<number[]>([]);
-	const [brackets, setBrackets] = useState<BracketLayout[]>([]);
+	const wrapEnterRef = useRef<number[]>([]);
+	const [wrapArrows, setWrapArrows] = useState<WrapArrowLayout[]>([]);
 
 	useLayoutEffect(() => {
 		const map = mapRef.current;
@@ -435,30 +394,44 @@ function SnakeMap({
 
 		const measure = () => {
 			const mapRect = map.getBoundingClientRect();
-			const next: BracketLayout[] = [];
+			const next: WrapArrowLayout[] = [];
 
 			for (let r = 0; r < rows.length - 1; r++) {
 				const topRow = rowRefs.current[r];
 				const bottomRow = rowRefs.current[r + 1];
 				if (!topRow || !bottomRow) continue;
 
+				// Last step in DOM = wrap point (LTR → rightmost, RTL reverse → leftmost)
+				const steps = topRow.querySelectorAll<HTMLElement>("[data-launch-step]");
+				const wrapStep = steps[steps.length - 1];
+				if (!wrapStep) continue;
+
+				const stepRect = wrapStep.getBoundingClientRect();
 				const topRect = topRow.getBoundingClientRect();
 				const bottomRect = bottomRow.getBoundingClientRect();
-				const startY = topRect.top - mapRect.top + topRect.height * 0.32;
-				const endY = bottomRect.top - mapRect.top + bottomRect.height * 0.52;
+				const centerX = stepRect.left - mapRect.left + stepRect.width / 2;
+				const gapTop = topRect.bottom - mapRect.top;
+				const gapBottom = bottomRect.top - mapRect.top;
+				const gapHeight = Math.max(gapBottom - gapTop, 64);
+				// Match horizontal connector footprint (w-10 × h-16/20/24); avoid
+				// translateX so enter-animation transform doesn't un-center it.
+				const arrowW = 40;
+				const arrowH = Math.min(80, gapHeight);
 
 				next.push({
 					rowIndex: r,
-					side: r % 2 === 0 ? "right" : "left",
-					enterIndex: turnEnterRef.current[r] ?? 0,
+					enterIndex: wrapEnterRef.current[r] ?? 0,
 					style: {
-						top: startY,
-						height: Math.max(endY - startY, 120),
+						position: "absolute",
+						left: centerX,
+						top: gapTop + (gapHeight - arrowH) / 2,
+						width: arrowW,
+						height: arrowH,
 					},
 				});
 			}
 
-			setBrackets(next);
+			setWrapArrows(next);
 		};
 
 		measure();
@@ -472,9 +445,9 @@ function SnakeMap({
 			ro.disconnect();
 			window.removeEventListener("resize", measure);
 		};
-	}, [rows.length]);
+	}, [rows.length, columns]);
 
-	const turnEnterIndices: number[] = [];
+	const wrapEnterIndices: number[] = [];
 	let enterIndex = 0;
 	const rowNodes: ReactNode[] = [];
 
@@ -508,7 +481,7 @@ function SnakeMap({
 		}
 
 		if (rowIndex < rows.length - 1) {
-			turnEnterIndices[rowIndex] = enterIndex++;
+			wrapEnterIndices[rowIndex] = enterIndex++;
 		}
 
 		rowNodes.push(
@@ -517,7 +490,7 @@ function SnakeMap({
 				ref={(el) => {
 					rowRefs.current[rowIndex] = el;
 				}}
-				className={rowIndex > 0 ? "mt-10 md:mt-12" : undefined}
+				className={rowIndex > 0 ? "mt-16 md:mt-24" : undefined}
 			>
 				<div
 					className={`flex items-stretch gap-0 ${
@@ -530,7 +503,7 @@ function SnakeMap({
 		);
 	}
 
-	turnEnterRef.current = turnEnterIndices;
+	wrapEnterRef.current = wrapEnterIndices;
 
 	return (
 		<div
@@ -539,12 +512,15 @@ function SnakeMap({
 			data-launch-snake
 		>
 			{rowNodes}
-			{brackets.map((bracket) => (
-				<BracketTurn
-					key={`bracket-${bracket.rowIndex}`}
-					side={bracket.side}
-					enterIndex={bracket.enterIndex}
-					style={bracket.style}
+			{wrapArrows.map((arrow) => (
+				<VerticalConnector
+					key={`wrap-${arrow.rowIndex}`}
+					enterIndex={arrow.enterIndex}
+					className="pointer-events-none z-10 flex items-center justify-center opacity-0 [backface-visibility:hidden]"
+					style={{
+						...arrow.style,
+						transform: "translate3d(0, 0.5rem, 0)",
+					}}
 				/>
 			))}
 		</div>
@@ -573,7 +549,9 @@ function MobileStack() {
 							slide="down"
 						/>
 						{arrowEnter >= 0 ? (
-							<VerticalConnector enterIndex={arrowEnter} />
+							<div className="flex justify-center py-1">
+								<VerticalConnector enterIndex={arrowEnter} />
+							</div>
 						) : null}
 					</div>
 				);
@@ -652,7 +630,6 @@ const ImpactLaunchSection = () => {
 			([entry]) => {
 				if (!entry?.isIntersecting) return;
 				run();
-				// Absolute brackets mount after measure — pick them up in-sequence
 				window.setTimeout(run, 80);
 				window.setTimeout(run, 220);
 				observer.disconnect();
@@ -672,14 +649,13 @@ const ImpactLaunchSection = () => {
 			className="relative bg-gradient-galaxy py-24 lg:py-32"
 		>
 			<div className="container relative z-10 mx-auto px-6">
-				<div className="mx-auto mb-14 lg:mb-20 max-w-3xl text-center">
+				<div className="mx-auto mb-14 max-w-3xl text-center lg:mb-20">
 					<h2 className="mb-4 font-space text-3xl font-bold md:text-4xl">
-						<span className="text-white">How things </span>
-						<span className="text-primary glow-stellar">Done</span>
+						<span className="text-white">Pilot </span>
+						<span className="text-primary glow-stellar">Launch</span>
 					</h2>
 					<p className="text-lg text-stellar-white/85">
-						We embed with your team and wire IMPACT where you already work - 4
-						to 6 weeks.
+					In 4 to 6 weeks, we embed with your team and wire IMPACT where you already work.
 					</p>
 				</div>
 
@@ -690,7 +666,30 @@ const ImpactLaunchSection = () => {
 					className="mx-auto hidden max-w-3xl md:block lg:hidden"
 				/>
 
-				<SnakeMap columns={3} className="mx-auto hidden max-w-5xl lg:block" />
+				<SnakeMap columns={3} className="mx-auto hidden lg:max-w-6xl lg:block" />
+
+				<div className="mx-auto mt-16 max-w-3xl lg:mt-20">
+					<h3 className="mb-3 text-center font-space text-xl font-bold text-white md:text-2xl">
+						What you own at hand-off
+					</h3>
+					<p className="mb-6 text-center text-sm text-stellar-white/75 md:text-base">
+						Concrete artifacts on your systems - not a slide deck.
+					</p>
+					<ul className="space-y-3 rounded-2xl border border-primary/20 bg-deep-space/40 p-6 backdrop-blur-sm md:p-8">
+						{impactLaunchDeliverables.map((item) => (
+							<li
+								key={item}
+								className="flex gap-3 text-sm leading-relaxed text-stellar-white/85 md:text-base"
+							>
+								<span
+									className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+									aria-hidden
+								/>
+								<span>{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 		</section>
 	);

@@ -1,7 +1,8 @@
 import impactBg from "@/assets/impact-hero-bg.jpg";
+import { IMPACT_CTA_LABEL } from "@/lib/impact-service";
 
 const ImpactServiceHero = () => {
-	const scrollToTimeline = () => {
+	const scrollToForm = () => {
 		document
 			.getElementById("impact-interest")
 			?.scrollIntoView({ behavior: "smooth" });
@@ -22,23 +23,24 @@ const ImpactServiceHero = () => {
 
 			<div className="container relative z-10 mx-auto px-6 py-20">
 				<p className="mb-4 text-sm font-medium tracking-[0.2em] text-neon-teal uppercase">
-					Agentic SDLC OS
+					New methodology
 				</p>
 				<h1 className="mb-6 max-w-4xl font-space text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
 					<span className="text-primary glow-stellar">IMPACT </span>
 					<span className="text-white">
-						- Agentic SDLC, made predictable.
+						- Agentic SDLC, installed for real.
 					</span>
 				</h1>
 				<p className="mb-10 max-w-2xl text-lg text-stellar-white/85 md:text-xl">
-					A 6 stage AI lead development process that deliver high quality , cost effective software.
+					A new installed OS for agentic engineering - we wire Intent, Memory,
+					Policy, and Checks into your tickets, repos, and CI.
 				</p>
 				<button
 					type="button"
-					onClick={scrollToTimeline}
-					className="cursor-pointer inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-stellar hover-glow hover:-translate-y-0.5"
+					onClick={scrollToForm}
+					className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-stellar hover-glow hover:-translate-y-0.5"
 				>
-					Improve IMPACT
+					{IMPACT_CTA_LABEL}
 				</button>
 			</div>
 		</section>

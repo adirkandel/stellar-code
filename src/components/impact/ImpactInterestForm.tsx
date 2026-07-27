@@ -1,7 +1,7 @@
-import { Briefcase, Building2, Mail, Send, User } from "lucide-react";
+import { Briefcase, Building2, Linkedin, Mail, Send, User } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
-import { IMPACT_ROLES } from "@/lib/impact-service";
+import { IMPACT_FORM_SUBMIT_LABEL, IMPACT_ROLES } from "@/lib/impact-service";
 
 const ImpactInterestForm = () => {
 	const [formData, setFormData] = useState({
@@ -48,7 +48,7 @@ const ImpactInterestForm = () => {
 			toast({
 				title: "Interest received",
 				description:
-					"Thanks - we’ll follow up about an IMPACT Launch conversation.",
+					"Thanks - we'll follow up about an IMPACT pilot conversation.",
 			});
 			setFormData({ name: "", email: "", company: "", role: "" });
 		} catch (error) {
@@ -72,11 +72,30 @@ const ImpactInterestForm = () => {
 			<div className="container relative z-10 mx-auto px-6">
 				<div className="mx-auto mb-12 max-w-2xl text-center">
 					<h2 className="mb-4 font-space text-3xl font-bold md:text-4xl">
-						<span className="text-white">Inquire about </span>
-						<span className="text-primary glow-stellar">IMPACT</span>
+						<span className="text-white">Schedule a </span>
+						<span className="text-primary glow-stellar">pilot</span>
 					</h2>
-					<p className="text-lg text-stellar-white/85">
-						Send us you details and we'll get back to you about a Launch conversation
+					<p className="mb-3 text-lg text-stellar-white/85">
+						Interested in a pilot? Leave your details and we'll get back to you.
+					</p>
+					<p className="text-sm text-stellar-white/70">
+						Or reach out directly:{" "}
+						<a
+							href="mailto:akandel@stellar-code.dev"
+							className="text-primary underline-offset-2 hover:underline"
+						>
+							akandel@stellar-code.dev
+						</a>
+						{" · "}
+						<a
+							href="https://www.linkedin.com/in/adir-kandel/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center gap-1 text-primary underline-offset-2 hover:underline"
+						>
+							<Linkedin className="h-3.5 w-3.5" aria-hidden />
+							LinkedIn
+						</a>
 					</p>
 				</div>
 
@@ -180,7 +199,7 @@ const ImpactInterestForm = () => {
 							</>
 						) : (
 							<>
-								Show me IMPACT
+								{IMPACT_FORM_SUBMIT_LABEL}
 								<Send className="h-5 w-5" />
 							</>
 						)}

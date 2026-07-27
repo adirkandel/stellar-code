@@ -1,39 +1,130 @@
+import {
+	Bug,
+	CheckCircle2,
+	Clock3,
+	ClipboardList,
+	RotateCcw,
+	UserRoundCheck,
+	type LucideIcon,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { impactSuccessLook } from "@/lib/impact-service";
+import {
+	impactSuccessLook,
+	type ImpactSuccessStat,
+	type ImpactSuccessStatIcon,
+} from "@/lib/impact-service";
+import { cn } from "@/lib/utils";
 
 const prefersReducedMotion = () => {
 	if (typeof window === "undefined") return true;
 	return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 
-/** Mock series — upward growth, no real metrics. ViewBox coords. */
-const VELOCITY_POINTS = [
-	[40, 168],
-	[100, 152],
-	[160, 138],
-	[220, 118],
-	[280, 96],
-	[340, 72],
-	[400, 48],
-	[460, 28],
-];
+const STAT_ICONS: Record<ImpactSuccessStatIcon, LucideIcon> = {
+	throughput: ClipboardList,
+	"lead-time": Clock3,
+	"touch-points": UserRoundCheck,
+	"bug-trend": Bug,
+	"first-pass": CheckCircle2,
+	rework: RotateCcw,
+};
 
-const QUALITY_POINTS = [
-	[40, 178],
-	[100, 170],
-	[160, 158],
-	[220, 142],
-	[280, 124],
-	[340, 102],
-	[400, 78],
-	[460, 52],
-];
+function useCountUp(target: number, active: boolean, durationMs = 1400) {
+	const [value, setValue] = useState(0);
 
-const toPolyline = (points: number[][]) =>
-	points.map(([x, y]) => `${x},${y}`).join(" ");
+	useEffect(() => {
+		if (!active) {
+			setValue(0);
+			return;
+		}
+		if (prefersReducedMotion()) {
+			setValue(target);
+			return;
+		}
+
+		let frame = 0;
+		const start = performance.now();
+
+		const tick = (now: number) => {
+			const t = Math.min(1, (now - start) / durationMs);
+			// Ease-out cubic
+			const eased = 1 - (1 - t) ** 3;
+			setValue(Math.round(target * eased));
+			if (t < 1) frame = requestAnimationFrame(tick);
+		};
+
+		frame = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(frame);
+	}, [active, target, durationMs]);
+
+	return value;
+}
+
+function StatCard({
+	stat,
+	accent,
+	active,
+	delayMs,
+}: {
+	stat: ImpactSuccessStat;
+	accent: string;
+	active: boolean;
+	delayMs: number;
+}) {
+	const [started, setStarted] = useState(false);
+	const Icon = STAT_ICONS[stat.icon];
+	const display = useCountUp(stat.value, started);
+
+	useEffect(() => {
+		if (!active) {
+			setStarted(false);
+			return;
+		}
+		const id = window.setTimeout(() => setStarted(true), delayMs);
+		return () => window.clearTimeout(id);
+	}, [active, delayMs]);
+
+	return (
+		<article
+			className={cn(
+				"rounded-xl border bg-deep-space/40 p-5 backdrop-blur-sm transition-all duration-700 ease-out",
+				active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+			)}
+			style={{
+				borderColor: `color-mix(in oklab, ${accent} 35%, transparent)`,
+				transitionDelay: active ? `${delayMs}ms` : "0ms",
+			}}
+		>
+			<div className="mb-4 flex items-start gap-3">
+				<span
+					className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+					style={{
+						backgroundColor: `color-mix(in oklab, ${accent} 18%, transparent)`,
+						color: accent,
+					}}
+				>
+					<Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+				</span>
+				<p
+					className="font-space text-3xl font-bold tracking-tight md:text-4xl"
+					style={{ color: accent }}
+				>
+					<span className="tabular-nums">
+						{stat.prefix}
+						{display}
+						{stat.suffix}
+					</span>
+				</p>
+			</div>
+			<p className="text-sm leading-relaxed text-stellar-white/80">
+				{stat.description}
+			</p>
+		</article>
+	);
+}
 
 const ImpactSuccessSection = () => {
-	const { subhead, series } = impactSuccessLook;
+	const { eyebrow, subhead, pillars } = impactSuccessLook;
 	const sectionRef = useRef<HTMLElement>(null);
 	const [visible, setVisible] = useState(false);
 
@@ -53,7 +144,7 @@ const ImpactSuccessSection = () => {
 					observer.disconnect();
 				}
 			},
-			{ threshold: 0.25 },
+			{ threshold: 0.2 },
 		);
 
 		observer.observe(node);
@@ -64,139 +155,77 @@ const ImpactSuccessSection = () => {
 		<section ref={sectionRef} className="relative py-24">
 			<div className="container relative z-10 mx-auto px-6">
 				<div className="mx-auto mb-12 max-w-3xl text-center">
+					<p className="mb-3 text-sm font-medium tracking-[0.18em] text-neon-teal uppercase">
+						{eyebrow}
+					</p>
 					<h2 className="mb-4 font-space text-3xl font-bold md:text-4xl">
 						<span className="text-white">What </span>
 						<span className="text-primary glow-stellar">Success </span>
-						<span className="text-white">looks like</span>
+						<span className="text-white">targets look like</span>
 					</h2>
 					<p className="text-lg text-stellar-white/85">{subhead}</p>
 				</div>
 
-				<div
-					className={`mx-auto max-w-3xl transition-all duration-700 ease-out ${
-						visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-					}`}
-				>
-					<div className="rounded-xl border border-primary/25 bg-gradient-card p-5 backdrop-blur-sm md:p-8">
-						<ul className="mb-5 flex flex-wrap items-center justify-center gap-6 md:justify-start">
-							{series.map((item) => (
-								<li key={item.id} className="flex items-center gap-2.5">
-									<span
-										className="h-0.5 w-6 rounded-full"
-										style={{ backgroundColor: item.color }}
-										aria-hidden
-									/>
-									<span className="font-space text-sm font-medium text-stellar-white/90">
-										{item.label}
-									</span>
-								</li>
-							))}
-						</ul>
-
-						<svg
-							viewBox="0 0 500 200"
-							className="h-auto w-full"
-							role="img"
-							aria-label="Illustrative chart: velocity and quality both rising over time"
+				<div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 md:gap-10">
+					{pillars.map((pillar) => (
+						<div
+							key={pillar.id}
+							className="rounded-2xl border p-5 md:p-6"
+							style={{
+								borderColor: `color-mix(in oklab, ${pillar.color} 40%, transparent)`,
+								background: `linear-gradient(165deg, color-mix(in oklab, ${pillar.color} 12%, transparent), oklch(13.14% 0.023 264.18 / 0.55))`,
+							}}
 						>
-							<title>Velocity and quality trending up together</title>
-							{/* Soft grid — no tick labels */}
-							{[40, 80, 120, 160].map((y) => (
-								<line
-									key={`h-${y}`}
-									x1="32"
-									y1={y}
-									x2="480"
-									y2={y}
-									stroke="currentColor"
-									className="text-stellar-white/8"
-									strokeWidth="1"
-								/>
-							))}
-							{[100, 160, 220, 280, 340, 400, 460].map((x) => (
-								<line
-									key={`v-${x}`}
-									x1={x}
-									y1="20"
-									x2={x}
-									y2="188"
-									stroke="currentColor"
-									className="text-stellar-white/5"
-									strokeWidth="1"
-								/>
-							))}
-							{/* Axes without labels */}
-							<line
-								x1="32"
-								y1="188"
-								x2="480"
-								y2="188"
-								stroke="currentColor"
-								className="text-stellar-white/20"
-								strokeWidth="1.5"
-							/>
-							<line
-								x1="32"
-								y1="20"
-								x2="32"
-								y2="188"
-								stroke="currentColor"
-								className="text-stellar-white/20"
-								strokeWidth="1.5"
-							/>
+							<header className="mb-6 border-b pb-4"
+								style={{
+									borderColor: `color-mix(in oklab, ${pillar.color} 28%, transparent)`,
+								}}
+							>
+								<p
+									className="mb-1 font-space text-xs font-semibold tracking-[0.18em] uppercase"
+									style={{ color: pillar.color }}
+								>
+									Pilot target pillar
+								</p>
+								<h3
+									className="font-space text-2xl font-bold md:text-3xl"
+									style={{ color: pillar.color }}
+								>
+									{pillar.label}
+								</h3>
+								<p className="mt-1 text-sm text-stellar-white/75">
+									{pillar.blurb}
+								</p>
+							</header>
 
-							{/* Quality (slightly behind / lower curve) */}
-							<polyline
-								fill="none"
-								stroke={series[1].color}
-								strokeWidth="2.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								points={toPolyline(QUALITY_POINTS)}
-								className={
-									visible
-										? "motion-safe:[stroke-dasharray:600] motion-safe:[stroke-dashoffset:0] motion-safe:transition-[stroke-dashoffset] motion-safe:duration-1000 motion-safe:ease-out"
-										: "motion-safe:[stroke-dasharray:600] motion-safe:[stroke-dashoffset:600]"
-								}
-							/>
-							{/* Velocity */}
-							<polyline
-								fill="none"
-								stroke={series[0].color}
-								strokeWidth="2.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								points={toPolyline(VELOCITY_POINTS)}
-								className={
-									visible
-										? "motion-safe:[stroke-dasharray:600] motion-safe:[stroke-dashoffset:0] motion-safe:delay-150 motion-safe:transition-[stroke-dashoffset] motion-safe:duration-1000 motion-safe:ease-out"
-										: "motion-safe:[stroke-dasharray:600] motion-safe:[stroke-dashoffset:600]"
-								}
-							/>
-
-							{/* End dots */}
-							<circle
-								cx={VELOCITY_POINTS.at(-1)![0]}
-								cy={VELOCITY_POINTS.at(-1)![1]}
-								r="4"
-								fill={series[0].color}
-								className={`transition-opacity duration-500 delay-700 ${
-									visible ? "opacity-100" : "opacity-0"
-								}`}
-							/>
-							<circle
-								cx={QUALITY_POINTS.at(-1)![0]}
-								cy={QUALITY_POINTS.at(-1)![1]}
-								r="4"
-								fill={series[1].color}
-								className={`transition-opacity duration-500 delay-700 ${
-									visible ? "opacity-100" : "opacity-0"
-								}`}
-							/>
-						</svg>
-					</div>
+							<ul className="flex flex-col gap-4">
+								{pillar.stats.map((stat, index) => (
+									<li key={stat.id}>
+										<StatCard
+											stat={stat}
+											accent={pillar.color}
+											active={visible}
+											delayMs={index * 120}
+										/>
+									</li>
+								))}
+							</ul>
+						</div>
+					))}
 				</div>
 			</div>
+
+			{/*
+			=== Previous Success section (chart + metric cards) - kept for reference ===
+
+			import { impactSuccessLook } from "@/lib/impact-service";
+			// Illustrative Velocity / Quality chart + 6 vision metric cards with IMPACT levers.
+			// See git history for full implementation (VELOCITY_POINTS, QUALITY_POINTS, metrics grid).
+
+			const { subhead, series, metrics } = impactSuccessLook;
+			// Chart: dual polyline (velocity + quality) with legend
+			// Grid: metrics.map → metric / vision / IMPACT lever
+			*/}
 		</section>
 	);
 };

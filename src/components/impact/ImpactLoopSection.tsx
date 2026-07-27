@@ -1,5 +1,9 @@
-import { useState } from "react";
-import { impactLetters } from "@/lib/impact-service";
+import { useEffect, useState } from "react";
+import {
+	impactLetters,
+	type ImpactLetter,
+} from "@/lib/impact-service";
+import { cn } from "@/lib/utils";
 
 const CX = 200;
 const CY = 200;
@@ -10,6 +14,7 @@ const ARROW_DEG = 12;
 const SEGMENT = 360 / impactLetters.length;
 /** Rotate ring so Intent is centered at the top */
 const RING_OFFSET = -SEGMENT / 2;
+const DEFAULT_STAGE_ID = impactLetters[0].id;
 
 function polar(cx: number, cy: number, r: number, angleDeg: number) {
 	const a = ((angleDeg - 90) * Math.PI) / 180;
@@ -53,18 +58,27 @@ function chevronPath(index: number) {
 
 function labelLayout(index: number) {
 	const start = segmentStart(index);
-	// Visual center of the chevron (body + tip), not the raw segment mid —
+	// Visual center of the chevron (body + tip), not the raw segment mid -
 	// notch eats the start, tip extends past the end, so shift by half the arrow.
 	const midAngle = start + SEGMENT / 2 + ARROW_DEG / 2;
-	return polar(CX, CY, MID_R, midAngle);
+	return { ...polar(CX, CY, MID_R, midAngle), midAngle };
 }
 
-function ImpactLoopRing() {
-	const [hoveredId, setHoveredId] = useState<string | null>(null);
-	const hovered = impactLetters.find((letter) => letter.id === hoveredId);
-
+function ImpactLoopRing({
+	activeId,
+	onHover,
+	onLeave,
+	onSelect,
+	isNarrow,
+}: {
+	activeId: string;
+	onHover: (id: string) => void;
+	onLeave: () => void;
+	onSelect: (id: string) => void;
+	isNarrow: boolean;
+}) {
 	return (
-		<div className="relative mx-auto w-full max-w-[640px]">
+		<div className="relative mx-auto w-full max-w-[640px] md:max-w-[760px] md:px-10 md:py-8">
 			<div className="relative aspect-square w-full">
 				<svg
 					viewBox="0 0 400 400"
@@ -76,22 +90,27 @@ function ImpactLoopRing() {
 
 					{impactLetters.map((letter, index) => {
 						const label = labelLayout(index);
-						const isDimmed =
-							hoveredId !== null && hoveredId !== letter.id;
+						const isDimmed = activeId !== letter.id;
 
 						return (
 							<g
 								key={letter.id}
 								className="cursor-pointer outline-none"
-								onMouseEnter={() => setHoveredId(letter.id)}
-								onMouseLeave={() => setHoveredId(null)}
-								onFocus={() => setHoveredId(letter.id)}
-								onBlur={() => setHoveredId(null)}
+								onMouseEnter={
+									isNarrow ? undefined : () => onHover(letter.id)
+								}
+								onMouseLeave={isNarrow ? undefined : onLeave}
+								onFocus={
+									isNarrow ? undefined : () => onHover(letter.id)
+								}
+								onBlur={isNarrow ? undefined : onLeave}
+								onClick={() => onSelect(letter.id)}
 								tabIndex={0}
 								role="button"
-								aria-label={`${letter.letter} ${letter.name}: ${letter.shortBlurb}`}
+								aria-label={`${letter.letter} ${letter.name}: ${letter.definition}`}
+								aria-pressed={activeId === letter.id}
 							>
-								<title>{letter.shortBlurb}</title>
+								<title>{letter.definition}</title>
 								<path
 									d={chevronPath(index)}
 									fill={letter.color}
@@ -139,23 +158,126 @@ function ImpactLoopRing() {
 					</p>
 				</div>
 			</div>
-
-			<div
-				role="tooltip"
-				aria-live="polite"
-				className="mt-5 flex min-h-[3rem] items-center justify-center px-4 text-center"
-			>
-				{hovered ? (
-					<p className="max-w-md rounded-md border border-primary/40 bg-deep-space/95 px-4 py-2 text-sm text-stellar-white shadow-cosmic animate-in fade-in-0">
-						{hovered.shortBlurb}
-					</p>
-				) : null}
-			</div>
 		</div>
 	);
 }
 
+function StagePills({
+	activeId,
+	onSelect,
+}: {
+	activeId: string;
+	onSelect: (id: string) => void;
+}) {
+	return (
+		<div
+			className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-2"
+			role="tablist"
+			aria-label="IMPACT stages"
+		>
+			{impactLetters.map((letter) => {
+				const selected = activeId === letter.id;
+				return (
+					<button
+						key={letter.id}
+						type="button"
+						role="tab"
+						aria-selected={selected}
+						onClick={() => onSelect(letter.id)}
+						className={cn(
+							"inline-flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 font-space text-sm font-semibold transition-stellar",
+							selected
+								? "border-primary/50 bg-primary/15 text-white shadow-cosmic"
+								: "border-primary/20 bg-deep-space/40 text-stellar-white/75 hover:border-primary/35 hover:text-white",
+						)}
+					>
+						<span
+							className="inline-flex h-5 w-5 items-center justify-center rounded-sm text-xs font-bold text-white"
+							style={{ backgroundColor: letter.color }}
+							aria-hidden
+						>
+							{letter.letter}
+						</span>
+						{letter.name}
+					</button>
+				);
+			})}
+		</div>
+	);
+}
+
+function StageDetailPanel({
+	stage,
+	active,
+}: {
+	stage: ImpactLetter;
+	active: boolean;
+}) {
+	return (
+		<article
+			className={cn(
+				"mx-auto max-w-3xl rounded-xl border border-primary/25 bg-gradient-card p-6 backdrop-blur-sm md:p-8",
+				active ? "mt-8" : "sr-only",
+			)}
+			aria-hidden={!active}
+			{...(active ? { "aria-live": "polite" as const } : {})}
+		>
+			<div className="mb-4 flex items-start gap-3">
+				<span
+					className="inline-flex shrink-0 h-10 w-10 items-center justify-center rounded-lg font-space text-lg font-bold text-white"
+					style={{ backgroundColor: stage.color }}
+					aria-hidden
+				>
+					{stage.letter}
+				</span>
+				<div>
+					<h3 className="font-space text-2xl font-bold text-white">
+						{stage.name}
+					</h3>
+					<p className="text-sm text-stellar-white/80 md:text-base">
+						{stage.definition}
+					</p>
+				</div>
+			</div>
+
+			<p className="mb-5 leading-relaxed text-stellar-white/85">
+				{stage.detail}
+			</p>
+
+			<ul className="space-y-2.5">
+				{stage.bullets.map((bullet) => (
+					<li
+						key={bullet}
+						className="flex gap-3 text-sm leading-relaxed text-stellar-white/85 md:text-base"
+					>
+						<span
+							className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+							style={{ backgroundColor: stage.color }}
+							aria-hidden
+						/>
+						<span>{bullet}</span>
+					</li>
+				))}
+			</ul>
+		</article>
+	);
+}
+
 const ImpactLoopSection = () => {
+	const [lockedId, setLockedId] = useState(DEFAULT_STAGE_ID);
+	const [hoveredId, setHoveredId] = useState<string | null>(null);
+	const [isNarrow, setIsNarrow] = useState(false);
+
+	useEffect(() => {
+		const mq = window.matchMedia("(max-width: 767px)");
+		const sync = () => setIsNarrow(mq.matches);
+		sync();
+		mq.addEventListener("change", sync);
+		return () => mq.removeEventListener("change", sync);
+	}, []);
+
+	const activeId = hoveredId ?? lockedId;
+
 	return (
 		<section id="impact-loop" className="relative py-24 md:pb-28">
 			<div
@@ -174,7 +296,24 @@ const ImpactLoopSection = () => {
 					</p>
 				</div>
 
-				<ImpactLoopRing />
+				<ImpactLoopRing
+					activeId={activeId}
+					isNarrow={isNarrow}
+					onHover={setHoveredId}
+					onLeave={() => setHoveredId(null)}
+					onSelect={setLockedId}
+				/>
+
+				<StagePills activeId={activeId} onSelect={setLockedId} />
+
+				{/* All stages stay in the DOM (sr-only when inactive) for GEO crawlability */}
+				{impactLetters.map((stage) => (
+					<StageDetailPanel
+						key={stage.id}
+						stage={stage}
+						active={stage.id === activeId}
+					/>
+				))}
 			</div>
 		</section>
 	);
