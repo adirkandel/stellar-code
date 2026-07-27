@@ -1,122 +1,42 @@
-import { Link } from "@tanstack/react-router";
-import { Menu } from "lucide-react";
-import { useEffect, useState } from "react";
-import stellarcodeLogo from "@/assets/stellarcode-logo.svg";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SiteNavBar, type SiteNavItem } from "@/components/SiteNavBar";
+import { useActiveSectionId } from "@/hooks/use-active-section-id";
+
+const HOME_NAV_ITEMS: SiteNavItem[] = [
+	{ id: "solutions", label: "Solutions", href: "/#solutions" },
+	{ id: "services", label: "Expertise", href: "/#services" },
+	{ id: "technologies", label: "Technologies", href: "/#technologies" },
+	{ id: "testimonials", label: "Testimonials", href: "/#testimonials" },
+	{ id: "why-us", label: "Why Us", href: "/#why-us" },
+	{ id: "contact", label: "Contact", href: "/#contact" },
+];
+
+function scrollToHomeSection(sectionId: string) {
+	const element = document.getElementById(sectionId);
+	if (element) {
+		window.location.hash = sectionId;
+		element.scrollIntoView({ behavior: "smooth" });
+		return;
+	}
+	window.location.href = `/#${sectionId}`;
+}
 
 const Navigation = () => {
-	const [activeSection, setActiveSection] = useState("hero");
-	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		const handleHashChange = () => {
-			const hash = window.location.hash.replace("#", "");
-			if (hash && document.getElementById(hash)) {
-				setActiveSection(hash);
-			}
-		};
-
-		handleHashChange();
-		window.addEventListener("hashchange", handleHashChange);
-
-		return () => {
-			window.removeEventListener("hashchange", handleHashChange);
-		};
-	}, []);
-
-	const scrollToSection = (sectionId: string) => {
-		window.location.hash = sectionId;
-		const element = document.getElementById(sectionId);
-		if (element) {
-			element.scrollIntoView({ behavior: "smooth" });
-		}
-		setIsOpen(false);
-	};
-
-	const navItems = [
-		{ id: "solutions", label: "Solutions" },
-		{ id: "services", label: "Expertise" },
-		{ id: "technologies", label: "Technologies" },
-		{ id: "testimonials", label: "Testimonials" },
-		{ id: "why-us", label: "Why Us" },
-		{ id: "contact", label: "Contact" },
-	];
+	const [activeId, setActiveId] = useActiveSectionId("hero");
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 bg-deep-space/30 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-primary/5">
-			<div className="container mx-auto px-6 py-4">
-				<div className="flex items-center justify-between">
-					<Link
-						to="/"
-						className="flex items-center gap-3 cursor-pointer"
-					>
-						<img
-							src={stellarcodeLogo}
-							alt="Stellar Code"
-							className="h-8 w-auto logo-hover"
-						/>
-					</Link>
-
-					<div className="hidden lg:flex items-center space-x-8">
-						{navItems.map((item) => (
-							<a
-								key={item.id}
-								href={`/#${item.id}`}
-								className={`
-                  font-medium transition-stellar hover:text-primary
-                  ${activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-stellar-white"}
-                `}
-							>
-								{item.label}
-							</a>
-						))}
-					</div>
-
-					<div className="flex items-center gap-4">
-						<button
-							onClick={() => scrollToSection("contact")}
-							className="hidden lg:block bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium transition-stellar hover-glow hover:-translate-y-0.5"
-						>
-							Get Started
-						</button>
-
-						<Sheet open={isOpen} onOpenChange={setIsOpen}>
-							<SheetTrigger asChild>
-								<button className="lg:hidden text-stellar-white p-2">
-									<Menu className="h-6 w-6" />
-								</button>
-							</SheetTrigger>
-							<SheetContent
-								side="right"
-								className="bg-deep-space/95 backdrop-blur-xl border-l border-white/10 w-[300px]"
-							>
-								<div className="flex flex-col gap-8 mt-8">
-									{navItems.map((item) => (
-										<a
-											key={item.id}
-											href={`#${item.id}`}
-											onClick={() => setIsOpen(false)}
-											className={`
-                        text-lg font-medium transition-stellar
-                        ${activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-stellar-white"}
-                      `}
-										>
-											{item.label}
-										</a>
-									))}
-									<button
-										onClick={() => scrollToSection("contact")}
-										className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-stellar hover-glow w-full"
-									>
-										Get Started
-									</button>
-								</div>
-							</SheetContent>
-						</Sheet>
-					</div>
-				</div>
-			</div>
-		</nav>
+		<SiteNavBar
+			items={HOME_NAV_ITEMS}
+			ctaLabel="Get Started"
+			activeId={activeId}
+			onCtaClick={() => {
+				scrollToHomeSection("contact");
+				setActiveId("contact");
+			}}
+			onItemNavigate={(item) => {
+				scrollToHomeSection(item.id);
+				setActiveId(item.id);
+			}}
+		/>
 	);
 };
 

@@ -10,7 +10,7 @@ import ImpactPainsSection from "@/components/impact/ImpactPainsSection";
 import ImpactPilotCta from "@/components/impact/ImpactPilotCta";
 import ImpactServiceHero from "@/components/impact/ImpactServiceHero";
 import ImpactSuccessSection from "@/components/impact/ImpactSuccessSection";
-import Navigation from "@/components/Navigation";
+import ImpactNavigation from "@/components/impact/ImpactNavigation";
 import { impactFaqs, impactServiceMeta } from "@/lib/impact-service";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/services/agentic-sdlc-impact-method")({
 function ImpactServicePage() {
 	return (
 		<div className="min-h-screen bg-deep-space">
-			<Navigation />
+			<ImpactNavigation />
 			<main>
 				<ImpactServiceHero />
 				<ImpactPainsSection />
