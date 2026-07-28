@@ -31,7 +31,7 @@ export const Route = createFileRoute("/services/agentic-sdlc-impact-method")({
 						name: siteConfig.siteName,
 						url: siteConfig.url,
 					},
-					serviceType: "Agentic SDLC operating system",
+					serviceType: "Agentic SDLC framework",
 					areaServed: "Worldwide",
 				},
 				{

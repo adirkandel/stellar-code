@@ -29,9 +29,9 @@ const ImpactPromoSection = () => {
 						</span>
 					</h2>
 					<p className="mb-8 text-lg text-muted-foreground">
-						A methodology and installed operating system for engineering teams
-						that want better outcomes from AI coding agents - without losing
-						control or rebuilding context every sprint.
+						A methodology and operating layer for engineering teams that want
+						better outcomes from AI coding agents - without losing control or
+						rebuilding context every sprint.
 					</p>
 					<Link
 						to="/services/agentic-sdlc-impact-method"

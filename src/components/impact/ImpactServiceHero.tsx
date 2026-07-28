@@ -28,11 +28,11 @@ const ImpactServiceHero = () => {
 				<h1 className="mb-6 max-w-4xl font-space text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
 					<span className="text-primary glow-stellar">IMPACT </span>
 					<span className="text-white">
-						- Agentic SDLC, installed for real.
+						- Agentic SDLC, embedded into your stack.
 					</span>
 				</h1>
 				<p className="mb-10 max-w-2xl text-lg text-stellar-white/85 md:text-xl">
-					A new installed OS for agentic engineering - we wire Intent, Memory,
+					An operating layer for agentic engineering - we wire Intent, Memory,
 					Policy, and Checks into your tickets, repos, and CI.
 				</p>
 				<button

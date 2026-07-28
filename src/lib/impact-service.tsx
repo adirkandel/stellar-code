@@ -43,7 +43,7 @@ export const impactLetters: ImpactLetter[] = [
 		definition:
 			"Living shared context agents retrieve - not chat history, not someone's head.",
 		detail:
-			"Memory is the largest hidden cost in agentic engineering: rebuilding context every time someone spawns an agent or returns to a project. IMPACT installs living shared context - a markdown vault in git with agent-grade retrieval. Working memory captures run distillations; the living shared context holds architecture, principles, and runbooks the whole team relies on.",
+			"Memory is the largest hidden cost in agentic engineering: rebuilding context every time someone spawns an agent or returns to a project. IMPACT embeds living shared context - a markdown vault in git with agent-grade retrieval. Working memory captures run distillations; the living shared context holds architecture, principles, and runbooks the whole team relies on.",
 		bullets: [
 			"Working memory (cold by default) vs living shared context (hot retrieval)",
 			"Locality rule: context lives where the next reader will look - ticket, code, ADR, or shared context",
@@ -147,7 +147,7 @@ export const impactAbout = {
 		},
 	],
 	close:
-		"I built IMPACT to kill the AI tax: agents that speed up authoring while seniors drown in review and rework. You get startup speed, cyber-grade discipline, and real AI SDLC practice - installed in your team.",
+		"I built IMPACT to kill the AI tax: agents that speed up authoring while seniors drown in review and rework. You get startup speed, cyber-grade discipline, and real AI SDLC practice - wired into your team workflow.",
 	links: [
 		{
 			label: "LinkedIn",
@@ -173,7 +173,7 @@ export const impactLaunchDeliverables = [
 	"Operating runbook: compile / promote ritual so Memory stays sharp",
 ] as const;
 
-export const IMPACT_CTA_LABEL = "Leave your details";
+export const IMPACT_CTA_LABEL = "Schedule a pilot";
 export const IMPACT_CTA_HREF = "#impact-interest";
 export const IMPACT_FORM_SUBMIT_LABEL = "Send";
 
@@ -562,7 +562,7 @@ export const impactFaqs: ImpactFaq[] = [
 		id: "framework-dust",
 		question: "Is this another framework that collects dust?",
 		answer:
-			"No. IMPACT is installed and enforced from week one - living shared context, Policy checks in CI, and Telemetry on the scoreboard. If a discipline cannot be observed in the team's actual workflow, it is not installed yet. The deliverable is a running golden path, not a deck.",
+			"No. IMPACT is wired and enforced from week one - living shared context, Policy checks in CI, and Telemetry on the scoreboard. If a discipline cannot be observed in the team's actual workflow, it is not embedded yet. The deliverable is a running golden path, not a deck.",
 	},
 	{
 		id: "how-it-works",
@@ -592,7 +592,7 @@ export const impactFaqs: ImpactFaq[] = [
 		id: "security",
 		question: "Where does our code go - and how does this pass security review?",
 		answer:
-			"Your code, tickets, and vault stay in your systems. Agents run in the coding platforms you already choose (Cursor, Claude Code, Codex, etc.) under your accounts and retention policies. Stellar does not take a copy of your monorepo to operate IMPACT. You own vault content and repo config; we bring the methodology and portable kit. Enterprise SOC2/ISO review is a conversation against your stack - we install into existing controls rather than inventing a shadow toolchain.",
+			"Your code, tickets, and vault stay in your systems. Agents run in the coding platforms you already choose (Cursor, Claude Code, Codex, etc.) under your accounts and retention policies. Stellar does not take a copy of your monorepo to operate IMPACT. You own vault content and repo config; we bring the methodology and portable kit. Enterprise SOC2/ISO review is a conversation against your stack - we connect into existing controls rather than inventing a shadow toolchain.",
 	},
 	{
 		id: "tools",
@@ -616,7 +616,7 @@ export const impactFaqs: ImpactFaq[] = [
 		id: "engagement",
 		question: "What does an engagement look like - and what about pricing?",
 		answer:
-			"Pilots start as a Launch on one product team (about 4–6 weeks) to install the golden path and instrument the scorecard. Early engagements are at pilot pricing - lower than later Launch/Expansion rates - with founder-led attention. From there you can continue with Expansion or Retainer. Exact numbers are a custom proposal.",
+			"Pilots start as a Launch on one product team (about 4–6 weeks) to embed the golden path and instrument the scorecard. Early engagements are at pilot pricing - lower than later Launch/Expansion rates - with founder-led attention. From there you can continue with Expansion or Retainer. Exact numbers are a custom proposal.",
 	},
 	{
 		id: "ownership",
@@ -627,9 +627,9 @@ export const impactFaqs: ImpactFaq[] = [
 ];
 
 export const impactServiceMeta = {
-	title: "IMPACT Method | Agentic SDLC OS",
+	title: "IMPACT Method | Agentic SDLC Framework",
 	description:
-		"IMPACT is a new Agentic SDLC methodology from Stellar Code, currently running pilot engagements: Intent, Memory, Policy, Agents, Checks, and Telemetry - installed into your tickets, repos, and CI.",
+		"IMPACT is a new Agentic SDLC methodology from Stellar Code, currently running pilot engagements: Intent, Memory, Policy, Agents, Checks, and Telemetry - wired into your tickets, repos, and CI.",
 	path: "/services/agentic-sdlc-impact-method",
 	ogImage: "/impact-og-image.jpg",
 } as const;

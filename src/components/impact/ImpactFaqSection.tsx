@@ -15,7 +15,7 @@ const ImpactFaqSection = () => {
 				<div className="mx-auto mb-12 max-w-3xl text-center">
 					<h2 className="mb-4 font-space text-3xl font-bold md:text-4xl">
 						<span className="text-white">Questions leaders ask </span>
-						<span className="text-primary glow-stellar">before they install.</span>
+						<span className="text-primary glow-stellar">before they embed.</span>
 					</h2>
 					<p className="text-lg text-stellar-white/85">
 						Pilots, fit, security, Memory, Policy, tools, and how you know the
