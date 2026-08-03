@@ -1,0 +1,37 @@
+---
+description: Review cookie consent and privacy policy when adding tracking, forms, or third-party data processing
+alwaysApply: true
+---
+
+# Cookie & Privacy Review Gate
+
+When adding or changing anything that collects, stores, shares, or tracks personal data — **pause and update consent + privacy docs before finishing**.
+
+## Triggers (non-exhaustive)
+
+- Analytics, pixels, tag managers, session replay, A/B tools
+- New cookies, `localStorage` / `sessionStorage` for tracking or preferences beyond consent itself
+- Third-party scripts/embeds (fonts CDNs, chat widgets, video, maps, ads)
+- Forms or fields that collect PII (name, email, phone, company, etc.)
+- New processors/tools that see user data (CRM, email, Slack, Discord, auth, hosting logs)
+- Auth, payments, or marketing tooling
+
+## Required checklist
+
+1. **Consent UI** — Does `src/components/ConsentBanner.tsx` / `src/lib/consent.ts` need a new category, copy change, or script gated behind consent?
+2. **Privacy Policy** — Update `src/routes/privacy.tsx` (what, why, who, retention, rights). Keep vendor names accurate.
+3. **Footer / reopen** — Keep Privacy Policy + Cookie settings links working in `src/components/Footer.tsx`.
+4. **Load order** — Non-essential trackers must not run until the user accepts (or the matching toggle is on).
+5. **Dismiss ≠ consent** — Closing/X must not imply Accept.
+
+## Examples
+
+```text
+❌ Add Google Analytics in __root.tsx with no consent gate and no privacy update
+✅ Gate GA behind analytics consent; document it in /privacy; extend customize if needed
+
+❌ Add a phone field to contact form with no privacy mention
+✅ Document the new field + purpose/retention in src/routes/privacy.tsx
+```
+
+If unsure whether something is essential vs optional, ask before shipping.

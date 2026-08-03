@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Mail, Linkedin, Users, Youtube } from "lucide-react";
+import { Linkedin, Mail, Users, Youtube } from "lucide-react";
 import stellarcodeLogo from "@/assets/stellarcode-logo.svg";
+import { openCookieSettings } from "@/lib/consent";
 
 const Footer = () => {
 	const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -122,7 +123,10 @@ const Footer = () => {
 								</>
 							) : (
 								<li>
-									<Link to="/" className="transition-stellar hover:text-primary">
+									<Link
+										to="/"
+										className="transition-stellar hover:text-primary"
+									>
 										All services
 									</Link>
 								</li>
@@ -168,6 +172,14 @@ const Footer = () => {
 											Home
 										</Link>
 									</li>
+									<li>
+										<Link
+											to="/privacy"
+											className="transition-stellar hover:text-primary"
+										>
+											Privacy Policy
+										</Link>
+									</li>
 								</>
 							) : (
 								<>
@@ -198,6 +210,14 @@ const Footer = () => {
 											Contact
 										</button>
 									</li>
+									<li>
+										<Link
+											to="/privacy"
+											className="transition-stellar hover:text-primary"
+										>
+											Privacy Policy
+										</Link>
+									</li>
 								</>
 							)}
 						</ul>
@@ -208,6 +228,21 @@ const Footer = () => {
 					<p className="text-muted-foreground">
 						&copy; {new Date().getFullYear()} Stellar Code. All rights reserved.
 						Building the future, one stellar project at a time.
+					</p>
+					<p className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-muted-foreground">
+						<Link
+							to="/privacy"
+							className="transition-stellar hover:text-primary"
+						>
+							Privacy Policy
+						</Link>
+						<button
+							type="button"
+							onClick={() => openCookieSettings()}
+							className="transition-stellar hover:text-primary"
+						>
+							Cookie settings
+						</button>
 					</p>
 				</div>
 			</div>

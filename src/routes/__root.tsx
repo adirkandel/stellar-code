@@ -5,7 +5,7 @@ import {
 	Outlet,
 	Scripts,
 } from "@tanstack/react-router";
-import { Analytics } from "@vercel/analytics/react";
+import ConsentBanner from "@/components/ConsentBanner";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/lib/site";
 import appCss from "../styles.css?url";
@@ -130,7 +130,7 @@ function RootComponent() {
 			<body className="min-h-screen bg-deep-space text-stellar-white antialiased">
 				<Outlet />
 				<Toaster />
-				<Analytics />
+				<ConsentBanner />
 				<Scripts />
 			</body>
 		</html>

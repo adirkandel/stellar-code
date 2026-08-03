@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesAgenticSdlcImpactMethodRouteImport } from './routes/services/agentic-sdlc-impact-method'
@@ -16,6 +17,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as ApiImpactInterestRouteImport } from './routes/api/impact-interest'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -50,6 +56,7 @@ const ApiContactRoute = ApiContactRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
   '/api/contact': typeof ApiContactRoute
   '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
   '/api/contact': typeof ApiContactRoute
   '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -67,6 +75,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
   '/api/contact': typeof ApiContactRoute
   '/api/impact-interest': typeof ApiImpactInterestRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/privacy'
     | '/api/contact'
     | '/api/impact-interest'
     | '/blog/$slug'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/privacy'
     | '/api/contact'
     | '/api/impact-interest'
     | '/blog/$slug'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/privacy'
     | '/api/contact'
     | '/api/impact-interest'
     | '/blog/$slug'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrivacyRoute: typeof PrivacyRoute
   ApiContactRoute: typeof ApiContactRoute
   ApiImpactInterestRoute: typeof ApiImpactInterestRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -111,6 +124,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrivacyRoute: PrivacyRoute,
   ApiContactRoute: ApiContactRoute,
   ApiImpactInterestRoute: ApiImpactInterestRoute,
   BlogSlugRoute: BlogSlugRoute,
